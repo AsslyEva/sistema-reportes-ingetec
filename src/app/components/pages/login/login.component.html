@@ -1,0 +1,83 @@
+
+<div class="login-container">
+    <!-- <div class="background-opacity">
+    </div> -->
+
+    <div class="container-login">
+
+        <div class="person">
+            <h1 class="h1-ingetec">{{title | uppercase}}</h1>
+            <img src="assets/login/person.svg">
+        </div>
+        <div class="login-form">
+
+            <form [formGroup]="formLogin" (ngSubmit)="login()">
+                <div  class="logo-ingetec">
+                    <img src="\assets\login\ingetec-logo.svg" alt="">
+                </div>
+                <p>Por favor ingrese usuario y contraseña </p>
+
+                <div class="form-ingresar">
+                  <label class="label-ingetec">Usuario: </label>
+                  <div class="input-login">
+                        <input formControlName="usuario"
+                              class="form-control-ingetec"
+                              type="text"
+                              placeholder="Ingrese su usuario">
+                              <mat-icon>person</mat-icon>
+                  </div>
+                  <!-- <div *ngIf="usuarioForm?.invalid && (usuarioForm?.dirty || usuarioForm?.touched)">
+                    <p class="p-error color-red" *ngIf="usuarioForm?.invalid"><small>El campo es requerido</small></p>
+                  </div> -->
+                </div>
+
+                <div class="form-ingresar">
+                    <label class="label-ingetec">Contraseña: </label>
+                    <div class="input-login">
+
+                      <input  formControlName="password"
+                              class="form-control-ingetec"
+                              [type]="hide ? 'password' : 'text'"
+                              placeholder="Ingrese su contraseña">
+                              <mat-icon
+                              matSuffix
+                              (click)="hide = !hide">
+                              {{hide ? 'visibility_off' : 'visibility'}}
+                              </mat-icon>
+                    </div>
+                    <!-- <div *ngIf="passwordForm?.invalid && (passwordForm?.dirty || passwordForm?.touched)">
+                      <p class="p-error color-red" *ngIf="passwordForm?.invalid"><small>El campo es requerido</small></p>
+                    </div> -->
+                </div>
+
+                <button type="submit" 
+                        class="btn-ingetec-cyan">
+                    <i class="fas fa-sign-out-alt icon-ingetec"></i>
+                    INICIAR SESION
+                </button>
+
+                <div  class="logo-consorcio">
+                    <img src="assets/login/logo-consorcio.svg">
+                </div>
+                <p class="text_version label-ingetec">{{version}}</p>
+            </form>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<ngx-spinner 
+    bdColor = "rgba(14,14,14,0.8)" 
+    size = "large" 
+    color = "#9ad424" 
+    type = "square-jelly-box" 
+    [fullScreen] = "false">
+    <p style="color: white" > Cargando, espere por favor </p>
+</ngx-spinner>
+
+<!-- <app-loading *ngIf="isLoading"></app-loading> -->
+
+

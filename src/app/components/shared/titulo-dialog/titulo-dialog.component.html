@@ -1,0 +1,22 @@
+<div class="cont-titulo">
+  <div class="fondo-dialog">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
+
+  <p class="titulo">{{titulo | uppercase}}</p>
+
+  <button class="close" (click)="cerrar()" alt="">
+    <mat-icon>close</mat-icon>
+  </button>  
+
+  <button mat-stroked-button
+    color="$sunarp-gray-dark"
+    class="bg-white border-none button-bold"
+    (click)="cerrar()">
+    <mat-icon class="icon">arrow_back</mat-icon>&nbsp;Regresar
+  </button>
+</div>
+

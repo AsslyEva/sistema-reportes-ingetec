@@ -1,0 +1,139 @@
+@use 'src/assets/sass/general.scss' as g;
+
+table{
+    border: none;
+    z-index: 4;
+    border-radius: 2rem;
+}
+
+.content-tabla{
+    padding: 2rem 10rem;
+
+    thead{
+        text-align: center;
+        padding: 0 4rem;
+    }
+    tbody{
+        text-align: center;
+        padding: 2rem;
+    }
+}
+
+.form-filtro{
+    border-radius: 2rem;
+    border-style: dotted;
+    border-width: 2px;
+    border-color: g.$ingetec-aprobe;
+    // width: 80%;
+    // height: 10%;
+    // padding: 1rem;
+    margin: 1.5rem;
+    text-align: center;
+}
+
+.text-filtro{
+    font-size: 1.5rem;
+    color: g.$ingetec-aprobe;
+    font-weight: bold;
+    font-family: 'Montserrat';
+}
+
+.items-busqueda{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    button{
+        // width: 70%;
+        background-color: g.$ingetec-aprobe;
+        padding: 1em 3rem;
+        border-radius: 1rem;
+        border: none;
+        color: white;
+        display: flex;
+        /* flex-direction: row; */
+        /* flex-wrap: nowrap; */
+        /* align-content: center; */
+        /* justify-content: center; */
+        align-items: center;
+    }
+}
+
+
+.dercargar-all{
+    button{
+        // width: 70%;
+        background-color: g.$ingetec-cyan;
+        padding: 1em;
+        border-radius: 1rem;
+        // margin: 1rem 0;
+        border: none;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;                                                                                                                                
+    mat-icon{
+        margin: 0 0 0 1rem;
+    }
+}
+
+
+mat-label{
+    font-size: 1.3rem;
+    font-family: 'AvenirLTStd-Book';
+    color: rgb(0, 0, 0);
+    margin: 0 0 2rem 0;
+    font-weight: bold;
+}
+
+input{
+    color: #000000;
+    padding: 0.3rem;
+}
+
+
+
+
+
+
+@media (max-width:990px){
+
+    .d-flex {
+        display: -ms-flexbox !important;
+        display: flex!important;
+        flex-direction: column-reverse;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .content-info{
+        width: 100%;
+        padding: 0;
+    }
+    .button-bold{
+        display: flex;
+    }
+
+
+    .form-inf{
+        display: flexbox;
+        width: 100%;
+
+    }
+
+}

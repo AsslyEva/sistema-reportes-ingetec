@@ -1,0 +1,212 @@
+@use 'src/assets/sass/general.scss' as g;
+
+table{
+    border: none;
+}
+
+ng-template{
+    font-size: 4rem !important;
+}
+
+.botton-list{
+    display: flex;
+}
+
+
+.options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-radius: 4rem;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: 1rem;
+    /* margin: 0 1rem 0 1rem; */
+    padding: 1rem;
+    mat-icon{
+        font-size: 2.4rem;
+        margin: 1rem 0 0 1rem;
+        width: 10%;
+        height: 100%;
+    }
+}
+
+
+.mat-chip {
+    font-size: 1rem !important;
+}
+
+
+.cantidad{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    // .item-cantidad{
+    //     // width: 100%;
+
+    // }
+}
+
+.form-general{
+    margin: 4rem 0 !important;
+    background: transparent !important;
+}
+.form-item{
+    width: 100%;
+}
+button{
+    width: 100%;
+}
+mat-label{
+    font-size: 0.9rem;
+}
+
+input{
+    font-size: 1.2rem;
+}
+
+
+// background: #f3f3f3;
+label{
+    font-family: 'AvenirLTStd-Book';
+    font-size: 1.2rem;
+    font-weight: 0.1px;
+    color: #000000;
+    padding: 1.5rem 0 ;
+
+}
+
+mat-icon{
+    font-size: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+ mat-label{
+    font-size: 1.3rem !important;
+ }
+
+p{
+    font-size: 1.2rem !important;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    mat-icon{
+        color: g.$ingetec-aprobe;
+    }
+}
+
+ul{
+    font-size: 1.1rem !important;
+    font-weight: bold;
+    font-family: 'Montserrat';
+    color: g.$ingetec-cyan;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    mat-icon{
+        color: g.$ingetec-aprobe;
+    }
+ }
+
+ .actividades{
+    gap: 2.5rem 0;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+ }
+
+ .item-actividad{
+    border: 1px solid #00000026;
+    box-shadow: 0 1px 3px #00000040;
+ }
+.td-actividad{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button{
+
+        margin: 1.2rem 0;
+    }
+}
+
+.actividad-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 0.9rem;
+    border: none;
+    color: g.$ingetec-white;
+    font-weight: bold;
+    width: 100%;
+    padding: 2rem;
+}
+.add{
+    background-color: g.$ingetec-aprobe !important;
+    padding: 1.2rem !important;
+}
+.delete{
+    margin: 1rem 0 !important;
+    background-color: g.$ingetec-red !important;
+}
+
+
+
+.mat-form-field-wrapper {
+    position: relative;
+    display: flex !important;
+    // width: 100%;
+}
+
+
+
+// registar-button
+
+.btn-register {  
+    background-color: rgba(0, 165, 165, 1);  
+    color:white;  
+    width: 100%;
+    border: none;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    font-family: 'Montserrat';
+    font-weight: bold;
+    padding: 0.9rem 1.5rem;  
+} 
+
+
+
+
+@media (max-width:990px){
+
+    .d-flex {
+        display: -ms-flexbox !important;
+        display: flex!important;
+        flex-direction: column-reverse;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .content-info{
+        width: 100%;
+        padding: 0;
+    }
+    .button-bold{
+        display: flex;
+    }
+
+
+    .form-inf{
+        display: flexbox;
+        width: 100%;
+
+    }
+
+}

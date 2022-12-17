@@ -1,0 +1,83 @@
+<div class="content">
+
+    <app-title-frame
+    [title]="'REPORTE DE PERSONAL'"
+    [link]="'/administrador/inicio'"
+    ></app-title-frame>
+  
+    <div class="content-tabla col-12">
+      <table 
+             datatable
+             [dtOptions]="dtOptions"
+             class="table table-dark-ingetec">
+        <thead>
+          <tr >
+            <th>Sede</th>
+            <th>Segmento</th>
+            <th>Lider de Equipo</th>
+            <th>Intengrantes de equipo</th>
+            <th>Actividades Realizadas</th>
+            <th>Fecha</th>
+            <th>Opcion</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="actos?.length !=0">
+          <tr *ngFor="let acto of actos" class="text-center align-middle border-bottom ">
+            <td>{{acto.sede}}</td>
+            <td>{{acto.segmento}}</td>
+            <td>{{acto.lider}}</td>
+            <td>{{acto.integrantes}}</td>
+            <td>{{acto.actividad}}</td>
+            <td>{{acto.fecha | date:'dd/MM/yyyy hh:mm:ss a'}}</td>
+            <td>
+              <div class="row options">
+                <!-- <div class="button-option view">
+                  <button
+                    mat-flat-button
+                    color="primary"
+                    class="menu-button bg-blue"
+                    matTooltip="Ver acto">
+                    <mat-icon> visibility </mat-icon>
+                  </button>
+                  <span class="text-button">Ver</span>
+                </div> -->
+  
+              <div class="button-option download ">
+                  <button
+                      mat-flat-button
+                      color="primary"
+                      class="menu-button"
+                      matTooltip="Descargar">
+                      <mat-icon> download </mat-icon>
+                      <span class="text-button">Descargar</span>
+  
+                    </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="button-option download text-center align-middle border-top pt-5">
+      <button
+          mat-flat-button
+          class="descargar-all"
+          matTooltip="Descargar todo">
+          <mat-icon> download </mat-icon>
+          <span class="text-button">Descargar toda la Tabla</span>
+  
+        </button>
+    </div>
+  </div>
+  
+  <ngx-spinner
+      bdColor = "rgba(14,14,14,0.8)"
+      size = "large"
+      color = "#9ad424"
+      type = "square-jelly-box"
+      [fullScreen] = "false">
+      <p style="color: white" > Cargando, espere por favor </p>
+  </ngx-spinner>
+  

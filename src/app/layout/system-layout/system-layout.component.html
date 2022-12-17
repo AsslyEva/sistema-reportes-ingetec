@@ -1,0 +1,102 @@
+<mat-toolbar class="">
+  <div class="header">
+    <button
+    mat-icon-button
+    *ngIf="sidenav.mode === 'over'"
+    (click)="sidenav.toggle()"
+    >
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+    </button>
+
+    <div class="title">
+      <p>{{title | uppercase}}</p>
+    </div>
+
+    <div class="logo">
+        <mat-icon>inventory</mat-icon>
+    </div>
+
+
+
+    <!-- <div class="notification">
+      <button style="margin:auto" mat-button class="menu-button" routerLink="/notificaciones">
+        <mat-icon>notifications</mat-icon>
+      </button>
+    </div> -->
+
+  </div>
+
+</mat-toolbar>
+
+<mat-sidenav-container tabindex="-2">
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z10" >
+   <div class="content">
+    <div class="title-sidenav">
+      <p>{{title | uppercase}}</p>
+    </div>
+    <img
+    class="avatar mat-elevation-z8"
+    src='\assets\img\ingetec-logo.svg'
+  />
+
+  <h4 class="wellcome">BIENVENIDO (A)</h4>
+
+  <mat-divider></mat-divider>
+
+  <button mat-button class="button-menu"  routerLink="/usuario/inicio">
+    <mat-icon>edit_note</mat-icon>
+    <span>Formulario</span>
+  </button>
+
+  <button mat-button class="button-menu"   routerLink="/administrador/inicio">
+    <mat-icon>receipt_long</mat-icon>
+    <span>Reporte de Actividades</span>
+  </button>
+
+  <!-- <button mat-button class="button-menu"   routerLink="/administrador/personal">
+    <mat-icon>personal_injury</mat-icon>
+    <span>Reporte del Personal</span>
+  </button> -->
+
+  <!-- <button mat-button class="button-menu"   routerLink="/administrador/evidencia">
+    <mat-icon>panorama</mat-icon>
+    <span>Reporte de Evidencia</span>
+  </button> -->
+
+  <mat-divider></mat-divider>
+
+  <button 
+  mat-button class="button-menu" 
+  >
+    <mat-icon>power_settings_new</mat-icon>
+    <span>Cerrar sesión</span>
+  </button>
+
+   </div>
+   
+    
+    <mat-divider></mat-divider>
+    
+    <div class="version">
+      <span>{{version}}</span>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div>
+      
+      <router-outlet>
+        <!-- <button
+        mat-icon-button
+        *ngIf="sidenav.mode === 'over'"
+        (click)="sidenav.toggle()"
+        >
+        <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+        <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+      </button> -->
+      </router-outlet>
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -1,0 +1,231 @@
+// @import '~@angular/material/theming';
+// // Plus imports for other components in your app.
+
+// // Include the common styles for Angular Material. We include this here so that you only
+// // have to load a single css file for Angular Material in your app.
+// // Be sure that you only ever include this mixin once!
+// @include mat-core();
+
+// /* For use in src/lib/core/theming/_palette.scss */
+// /* For use in src/lib/core/theming/_palette.scss */
+// $mat-ingetec-blue: (
+//     50 : #e0f4f4,
+//     100 : #b3e4e4,
+//     200 : #80d2d2,
+//     300 : #4dc0c0,
+//     400 : #26b3b3,
+//     500 : #00a5a5,
+//     600 : #009d9d,
+//     700 : #009393,
+//     800 : #008a8a,
+//     900 : #007979,
+//     A100 : #a7ffff,
+//     A200 : #74ffff,
+//     A400 : #41ffff,
+//     A700 : #27ffff,
+//     contrast: (
+//         50 : #000000,
+//         100 : #000000,
+//         200 : #000000,
+//         300 : #000000,
+//         400 : #000000,
+//         500 : #ffffff,
+//         600 : #ffffff,
+//         700 : #ffffff,
+//         800 : #ffffff,
+//         900 : #ffffff,
+//         A100 : #000000,
+//         A200 : #000000,
+//         A400 : #000000,
+//         A700 : #000000,
+//     )
+// );
+
+// $mat-ingetec-green: (
+//     50 : #f1f8e4,
+//     100 : #ddedbc,
+//     200 : #c7e190,
+//     300 : #b0d564,
+//     400 : #9fcc42,
+//     500 : #8ec321,
+//     600 : #86bd1d,
+//     700 : #7bb518,
+//     800 : #71ae14,
+//     900 : #5fa10b,
+//     A100 : #e8ffcf,
+//     A200 : #cfff9c,
+//     A400 : #b6ff69,
+//     A700 : #aaff4f,
+//     contrast: (
+//         50 : #000000,
+//         100 : #000000,
+//         200 : #000000,
+//         300 : #000000,
+//         400 : #000000,
+//         500 : #ffffff,
+//         600 : #ffffff,
+//         700 : #ffffff,
+//         800 : #ffffff,
+//         900 : #ffffff,
+//         A100 : #000000,
+//         A200 : #000000,
+//         A400 : #000000,
+//         A700 : #000000,
+//     )
+// );
+
+// $mat-ingetec-red: (
+//     50 : #fde6e3,
+//     100 : #f9c2ba,
+//     200 : #f5998c,
+//     300 : #f1705e,
+//     400 : #ee513c,
+//     500 : #eb3219,
+//     600 : #e92d16,
+//     700 : #e52612,
+//     800 : #e21f0e,
+//     900 : #dd1308,
+//     A100 : #ffffff,
+//     A200 : #ffd4d3,
+//     A400 : #ffa3a0,
+//     A700 : #ff8a86,
+//     contrast: (
+//         50 : #000000,
+//         100 : #000000,
+//         200 : #000000,
+//         300 : #000000,
+//         400 : #ffffff,
+//         500 : #ffffff,
+//         600 : #ffffff,
+//         700 : #ffffff,
+//         800 : #ffffff,
+//         900 : #ffffff,
+//         A100 : #000000,
+//         A200 : #000000,
+//         A400 : #000000,
+//         A700 : #000000,
+//     )
+// );
+
+// $mat-ingetec-yellow: (
+//     50 : #fff5e0,
+//     100 : #ffe7b3,
+//     200 : #ffd780,
+//     300 : #ffc74d,
+//     400 : #ffbb26,
+//     500 : #ffaf00,
+//     600 : #ffa800,
+//     700 : #ff9f00,
+//     800 : #ff9600,
+//     900 : #ff8600,
+//     A100 : #ffffff,
+//     A200 : #fff8f2,
+//     A400 : #ffddbf,
+//     A700 : #ffd0a6,
+//     contrast: (
+//         50 : #222222,
+//         100 : #222222,
+//         200 : #222222,
+//         300 : #ffffff,
+//         400 : #ffffff,
+//         500 : #ffffff,
+//         600 : #ffffff,
+//         700 : #ffffff,
+//         800 : #ffffff,
+//         900 : #ffffff,
+//         A100 : #222222,
+//         A200 : #222222,
+//         A400 : #222222,
+//         A700 : #222222,
+//     )
+// );
+
+// $mat-ingetec-dark: (
+//     50 : #e6e8e7,
+//     100 : #c2c5c3,
+//     200 : #999e9b,
+//     300 : #707773,
+//     400 : #515955,
+//     500 : #323c37,
+//     600 : #2d3631,
+//     700 : #262e2a,
+//     800 : #1f2723,
+//     900 : #131a16,
+//     A100 : #60ffa0,
+//     A200 : #2dff81,
+//     A400 : #00f964,
+//     A700 : #00e059,
+//     contrast: (
+//         50 : #000000,
+//         100 : #000000,
+//         200 : #000000,
+//         300 : #ffffff,
+//         400 : #ffffff,
+//         500 : #ffffff,
+//         600 : #ffffff,
+//         700 : #ffffff,
+//         800 : #ffffff,
+//         900 : #ffffff,
+//         A100 : #000000,
+//         A200 : #000000,
+//         A400 : #000000,
+//         A700 : #000000,
+//     )
+// );
+
+// $mat-ingetec-ligth: (
+//     50 : #fafafa,
+//     100 : #f3f3f3,
+//     200 : #ebebeb,
+//     300 : #e2e2e2,
+//     400 : #dcdcdc,
+//     500 : #d6d6d6,
+//     600 : #d1d1d1,
+//     700 : #cccccc,
+//     800 : #c6c6c6,
+//     900 : #bcbcbc,
+//     A100 : #ffffff,
+//     A200 : #ffffff,
+//     A400 : #ffffff,
+//     A700 : #fffdfd,
+//     contrast: (
+//         50 : #000000,
+//         100 : #000000,
+//         200 : #000000,
+//         300 : #000000,
+//         400 : #000000,
+//         500 : #000000,
+//         600 : #000000,
+//         700 : #000000,
+//         800 : #000000,
+//         900 : #000000,
+//         A100 : #000000,
+//         A200 : #000000,
+//         A400 : #000000,
+//         A700 : #000000,
+//     )
+// );
+
+// // Define the palettes for your theme using the Material Design palettes available in palette.scss
+// // (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// // hue. Available color palettes: https://material.io/design/color/
+// $ingetec-app-primary:  mat-palette($mat-ingetec-green);
+// $ingetec-app-accent:   mat-palette($mat-ingetec-yellow);
+
+// // The warn palette is optional (defaults to red).
+// $ingetec-app-warn:     mat-palette($mat-ingetec-red);
+
+// // Create the theme object. A theme consists of configurations for individual
+// // theming systems such as `color` or `typography`.
+// $ingetec-app-theme: mat-light-theme((
+//   color: (
+//     primary: $ingetec-app-primary,
+//     accent: $ingetec-app-accent,
+//     warn: $ingetec-app-warn,
+//   )
+// ));
+
+// // Include theme styles for core and each component used in your app.
+// // Alternatively, you can import and @include the theme mixins for each component
+// // that you are using.
+// @include angular-material-theme($ingetec-app-theme);

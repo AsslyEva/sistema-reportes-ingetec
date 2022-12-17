@@ -1,0 +1,440 @@
+// /* You can add global styles to this file, and also import other style files */
+
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// // /* Importing Bootstrap SCSS file. */
+// // @import '~bootstrap/scss/bootstrap';
+
+// // /* Importing Bootstrap SCSS file. */
+// // @import '~bootstrap/scss/bootstrap';
+
+
+/* You can add global styles to this file, and also import other style files */
+@import 'assets/sass/general.scss';
+// @use 'src/assets/sass/general' as g;
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+// @import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html{
+    margin-top: 0 !important;
+}
+::ng-deep * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::ng-deep html {
+    margin: 0 !important;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+p {
+  margin: 0;
+}
+
+// R7 styling
+// animacion
+@keyframes bouncy {
+  0%{top:-1em}
+  40%{top:0em}
+  43%{top:0em}
+  46%{top:0em}
+  48%{top:-0.2em}
+  50%{top:0em}
+  100%{top:-1em;}
+}
+
+@keyframes latido {
+  0%,  30% , 75% , 100%    { 
+      transform:scale(1);
+      animation-timing-function: ease-in;
+  }
+  0%, 30%            { 
+    // color: $ingetec-red;
+    transform:scale(1.25);
+    animation-timing-function: ease-out;
+  } 
+
+  75%, 100%            { 
+    // color: $ingetec-white;
+    transform:scale(1.25);
+    animation-timing-function: ease-out;
+  }
+}
+
+// mat-sidenav-content{
+//   height: 80vh;
+// }
+
+.card-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  position: absolute;
+  gap: 0rem 20rem;
+  width: 30%;
+}
+
+
+.content-inicio {
+  height: calc(102vh - 90px);
+  align-items: center;
+  justify-content: cent2r;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  overflow: auto;
+  background-attachment: fixed;
+  // background-image: url(\\assets\\img\\menu_fondo.svg);
+  background-position: center center;
+  background-size: cover;
+}
+
+.content-body{
+  // height: calc(100vh - 0px);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
+}
+app-menu-item{
+  margin: 3em 2em;
+}
+
+
+.menu-content{
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  display: contents;
+}
+
+.container-body{
+  width: 80%;
+  height: 30%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+
+/*Estilos para datatable*/
+.content-tabla{
+  padding: 1rem;
+  // border: 1px solid #00000026;
+  // box-shadow: 0 1px 3px #00000040;
+  // position: relative;
+}
+
+table.dataTable thead th {
+  text-align: center !important;
+  justify-content: center;
+  vertical-align: middle;
+  
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  vertical-align: middle !important;
+  // border-radius: 4px;
+    border: 1px solid #00000026;
+    // box-shadow: 0 1px 3px #00000040;
+}
+
+tbody, td, tfoot, th, thead, tr {
+  border-radius: 0.2rem !important;
+}
+
+.top .dataTables_info {
+  font-size: 1rem;
+}
+.table-dark-ingetec{
+  width: 100%;
+  border-radius: 2rem;
+  thead{
+      background-color: $ingetec-dark;
+      color: $ingetec-white;
+      font-size: 0.54rem;
+      font-family: 'Montserrat';
+      padding: 1rem;
+      th{
+        padding: 1.5rem !important;
+      }
+  }
+  tbody{
+      font-family: 'AvenirLTStd-Medium';
+      font-size: 1.1rem;
+      color: $ingetec-gray-dark;
+  }
+}
+
+.table>:not(caption)>*>* {
+  padding: 0 !important;
+  background-color: transparent !important;
+}
+
+
+/*Estilos para boton observar del dialog*/
+.button-bold{
+  img{
+      width: 1.5rem;
+      padding: -2rem 0.5rem;
+      display: flex;
+      position: absolute;
+  }
+}
+
+// /*stepper-vertical/
+.mat-stepper-horizontal, .mat-stepper-vertical {
+  background: #0000 !important; 
+}
+
+.mat-vertical-content {
+    padding: 0 2rem !important;
+}
+
+// /*Configuracion para el dialog / popup*/
+// .myapp-no-padding-dialog .mat-dialog-container {
+//   max-height: 95vh;
+//   overflow: auto;
+//   border-radius: 2rem;
+// }
+
+// .myapp-no-padding-dialog .mat-form-field-infix {
+//   display: flex;
+//   position: relative;
+//   justify-content: center;
+//   align-items: center;
+//   width: 32rem;
+// }
+
+
+// styles chips
+.mat-chip-list-wrapper {
+  margin: 10px 0 0 0 !important;
+  justify-content: center !important; 
+
+}
+
+
+// stiles input
+input{
+  color: rgb(37, 37, 37);
+  font-size: 1.2rem;
+  font-family: 'AvenirLTStd-Book';
+  padding: 0.6rem 0;
+}
+
+
+.form-control {
+  font-size: 1.5rem !important;
+}
+
+// .myapp-no-padding-dialog .mat-form-field-infix{
+//   justify-content: flex-start;
+// }
+
+
+// styles mat-form.form-inf
+.mat-mdc-form-field {
+  display: block !important;
+}
+
+// styles selec  
+.mat-mdc-select {
+  padding: 0 1rem !important;
+}
+
+.mat-mdc-option .mdc-list-item__primary-text {
+  font-size: 11px !important;
+}
+
+
+// input fecha 
+.mat-mdc-form-field-input-control.mat-mdc-form-field-input-control {
+  font-size:  12px !important;
+}
+// .mat-form-field-appearance-fill .mat-form-field-flex {
+//   // background-color: rgba(255, 255, 255, 0) !important;
+// }
+
+// .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
+//   padding: 1.5rem !important;
+// }
+
+// .mat-form-field {
+//   margin: 0 1rem !important;
+
+// }
+
+
+// .mat-form-field-appearance-fill .mat-form-field-flex {
+//   padding: 0 0 0 2rem !important;
+// }
+
+
+// stules-sweetAlert
+.swal2-popup {
+  width: 45rem !important;
+  font-size: 1.5rem;
+  border-radius: 4rem;
+}
+
+// configuracion de botones opciones
+// .mat-button, .mat-icon-button, .mat-stroked-button, 
+.mat-flat-button {
+  border-radius: 15px !important;
+}
+
+
+// stiles matsidenav
+.mat-drawer {
+  background-color: $ingetec-cyan !important;
+  box-shadow: none !important;
+  border-radius: 0 1rem 1rem 0;
+}
+
+mat-sidenav-container {
+  height: 92.8vh !important;
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: transparent !important;
+}
+// .mat-drawer-container {
+//   background-color: #dc2929f3 !important;
+// }
+// body {
+//   background-color: #ffffff !important;
+// }
+
+// toolbar styles
+.mat-toolbar-single-row {
+  padding: 0 !important;
+  height: 50px !important;
+}
+
+
+// // mat-form styles
+// .mat-form-field-infix {
+//   display: flex !important;
+// }
+
+// .mat-vertical-content  {
+//   padding: 0 0 0 10px !important;
+// }
+// .mat-form-field {
+//   display: block !important;
+// }
+
+
+
+// styles vertical mat-step  
+// .row>* {
+//   padding-left: 0 !important;
+// }
+
+
+// .mat-date-range-input-container {
+//   display: flex;
+//   align-items: center;
+//   flex-direction: row;
+//   flex-wrap: nowrap;
+//   justify-content: center;
+//   align-content: center;
+//   width: 100%;
+// }
+// .mat-calendar-body-cell-content, .mat-date-range-input-separator {
+//   color: rgba(0, 0, 0, 0);
+//   border-color: transparent;
+//   // display: none;
+// }
+
+// .mat-date-range-input-separator{
+//   color: #ffff !important;
+//   text-align: center;
+// }
+
+
+
+
+//Responsive logos, content y title
+// @media (max-width:2250px){
+//   *{
+//     font-size: 20px;
+//   }
+// }
+
+@media (max-width:1920px){
+  *{
+    font-size: 15px;
+  }
+}
+
+
+
+@media (max-width:1720px){
+  *{
+    font-size: 11px;
+  }
+}
+
+
+@media (max-width:1350px){
+
+  *{
+    font-size: 10px;
+  }
+
+  // .mat-drawer {
+  //   background-color: rgba(255, 255, 255, 0) !important;
+  // }
+
+  .contentInicio {
+    height: calc(100vh - 4rem);
+  }
+
+}
+
+@media (max-width:1250px){
+  *{
+    font-size: 10px;
+  }
+}
+
+@media (max-width:900px){
+  *{
+    font-size: 10px;
+  }
+}
+
+@media (max-width:730px){
+  *{
+    font-size: 9px;
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

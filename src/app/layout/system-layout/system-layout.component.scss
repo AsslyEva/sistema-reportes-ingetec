@@ -1,0 +1,202 @@
+
+@use 'src/assets/sass/general' as g;
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';// mat-toolbar {
+
+.header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 5.5rem;
+  background: g.$ingetec-cyan;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  // border-radius: 0 0 1.5rem 1.5rem;
+  // .notificacion{
+  //  font-size: 5rem;
+  // }
+  color: #ffff !important;
+
+  button{
+    position: absolute;
+    left: 2rem;
+  }
+
+}
+
+.logo{
+  background-size: cover;
+  position: absolute;
+  right: 3rem;
+  mat-icon{
+    width: 100%;
+    height: 100%;
+    font-size: 4rem;
+    color: #ffff;
+  }
+}
+
+.title{
+  // width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p{
+    font-size: 2rem;
+    font-family: Montserrat;
+    font-weight: bold;
+    color: #ffff;
+  }
+}
+
+
+.mat-icon-button {
+  position: absolute;
+  left: 3rem;  
+  float: inline-start;
+  background: rgb(249, 247, 247);
+  // margin: 1rem 0 0 1rem;
+  mat-icon{
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.541);
+    z-index: 10;
+  }
+}
+
+
+
+mat-sidenav {
+  text-align: center;
+  width: 27rem;
+  height: 99.9%;
+  color: #ffff;
+  margin: 0.2rem 0;
+  // background-color: rgb(255, 0, 0);
+
+}
+
+// Height general of menu   
+mat-sidenav-container{
+  height: 100vh;
+}
+
+
+.content{
+  display: flex;
+  flex-wrap: nowrap;
+  text-align: center;
+  align-items: flex-start;
+  width: 100%;
+  /* height: 90%; */
+  color: white;
+  margin: 2rem 0 2rem 0;
+  z-index: 5;
+  gap: 0.5rem 0;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+// .content{
+
+
+.title-sidenav{
+  font-family: 'AvenirLTStd-Medium';
+  width: 100%;
+  position: relative;
+  justify-content: center;
+  margin: 1rem 0 1rem 0;
+  p{
+    margin-bottom: 0;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+
+
+.avatar {
+  position: relative;
+
+  // margin: 1rem 0 1rem 0;
+  width: 100%;
+  border-radius: 50%;
+  padding: 1rem;
+  img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height: 100%;
+  }
+}
+
+.wellcome {
+  position: relative;
+  width: 100%;
+  font-family: 'Gotham-Medium';
+  font-size: 1.5rem;
+}
+
+.button-menu{
+  width: 100%;
+  align-items: initial;
+  color: #ffff  !important;
+
+  mat-icon{
+    width: 10%;
+    height: 100% ;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    left: 2rem;
+    font-size: 2rem;
+  }
+  span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    
+  }
+}
+
+
+
+.version{
+  width: 100%;
+  bottom: 1rem;
+  position: absolute;
+  span{
+    color: g.$ingetec-white;
+    text-align: center;
+    font-size: g.$font-size-small;
+    font-family: g.$ff-avenirLTStd-book;
+  }
+
+}
+
+
+
+@media (max-width:1750px){
+  .home{
+    display: none;
+  }
+
+}
+
+@media (max-width:1350px){
+
+}
+
+
+@media (max-width:800px){
+  .title{
+    display: none;
+  }
+}
+

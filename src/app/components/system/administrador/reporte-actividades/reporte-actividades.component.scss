@@ -1,0 +1,109 @@
+@use 'src/assets/sass/general.scss' as g;
+
+// .options{
+//     display: flex;
+//     gap: 1rem 1rem;
+// }
+
+// .menu-button{
+//     // display: flex;
+//     width: 80%;
+//     mat-icon{
+//         width: 100%;
+//     }
+// }
+
+.descargar-all{
+    width: 50%;
+    button{
+        background: g.$ingetec-cyan !important;
+    }
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 1.5em !important;
+}
+.row > * {
+    padding-left: 0 1rem 0 1rem !important; 
+}
+
+.form-filtro{
+    border-radius: 2rem;
+    border-style: dotted;
+    border-width: 2px;
+    border-color: g.$ingetec-aprobe;
+    // width: 80%;
+    // height: 10%;
+    // padding: 1rem;
+    margin: 1.5rem;
+    text-align: center;
+}
+
+.text-filtro{
+    font-size: 1.5rem;
+    color: g.$ingetec-aprobe;
+    font-weight: bold;
+    font-family: 'Montserrat';
+}
+
+.items-busqueda{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    button{
+        // width: 70%;
+        background-color: g.$ingetec-aprobe;
+        padding: 1em 3rem;
+        border-radius: 1rem;
+        border: none;
+        color: white;
+        display: flex;
+        /* flex-direction: row; */
+        /* flex-wrap: nowrap; */
+        /* align-content: center; */
+        /* justify-content: center; */
+        align-items: center;
+    }
+}
+mat-form-field{
+    color: g.$ingetec-green;
+    font-size: 2rem;
+    // background: #ffff;
+
+} 
+
+mat-label{
+    font-size: 1.4rem;
+} 
+
+mat-datepicker-toggle{
+    color: g.$ingetec-aprobe;
+}
+mat-datepicker{
+    font-size: 2rem;
+}
+.dercargar-all{
+    button{
+        // width: 70%;
+        background-color: g.$ingetec-cyan;
+        padding: 1em;
+        border-radius: 1rem;
+        // margin: 1rem 0;
+        border: none;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.view{
+    border-radius: 5rem;
+}
