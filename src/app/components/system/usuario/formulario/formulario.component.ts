@@ -7,6 +7,9 @@ import { map, Observable, startWith } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import {Sort} from '@angular/material/sort';
 import Swal from 'sweetalert2';
+import { Segmento } from 'src/app/model/interfaces/global/segmento';
+import { ActividadEspecifica } from 'src/app/model/interfaces/global/actividad_especiifica';
+import { GeneralServide } from 'src/app/service/global/general.service';
 
 export interface User {
   name: string;
@@ -31,12 +34,13 @@ export interface integrantes {
 
 
 
-export const INTEGRANTES: integrantes[] = [
-  { id: 2, name: "ASSLY" },
-  { id: 3, name: "BRYAN" },
-  { id: 4, name: "FRANCO" },
-  { id: 5, name: "JANESSY" }
-];
+// export const INTEGRANTES: integrantes[] = [
+//   { id: 2, name: "ASSLY" },
+//   { id: 3, name: "BRYAN" },
+//   { id: 4, name: "FRANCO" },
+//   { id: 5, name: "JANESSY" }
+// ];
+
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
@@ -58,14 +62,16 @@ export class FormularioComponent implements OnInit {
   urbano =  new FormControl('');
   
   // *// inicializacion segmento
-  segmento = new FormControl('');
-  segmentosList: string[] = ['INSTALACION', 'CORTE', 'REPARTO'];
+  selectedSegmento: Segmento = new Segmento(1, '');
+
+  segmento: Segmento[] = [];
+  // segmentosList: string[] = ['INSTALACION', 'CORTE', 'REPARTO'];
  
   // *// inicializacion actividades
-  actividad_especifica = new FormControl('');
-  actividad_especificaList: string[] = ['Aéreo Monofásico', 'Aéreo Trifásico', 'Subterráneo Monofásico sin rotura ni resane de vereda'];
+  actividad_especifica: ActividadEspecifica[] = [];
+  // actividad_especificaList: string[] = ['Aéreo Monofásico', 'Aéreo Trifásico', 'Subterráneo Monofásico sin rotura ni resane de vereda'];
  // array is selectedIntegrantes
- selectedActividad_especifica!: any[];
+//  selectedActividad_especifica!: any[];
  
 
   // configuracion autocomplete
@@ -92,13 +98,13 @@ searchUserForm!: FormGroup;
   select.value = values;
   array = values;
   console.log(this.selectedIntegrantes); 
-  console.log(this.selectedActividad_especifica); // selectedIntegrantes is still undefined
+  // console.log(this.selectedActividad_especifica); // selectedIntegrantes is still undefined
   // selectedIntegrantes is still undefined
 }
 
 deselectAll(select: MatSelect) {
   this.selectedIntegrantes = [];
-  this.selectedActividad_especifica = [];
+  // this.selectedActividad_especifica = [];
   select.value = [];
 }
 
@@ -108,7 +114,8 @@ deselectAll(select: MatSelect) {
 
   constructor(
     private fb:FormBuilder,
-    private _formBuilder: FormBuilder) {
+    private _formBuilder: FormBuilder,
+    private generalService: GeneralServide) {
       
     this.productForm = this.fb.group({
       actividades: this.fb.array([]) ,
@@ -134,8 +141,14 @@ deselectAll(select: MatSelect) {
   
   
   ngOnInit(): void {
-    
+    this.segmento = this.generalService.getSegmento();
+    this.onSelect(this.selectedSegmento.id_segmento);
   }
+
+  onSelect(segmentoid: number) {
+    console.log('value: ' + 'dddd');
+    this.actividad_especifica = this.generalService.getActividadEspecifica().filter((item) => item.segmentoid == segmentoid); 
+   }
 
   /* MANEJO DEL ARRAY DE CANTIDADES */
 
@@ -148,8 +161,8 @@ deselectAll(select: MatSelect) {
   nuevaActividad(): FormGroup {
     return this.fb.group({
       fecha_actividad: this.fecha_act.value,
-      detalle_segmento: this.segmento.value,
-      detalle_actividad: this.actividad_especifica.value,
+      detalle_segmento: this.segmento.values,
+      detalle_actividad: this.actividad_especifica.values,
       cantidad_rural: this.rural.value,
       cantidad_urbano: this.urbano.value,
     })
@@ -157,13 +170,13 @@ deselectAll(select: MatSelect) {
 
   //Añadir los valores de las cantidades al array de cantidades
   agregarActividades() {
-    if (this.fecha_act.value && this.segmento.value && this.actividad_especifica.value && this.rural.value && this.urbano.value) {
+    if (this.fecha_act.value && this.segmento.values() && this.actividad_especifica.values() && this.rural.value && this.urbano.value) {
       this.actividades().push(this.nuevaActividad());
       console.log(this.actividades().value)
       //limpiar controls
       this.fecha_act.reset();
-      this.segmento.reset();
-      this.actividad_especifica.reset();
+      this.segmento;
+      this.actividad_especifica;
       this.rural.reset();
       this.urbano.reset();
     } else {
@@ -193,4 +206,6 @@ deselectAll(select: MatSelect) {
   sortedData = this.actividad.slice();
   sortData() {
   }
+
+
 }

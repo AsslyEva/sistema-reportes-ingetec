@@ -11,6 +11,7 @@ import { AppComponent } from 'src/app/app.component';
 import { DynamicModule } from 'ng-dynamic-component';
 import { DataTablesModule } from 'angular-datatables';
 import { DialogsService } from '../../shared/dialogs.service';
+import { GeneralServide } from 'src/app/service/global/general.service';
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import { DialogsService } from '../../shared/dialogs.service';
   ],
   providers: [
     DialogsService,
-
+    GeneralServide,
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: MAT_DATE_LOCALE, useValue: 'es-PE' },
   ],

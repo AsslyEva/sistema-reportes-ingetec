@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { DynamicModule } from 'ng-dynamic-component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { GeneralServide } from './service/global/general.service';
 
 @NgModule({
   declarations: [
@@ -36,9 +37,7 @@ import { AppRoutingModule } from './app-routing.module';
     ReactiveFormsModule,
     SharedModule,
   ],
-  providers: [
 
-  ],
   bootstrap: [
     AppComponent
   ], 
@@ -46,7 +45,10 @@ import { AppRoutingModule } from './app-routing.module';
   entryComponents: [
     AppComponent
   ],
-  // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+
+  providers: [
+    GeneralServide
+  ]
 
 
 })

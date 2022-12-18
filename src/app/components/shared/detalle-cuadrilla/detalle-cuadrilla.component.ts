@@ -24,7 +24,7 @@ export class DetalleCuadrillaComponent{
       id_actividad: 1,
       sede: "TARMA",
       lider : "Javier Coella",
-      integrantes : ["Bryan" , "Assly" , "Franco"],
+      integrantes : ["Bryanssssssssssssssssssssssssssssssssssss" , "Asslyssssssssssssssssssssssssssssssssssssssssssssssssss" , "Franco"],
       segmento : "CONEXIONES NUEVAS BT",
       actividad_especifica : "Subterráneo Monofásico sin rotura ni resane de vereda",
       urbano : 2,
@@ -32,17 +32,6 @@ export class DetalleCuadrillaComponent{
       fecha : new Date(),
     },
 
-    {
-      id_actividad: 4,
-      sede: "TARMA",
-      lider : "Efrain Aylas",
-      integrantes : ["Bryan" , "Diana" , "Franco"],
-      segmento : "REINSTALACION DE SERVICIO RS",
-      actividad_especifica : "Instalación de medidor monofásico, caja e ITM",
-      urbano : 0,
-      rural : 3,
-      fecha : new Date(),
-    },
   ];
   constructor(
     public dialogRef: MatDialogRef<DetalleCuadrillaComponent>,

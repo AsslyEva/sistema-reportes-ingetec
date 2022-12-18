@@ -110,19 +110,31 @@
 
                     <mat-form-field   appearance="outline">
                         <mat-label>Segmento Realizado</mat-label>
-                        <mat-select [formControl]="segmento">
-                          <mat-option *ngFor="let segmento of segmentosList" [value]="segmento">
-                            {{segmento}}
+
+                        <mat-select [{ngModel}]="selectedSegmento.id_segmento"
+                        cambiar aqui
+                                      (valueChange)="onSelect($event.target.value)"> 
+
+                          <option value="0"></option>
+
+                          <mat-option *ngFor="let segmento of segmento" value = {{segmento.id_segmento}}>
+                            {{segmento.nombre_segmento}}
                           </mat-option>
+
                         </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field   appearance="outline">
+                    <mat-form-field appearance="outline">
                       <mat-label>Seleccione Actividad Realizada</mat-label>
-                      <mat-select [formControl]="actividad_especifica">
-                        <mat-option *ngFor="let actividad_especifica of actividad_especificaList" [value]="actividad_especifica">
-                          {{actividad_especifica}}
+                      <mat-select>
+
+                        <option value="0">--Select--</option>
+                        <mat-option 
+                        *ngFor="let actividad_especifica of actividad_especifica" 
+                        value= {{actividad_especifica.id_actividad_especifica}}>
+                        {{actividad_especifica.nombre_actividad_especifica}}
                         </mat-option>
+
                       </mat-select>
                     </mat-form-field>
                     <mat-divider></mat-divider>
