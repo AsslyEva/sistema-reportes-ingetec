@@ -10,6 +10,9 @@ import Swal from 'sweetalert2';
 import { Segmento } from 'src/app/model/interfaces/global/segmento';
 import { ActividadEspecifica } from 'src/app/model/interfaces/global/actividad_especiifica';
 import { GeneralServide } from 'src/app/service/global/general.service';
+import { SedesService } from 'src/app/service/global/sedes.service';
+import { SegmentosService } from 'src/app/service/global/segmentos.service';
+import { ActividadesService } from 'src/app/service/global/actividades.service';
 
 export interface User {
   name: string;
@@ -53,8 +56,8 @@ export class FormularioComponent implements OnInit {
 
   // inicializacion sedes
   sede = new FormControl('');
-  sedesList: string[] = ['TARMA', 'LA OROYA', 'CARHUAMAYO', 'JUNIN'];
-
+  sedesList: any;
+  selectedSede: any;
 
   // configuracion actividades
   productForm: FormGroup;
@@ -62,13 +65,12 @@ export class FormularioComponent implements OnInit {
   urbano =  new FormControl('');
   
   // *// inicializacion segmento
-  selectedSegmento: Segmento = new Segmento(1, '');
-
-  segmento: Segmento[] = [];
+  selectedSegmento: Segmento | null = null;
+  segmentos: Segmento[] = [];
   // segmentosList: string[] = ['INSTALACION', 'CORTE', 'REPARTO'];
  
   // *// inicializacion actividades
-  actividad_especifica: ActividadEspecifica[] = [];
+  actividades_especifica: ActividadEspecifica[] = [];
   // actividad_especificaList: string[] = ['Aéreo Monofásico', 'Aéreo Trifásico', 'Subterráneo Monofásico sin rotura ni resane de vereda'];
  // array is selectedIntegrantes
 //  selectedActividad_especifica!: any[];
@@ -115,7 +117,11 @@ deselectAll(select: MatSelect) {
   constructor(
     private fb:FormBuilder,
     private _formBuilder: FormBuilder,
-    private generalService: GeneralServide) {
+    private generalService: GeneralServide,
+    private sedesService: SedesService,
+    private segmentosService : SegmentosService,
+    private actividadesService : ActividadesService
+    ) {
       
     this.productForm = this.fb.group({
       actividades: this.fb.array([]) ,
@@ -141,14 +147,28 @@ deselectAll(select: MatSelect) {
   
   
   ngOnInit(): void {
-    this.segmento = this.generalService.getSegmento();
-    this.onSelect(this.selectedSegmento.id_segmento);
+    this.sedesService.getSedes()
+    .subscribe((resp)=> {
+      this.sedesList=resp
+    })
+
+    // this.segmentos = this.generalService.getSegmento();
+    // this.onSelect(this.selectedSegmento.id_segmento);
   }
 
-  onSelect(segmentoid: number) {
-    console.log('value: ' + 'dddd');
-    this.actividad_especifica = this.generalService.getActividadEspecifica().filter((item) => item.segmentoid == segmentoid); 
-   }
+
+  changeSede(){
+    console.log (this.selectedSede)
+
+    this.segmentosService.getSegmentos(this.selectedSede)
+    .subscribe((resp: Segmento[])=> {
+      this.segmentos = resp;
+    })
+  }
+  // onSelect(segmentoid: number) {
+  //   console.log('value: ' + 'agrega actividad');
+  //   this.actividades_especifica = this.generalService.getActividadEspecifica().filter((item) => item.segmentoid == segmentoid); 
+  //  }
 
   /* MANEJO DEL ARRAY DE CANTIDADES */
 
@@ -161,8 +181,8 @@ deselectAll(select: MatSelect) {
   nuevaActividad(): FormGroup {
     return this.fb.group({
       fecha_actividad: this.fecha_act.value,
-      detalle_segmento: this.segmento.values,
-      detalle_actividad: this.actividad_especifica.values,
+      detalle_segmento: this.selectedSegmento,
+      detalle_actividad: this.actividades_especifica,
       cantidad_rural: this.rural.value,
       cantidad_urbano: this.urbano.value,
     })
@@ -170,13 +190,13 @@ deselectAll(select: MatSelect) {
 
   //Añadir los valores de las cantidades al array de cantidades
   agregarActividades() {
-    if (this.fecha_act.value && this.segmento.values() && this.actividad_especifica.values() && this.rural.value && this.urbano.value) {
+    if (this.fecha_act.value && this.segmentos && this.actividades_especifica && this.rural.value && this.urbano.value) {
       this.actividades().push(this.nuevaActividad());
       console.log(this.actividades().value)
       //limpiar controls
       this.fecha_act.reset();
-      this.segmento;
-      this.actividad_especifica;
+      this.segmentos;
+      this.actividades_especifica;
       this.rural.reset();
       this.urbano.reset();
     } else {

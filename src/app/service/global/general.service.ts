@@ -10,6 +10,7 @@ export class GeneralServide {
   }
 
   getSegmento() {
+    
     return [
      new Segmento(1, 'CONEXIONES NUEVAS BT' ),
      new Segmento(2, 'REINSTALACION DE SERVICIO RS' ),

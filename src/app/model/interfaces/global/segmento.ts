@@ -1,7 +1,8 @@
 
 export class Segmento {
     constructor(
-    public id_segmento: number,
-    public nombre_segmento: string
+    public codigo_seg: number,
+    public descripcion_seg: string,
+    // public actividades_especificas : []
     ){}
 }
