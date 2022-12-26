@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ActividadEspecifica } from 'src/app/model/interfaces/global/actividad_especiifica';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
@@ -13,6 +14,6 @@ export class ActividadesService {
   ) { }
 
   getActividades(cod: string){
-    return this.http.get(`${this.url}/actividades/listar/segmento/${cod}`)
+    return this.http.get<ActividadEspecifica[]>(`${this.url}actividades/listar/segmento/${cod}`)
   }
 }

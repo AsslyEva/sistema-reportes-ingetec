@@ -12,21 +12,16 @@
 //         width: 100%;
 //     }
 // }
-.button-option{
-    display: flex;
-    justify-content: center;
-}
+
 
 .descargar-all{
-    background: #3cd419;
-    width: 50%;
-    color: white;
-    font-family: "Montserrat";
-    justify-content: center;
-    border-color: transparent;
-    display: flex;
-    border-radius: 2rem;    
-
+    background: g.$ingetec-aprobe;
+    color: #ffff;
+    font-family: 'Montserrat';
+    // mat-icon{
+    //     // width: 100%;
+    //     // color: #ffff;
+    // }
 }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
@@ -94,6 +89,23 @@ mat-datepicker-toggle{
 }
 mat-datepicker{
     font-size: 2rem;
+}
+.dercargar-all{
+    button{
+        // width: 70%;
+        background-color: g.$ingetec-cyan;
+        padding: 1em;
+        border-radius: 1rem;
+        // margin: 1rem 0;
+        border: none;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .view{

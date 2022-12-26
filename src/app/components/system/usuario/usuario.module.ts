@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { FormularioComponent } from './formulario/formulario.component';
-import { GeneralServide } from 'src/app/service/global/general.service';
+// import { GeneralServide } from 'src/app/service/global/general.service';
 
 @NgModule({
   imports: [
@@ -24,7 +24,7 @@ import { GeneralServide } from 'src/app/service/global/general.service';
   ],
 
   providers: [
-    GeneralServide,
+    // GeneralServide,
 
   ],
 

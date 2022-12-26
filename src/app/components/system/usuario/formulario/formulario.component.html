@@ -7,49 +7,71 @@
         <!-- <p>INGRESA LOS DATOS REQUERIDOS</p> -->
     <div>
       <div class="row form-inf">
-        <mat-vertical-stepper [linear]="false" #stepper  class="col-md-12">
-          <mat-step>
+        <mat-vertical-stepper [linear]="true" #stepper labelPosition="bottom"  class="col-md-12">
+          <mat-step  [stepControl]="SedeFormGroup">
             <form [formGroup]="SedeFormGroup">
               <ng-template matStepLabel>Sede</ng-template>
-              <mat-form-field  appearance="outline">
+              <mat-form-field  appearance="outline" >
                   <mat-label>Seleccione Sede</mat-label>
-                  <mat-select [formControl]="sede" 
+                  <mat-select 
                               [(ngModel)]="selectedSede"
-                              (ngModelChange)="changeSede()">
+                              (ngModelChange)="changeSede()"
+                              required
+                              formControlName="firstCtrl"
+                              >
+
                     <mat-option *ngFor="let sede of sedesList" [value]="sede.codigo_sede">
                       {{sede.descripcion_sede}}</mat-option>
                   </mat-select>
+
+                  <br />
+                  <mat-error
+                    *ngIf="SedeFormGroup.controls['firstCtrl'].hasError('required')"
+                  >
+                  Seleccione Sede para continuar
+                  </mat-error>
               </mat-form-field>
-
+              <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
             </form>
-
             <!-- <p >
               Sede Seleccionada: {{sede.descripcion_sede}}
             </p> -->
           </mat-step>
 
-          <mat-step >
-            <form>
-              <ng-template matStepLabel>Integrantes del Equipo</ng-template>
+          <mat-step  [stepControl]="CuadrillaFormGroup">
 
-              <mat-form-field   appearance="outline" [formGroup]="LiderFormGroup">
+            <form [formGroup]="LiderFormGroup">
+              <ng-template matStepLabel>Integrantes del Equipo</ng-template>
+              <mat-form-field appearance="outline">
                 <mat-label>Lider de Equipo</mat-label>
 
-                <mat-select [formControl]="lider">
-                  <mat-option *ngFor="let lider of integrantesList" [value]="lider">
+                <mat-select 
+                            required
+                            formControlName="thirdCtrl">
+                  <mat-option *ngFor="let lider of integrantesList" 
+                              [value]="lider">
                     {{lider}}
                   </mat-option>
                 </mat-select>
+                <br />
+                <mat-error
+                  *ngIf="LiderFormGroup.controls['thirdCtrl'].hasError('required')"
+                >
+                Seleccione Lider  para continuar
+                </mat-error>
               </mat-form-field>
+            </form>
 
-              <mat-form-field appearance="outline" [formGroup]="IntegrantesFormGroup">
+            <form [formGroup]="CuadrillaFormGroup">
+              <mat-form-field appearance="outline">
                 <mat-label>Integrantes del equipo</mat-label>
-
-                <mat-select [formControl]="integrantes" 
+                <mat-select  
                             [multiple]="true" 
                             [(ngModel)]="selectedIntegrantes" 
                             #integrantesSelect
-                            #multiSelect>
+                            #multiSelect
+                            required
+                            formControlName="secondCtrl">
                 <div class="options">
                   <button 
                   mat-raised-button 
@@ -65,28 +87,37 @@
                   </button>
                 </div>
 
-                  <mat-option  
+                  <mat-option *ngFor="let integrantes of integrantesList" 
                               [value]="integrantes" 
-                              *ngFor="let integrantes of integrantesList" 
                               >
-                              {{integrantes}}
+                  {{integrantes}}
                   </mat-option>
                 </mat-select>
+                <br />
+                <mat-error
+                  *ngIf="CuadrillaFormGroup.controls['secondCtrl'].hasError('required')"
+                >
+                Seleccione Integrantes para continuar
+                </mat-error>
               </mat-form-field>
-                <p>
-                  Lider de Equipo: {{lider.value}}
-                </p>
-                <p >
-                  Integrantes de equipo
-                </p>
-                <ul>
-                <mat-chip-list>
-                  <mat-chip  *ngFor="let integrantes of integrantesSelect?.value">
-                    {{integrantes}}
-                  </mat-chip>
-                </mat-chip-list>
-                </ul>
+              <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
             </form>
+            <br>
+            <div class="historia">
+              <p>
+                Lider de Equipo: {{lider.value}}
+              </p>
+              <p >
+                Integrantes de equipo
+              </p>
+              <ul>
+              <mat-chip-list>
+                <mat-chip  *ngFor="let integrantes of integrantesSelect?.value">
+                  {{integrantes}}
+                </mat-chip>
+              </mat-chip-list>
+              </ul>
+            </div> 
           </mat-step>
 
           <mat-step>
@@ -114,11 +145,13 @@
                         <mat-label>Segmento Realizado</mat-label>
                         <!-- [(ngModel)]="selectedSegmento.id_segmento"
                         (change)="onSelect($event.target.value)" -->
-                        <mat-select > 
+                        <mat-select   [formControl]="segmento" 
+                                      [(ngModel)]="selectedSegmento"
+                                      (ngModelChange)="changeSegmento()"> 
 
                           <option value="0"></option>
 
-                          <mat-option *ngFor="let segmento of segmentos" [value]= "segmento.codigo_seg" >
+                          <mat-option *ngFor="let segmento of segmentos " [value]= "segmento.codigo_seg" >
                             {{segmento.descripcion_seg}}
                           </mat-option>
 
@@ -127,13 +160,14 @@
 
                     <mat-form-field appearance="outline">
                       <mat-label>Seleccione Actividad Realizada</mat-label>
-                      <mat-select>
+                      <mat-select 
+                                [(ngModel)]="selectActividad_especifica"
+                                [formControl]="actividad_especifica" >
 
                         <!-- <option value="0">--Select--</option> -->
                         <mat-option 
-                        *ngFor="let actividad_especifica of actividades_especifica" 
-                        value= {{actividad_especifica.id_actividad_especifica}}>
-                        {{actividad_especifica.nombre_actividad_especifica}}
+                        *ngFor="let actividad_especifica of actividades_especifica" [value]= "actividad_especifica.codigo_act">
+                        {{actividad_especifica.descripcion_act}}
                         </mat-option>
 
                       </mat-select>
@@ -155,12 +189,13 @@
                       <button type="button"
                               (click)="agregarActividades()"
                               class="actividad-button add"
-                              matTooltip="Agregar nueva actividad">
+                              matTooltip="Agregar nueva actividad"
+                              required
+                              >
                               Añadir actividad
                         <mat-icon>add</mat-icon>
                       </button>
                     </tr>
-
 
                     <div class="actividades" *ngFor="let actividad of actividades().controls; let i=index" [formGroupName]="i">
 
@@ -169,34 +204,35 @@
                         <input style="text-align: center;" 
                               formControlName="fecha_actividad" 
                               class="form-control" 
-                              [ngModel]="todayDate |  date:'shortDate'">
+                              [ngModel]="todayDate |  date:'shortDate'"
+                              >
                       </div>
                     
                       <div>
                         <ul>Segmento agregado  <mat-icon>check_circle_outline</mat-icon></ul> 
                         <input style="text-align: center;"  
                               formControlName="detalle_segmento" 
-                              class="form-control">
+                              class="form-control"
+                              readonly>
                       </div>
 
                       <div>
                         <ul>Actividad específica agregada  <mat-icon>check_circle_outline</mat-icon></ul> 
                         <input style="text-align: center;"  
                               formControlName="detalle_actividad" 
-                              class="form-control">
-                      </div>
-                      
-
+                              class="form-control"
+                              readonly>
+                      </div>                  
                       
                       <!-- <label>Cantidades realizadas</label> -->
                       <div class="cantidad">
                         <div class="item-cantidad">
                         <ul>Cantidad de Rural agregada  <mat-icon>check_circle_outline</mat-icon></ul>
-                            <input style="text-align: center;"  formControlName="cantidad_rural" class="form-control ">
+                            <input type="number" style="text-align: center;"  formControlName="cantidad_rural" class="form-control ">
                         </div> 
                         <div class="item-cantidad">
                         <ul>Cantidad en Urbano agregado <mat-icon>check_circle_outline</mat-icon></ul> 
-                            <input style="text-align: center;"  formControlName="cantidad_urbano" class="form-control">
+                            <input type="number" style="text-align: center;"  formControlName="cantidad_urbano" class="form-control">
                         </div>
                       </div>
 
@@ -215,10 +251,11 @@
                     
                   </div> 
                 </table>
+                <!-- <button mat-raised-button color="primary" matStepperNext>Siguiente</button> -->
               </form>
           </mat-step>
 
-          <mat-step>
+          <mat-step >
             <ng-template matStepLabel>ENVIAR</ng-template>
 
             <!-- <ul>RESUMEN DE ACTIVIDAD</ul>
@@ -279,8 +316,6 @@
               </div> -->
             
 
-
-
             <ul>Si esta seguro de los datos ingresados haga click en "Enviar"</ul> 
             <div>
             <!-- <button mat-button matStepperPrevious>Anterior</button> -->
@@ -293,7 +328,6 @@
                     >
                     Enviar
                     <mat-icon class="icon">send</mat-icon>&nbsp;
-                    
                 </button>
             </div>
               <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->

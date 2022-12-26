@@ -4,11 +4,11 @@ import { Subject } from 'rxjs';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { HttpClient } from '@angular/common/http';
 @Component({
-  selector: 'app-reporte-personal',
-  templateUrl: './reporte-personal.component.html',
-  styleUrls: ['./reporte-personal.component.scss']
+  selector: 'app-reporte-valorizacion',
+  templateUrl: './reporte-valorizacion.component.html',
+  styleUrls: ['./reporte-valorizacion.component.scss']
 })
-export class ReportePersonalComponent implements OnInit {
+export class ReporteValorizacionComponent implements OnInit {
 // dom: any[];
  //Configuracion para datatable
  dtOptions: ADTSettings = {};

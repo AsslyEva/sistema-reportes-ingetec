@@ -1,14 +1,14 @@
 <div class="content-inicio">
 
   <app-title-frame
-  [title]="'REPORTE DE ACTIVIDADES COMERCIALES'"
+  [title]="'REPORTE DE ACTIVIDADES COMERCIALES DIARIAS'"
   [link]="'/administrador/inicio'"
   ></app-title-frame>
 
 
   <form class="row form-filtro" [formGroup]="form">
     <div class="col-12">
-      <p class="text-filtro">Seleccione un tipo de registro para realizar la búsqueda</p>
+      <p class="text-filtro">Seleccione filtro para realizar la búsqueda</p>
     </div>
 
       <div class="filtro">
@@ -24,7 +24,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-
+<!-- 
           <mat-form-field class="form-item" appearance="outline">
             <mat-label>Lider de Equipo</mat-label>
             <mat-select 
@@ -34,7 +34,7 @@
                 {{actividad.lider}}
               </mat-option>
             </mat-select>
-          </mat-form-field>
+          </mat-form-field> -->
 
           <mat-form-field class="form-item" appearance="outline">
             <mat-label>Fecha inicial</mat-label>
@@ -121,12 +121,14 @@
         </tr>
       </tbody>
     </table>
-    <div class="dercargar-all col-12  d-flex justify-content-center">
-      <button
+    <div class="button-option download text-center align-middle border-top pt-5">
+      <button 
+        class="descargar-all col-12"
         matTooltip="Descargar todo">
+        <mat-icon> download </mat-icon>
+
         <span class="text-button">Descargar toda la Tabla</span>
   
-        <mat-icon> download </mat-icon>
       </button>
     </div>
   </div>

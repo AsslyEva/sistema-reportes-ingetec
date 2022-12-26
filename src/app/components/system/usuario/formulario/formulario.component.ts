@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSelect } from '@angular/material/select';
@@ -9,7 +9,6 @@ import {Sort} from '@angular/material/sort';
 import Swal from 'sweetalert2';
 import { Segmento } from 'src/app/model/interfaces/global/segmento';
 import { ActividadEspecifica } from 'src/app/model/interfaces/global/actividad_especiifica';
-import { GeneralServide } from 'src/app/service/global/general.service';
 import { SedesService } from 'src/app/service/global/sedes.service';
 import { SegmentosService } from 'src/app/service/global/segmentos.service';
 import { ActividadesService } from 'src/app/service/global/actividades.service';
@@ -35,15 +34,6 @@ export interface integrantes {
   name: string;
 }
 
-
-
-// export const INTEGRANTES: integrantes[] = [
-//   { id: 2, name: "ASSLY" },
-//   { id: 3, name: "BRYAN" },
-//   { id: 4, name: "FRANCO" },
-//   { id: 5, name: "JANESSY" }
-// ];
-
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
@@ -52,7 +42,6 @@ export interface integrantes {
 export class FormularioComponent implements OnInit {
   required: boolean = true;
   // matDatepickerFilter: boolean = true;
-
 
   // inicializacion sedes
   sede = new FormControl('');
@@ -65,12 +54,17 @@ export class FormularioComponent implements OnInit {
   urbano =  new FormControl('');
   
   // *// inicializacion segmento
-  selectedSegmento: Segmento | null = null;
+  segmento = new FormControl('');
+  selectedSegmento: Segmento | any;
   segmentos: Segmento[] = [];
+  // segmentoList: any;
   // segmentosList: string[] = ['INSTALACION', 'CORTE', 'REPARTO'];
  
-  // *// inicializacion actividades
+  // *// inicializacion actividades  
+  actividad_especifica = new FormControl('');
+  selectActividad_especifica: ActividadEspecifica | any;
   actividades_especifica: ActividadEspecifica[] = [];
+
   // actividad_especificaList: string[] = ['Aéreo Monofásico', 'Aéreo Trifásico', 'Subterráneo Monofásico sin rotura ni resane de vereda'];
  // array is selectedIntegrantes
 //  selectedActividad_especifica!: any[];
@@ -94,8 +88,8 @@ integrantesList: string[] = ['ANA', 'ERIKA', 'VICTOR', 'BRYAN', 'FRANCO', 'JANES
 searchUserForm!: FormGroup;
  // array is selectedIntegrantes
  selectedIntegrantes!: any[];
- SelectActividad_especifica!: any[];
  
+
  selectAll(select: MatSelect, values: any, array: any) {
   select.value = values;
   array = values;
@@ -117,12 +111,14 @@ deselectAll(select: MatSelect) {
   constructor(
     private fb:FormBuilder,
     private _formBuilder: FormBuilder,
-    private generalService: GeneralServide,
+    // private generalService: GeneralServide,
     private sedesService: SedesService,
     private segmentosService : SegmentosService,
-    private actividadesService : ActividadesService
+    private actividadesService : ActividadesService,
+    
     ) {
-      
+    // this.createForm();
+
     this.productForm = this.fb.group({
       actividades: this.fb.array([]) ,
     });
@@ -134,14 +130,16 @@ deselectAll(select: MatSelect) {
 
   }
 
+// cofiguracion de matStep
   SedeFormGroup: FormGroup = this._formBuilder.group({firstCtrl: ['']});
-  LiderFormGroup: FormGroup = this._formBuilder.group({secondCtrl: ['']});
-  IntegrantesFormGroup: FormGroup = this._formBuilder.group({thirdCtrl: ['']});
-  SegmentoFormGroup: FormGroup = this._formBuilder.group({fourthCtrl: ['']});
-  ActividadFormGroup: FormGroup = this._formBuilder.group({fifthCtrl: ['']});
-  CantidadFormGroup: FormGroup = this._formBuilder.group({sixthCtrl: ['']});
-  FechaFormGroup: FormGroup = this._formBuilder.group({seventhCtrl: ['']});
-  EvidenciaFormGroup: FormGroup = this._formBuilder.group({eighthCtrl: ['']});
+  CuadrillaFormGroup: FormGroup = this._formBuilder.group({secondCtrl: ['']});
+  LiderFormGroup: FormGroup = this._formBuilder.group({thirdCtrl: ['']});
+  IntegrantesFormGroup: FormGroup = this._formBuilder.group({fourthCtrl: ['']});
+  SegmentoFormGroup: FormGroup = this._formBuilder.group({fifthCtrl: ['']});
+  ActividadFormGroup: FormGroup = this._formBuilder.group({sixthCtrl: ['']});
+  CantidadFormGroup: FormGroup = this._formBuilder.group({seventhCtrl: ['']});
+  FechaFormGroup: FormGroup = this._formBuilder.group({eighthCtrl: ['']});
+  // EvidenciaFormGroup: FormGroup = this._formBuilder.group({ninethCtrl: ['']});
 
 
   
@@ -151,9 +149,6 @@ deselectAll(select: MatSelect) {
     .subscribe((resp)=> {
       this.sedesList=resp
     })
-
-    // this.segmentos = this.generalService.getSegmento();
-    // this.onSelect(this.selectedSegmento.id_segmento);
   }
 
 
@@ -163,6 +158,15 @@ deselectAll(select: MatSelect) {
     this.segmentosService.getSegmentos(this.selectedSede)
     .subscribe((resp: Segmento[])=> {
       this.segmentos = resp;
+    })
+  }
+
+  changeSegmento(){
+    console.log (this.selectedSegmento)
+
+    this.actividadesService.getActividades(this.selectedSegmento)
+    .subscribe((resp: ActividadEspecifica[])=> {
+      this.actividades_especifica = resp;
     })
   }
   // onSelect(segmentoid: number) {
@@ -181,22 +185,29 @@ deselectAll(select: MatSelect) {
   nuevaActividad(): FormGroup {
     return this.fb.group({
       fecha_actividad: this.fecha_act.value,
-      detalle_segmento: this.selectedSegmento,
-      detalle_actividad: this.actividades_especifica,
+      codigo_segmento: this.segmento.value,
+      codigo_actividad: this.actividad_especifica.value,
+      detalle_segmento: this.segmentos.find(element => element.codigo_seg == parseInt(this.selectedSegmento))?.descripcion_seg,
+      detalle_actividad: this.actividades_especifica.find(element => element.codigo_act == parseInt(this.selectActividad_especifica))?.descripcion_act,
       cantidad_rural: this.rural.value,
       cantidad_urbano: this.urbano.value,
     })
   }
 
-  //Añadir los valores de las cantidades al array de cantidades
+  //Añadir los valores de las canti  dades al array de cantidades
   agregarActividades() {
-    if (this.fecha_act.value && this.segmentos && this.actividades_especifica && this.rural.value && this.urbano.value) {
+    if (
+      this.fecha_act.value 
+      && this.segmento.value 
+      && this.actividad_especifica.value 
+      && this.rural.value 
+      && this.urbano.value) {
       this.actividades().push(this.nuevaActividad());
       console.log(this.actividades().value)
       //limpiar controls
       this.fecha_act.reset();
-      this.segmentos;
-      this.actividades_especifica;
+      this.segmento.reset();
+      this.actividad_especifica.reset();
       this.rural.reset();
       this.urbano.reset();
     } else {
@@ -226,6 +237,5 @@ deselectAll(select: MatSelect) {
   sortedData = this.actividad.slice();
   sortData() {
   }
-
 
 }

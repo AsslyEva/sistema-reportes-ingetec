@@ -1,8 +1,6 @@
-export class ActividadEspecifica {
-    segmentoid: any;
+export class ActividadEspecifica {       
     constructor(
-    public id_actividad_especifica: number,
-    public id_segmento: number,
-    public nombre_actividad_especifica: string
+    public codigo_act: number,
+    public descripcion_act: string,
     ){}
 }
