@@ -19,4 +19,8 @@ export class IntegrantesService {
   getIntegrantesBySede(cod: string){
     return this.http.get(`${this.url}integrantes/listar/sede/${cod}`)
   }
+
+  getDetalleIntegrante(cod: string){
+    return this.http.get(`${this.url}integrantes/verDetalle/${cod}`)
+  }
 }

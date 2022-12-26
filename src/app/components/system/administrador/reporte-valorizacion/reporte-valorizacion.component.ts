@@ -3,6 +3,7 @@ import { LenguajeDataTable } from 'src/app/utils/utils';
 import { Subject } from 'rxjs';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { HttpClient } from '@angular/common/http';
+import { ReportesService } from 'src/app/service/global/reportes.service';
 @Component({
   selector: 'app-reporte-valorizacion',
   templateUrl: './reporte-valorizacion.component.html',
@@ -24,44 +25,21 @@ export class ReporteValorizacionComponent implements OnInit {
  importe_urbano = "";
  importe_rural = "";
 
- valorizacion: any[] = [
-   {
-     sede: "TARMA",
-     segmento : "CONEXIONES NUEVAS BT",
-     partida: "101CN02",
-     descripcion_actividades: "Aéreo Trifásico",
-     precio_urbano: "400",
-     precio_rural: "200",
-     cantidades_urbano: "15",
-     cantidades_rural: "150",
-     importe_urbano: "s/ 523",
-     importe_rural: "s/ 5412",
-   },
-
-   {
-     sede: "TARMA",
-     segmento : "CONEXIONES NUEVAS BT",
-     partida: "101CN02",
-     descripcion_actividades: "Aéreo Trifásico",
-     precio_urbano: "400",
-     precio_rural: "200",
-     cantidades_urbano: "15",
-     cantidades_rural: "150",
-     importe_urbano: "s/ 523",
-     importe_rural: "s/ 5412",
-   },
- ];
+ valorizacion: any = null;
 
 
  dtTrigger: Subject<any> = new Subject<any>();
 
- 
- constructor(
-   private httpClient: HttpClient  
-   ) {}
+
+  constructor(
+    private reportesService: ReportesService
+  ) {}
 
  ngOnInit(): void {
-   const that = this;
+   this.reportesService.getReportesAgrupados()
+   .subscribe((resp:any) => {
+      this.valorizacion = resp;
+   })
    this.dtOptions = {
      dom: '<"top"if>rt<"bottom"lp><"clear">',
      pagingType: 'simple_numbers',

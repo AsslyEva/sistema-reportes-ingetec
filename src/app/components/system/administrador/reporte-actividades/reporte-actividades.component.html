@@ -18,9 +18,11 @@
             <mat-label>Segmento</mat-label>
             <mat-select
                         placeholder="Ingresa registra"
-                        formControlName="actividad">
-              <mat-option *ngFor="let actividad of actos" [value]="actividad.id_actividad" >
-                {{actividad.segmento}}
+                        formControlName="actividad"
+                        [(ngModel)]="selectedSegmento"
+                        (ngModelChange)="changeSegmento()">
+              <mat-option *ngFor="let segmento of segmentos" [value]="segmento.codigo_seg" >
+                {{segmento.descripcion_seg}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -36,12 +38,12 @@
             </mat-select>
           </mat-form-field> -->
 
-          <mat-form-field class="form-item" appearance="outline">
+          <mat-form-field class="form-item" appearance="outline" >
             <mat-label>Fecha inicial</mat-label>
-            <input matInput
+            <input matInput [(ngModel)]="toDate" name="someName"
                     [matDatepicker]="fecInicio"
                     >
-            <mat-datepicker-toggle matIconSuffix [for]="fecInicio"></mat-datepicker-toggle>
+            <mat-datepicker-toggle matIconSuffix [for]="fecInicio" ></mat-datepicker-toggle>
             <mat-datepicker #fecInicio></mat-datepicker>
           </mat-form-field>
 
@@ -58,6 +60,9 @@
           <button matt-button >BUSCAR
             <mat-icon>search</mat-icon>
           </button>
+          <button matt-button (click)="reset()">LIMPIAR
+            <mat-icon>search</mat-icon>
+          </button>
         </div>
 
       </div>
@@ -67,11 +72,11 @@
 
 
 
-  <div class="content-tabla col-12 " *ngIf="actos != null">
+  <div class="content-tabla col-12 " *ngIf="actosFilter.length != 0">
     <table
-           datatable
-           [dtOptions]="dtOptions"
-           class="table table-dark-ingetec">
+            datatable
+            [dtOptions]="dtOptions"
+            class="table table-dark-ingetec">
       <thead>
         <tr >
           <th>Sede</th>
@@ -85,8 +90,8 @@
           <th>Cuadrilla</th>
         </tr>
       </thead>
-      <tbody *ngIf="actos?.length !=0">
-        <tr *ngFor="let acto of actos" class="text-center align-middle border-bottom ">
+      <tbody *ngIf="actosFilter?.length !=0">
+        <tr *ngFor="let acto of actosFilter" class="text-center align-middle border-bottom ">
           <td>{{acto.descripcion_sede}}</td>
           <!-- <td>{{acto.lider}}</td>
           <td>
@@ -109,7 +114,7 @@
                   color="primary"
                   class="menu-button bg-blue"
                   matTooltip="Ver cuadrilla"
-                  (click)="abrirDetalle(acto.codigo_cant_eje, 'Pedro')"
+                  (click)="abrirDetalle(acto.codigo_cant_eje, acto.lider_eje)"
                   >
                   Ver
                   <mat-icon> visibility </mat-icon>

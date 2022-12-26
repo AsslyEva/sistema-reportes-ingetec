@@ -159,7 +159,7 @@ deselectAll(select: MatSelect) {
   changeSede(){
     console.log (this.selectedSede)
 
-    this.segmentosService.getSegmentos(this.selectedSede)
+    this.segmentosService.getSegmentosBySede(this.selectedSede)
     .subscribe((resp: Segmento[])=> {
       this.segmentos = resp;
     })

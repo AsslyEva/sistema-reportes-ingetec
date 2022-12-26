@@ -60,7 +60,7 @@
 
 
         </form> -->
-        <p>Lider: {{data.lider}}</p>
+        <p *ngIf="lider != null">Lider: {{lider.nombres_integrante + ' ' + lider.apellidos_integrante}}</p>
         <div class="content-tabla col-12 ">
             <table
                     class="table table-dark-ingetec">

@@ -13,7 +13,11 @@ export class SegmentosService {
     private http: HttpClient
   ) { }
 
-  getSegmentos(cod: string){
+  getSegmentosBySede(cod: string){
     return this.http.get<Segmento[]>(`${this.url}segmento/listar/sede/${cod}`)
+  }
+
+  getSegmentos(){
+    return this.http.get<Segmento[]>(`${this.url}segmento/listar`)
   }
 }

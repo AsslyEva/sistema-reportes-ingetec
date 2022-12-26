@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogsService } from 'src/app/components/shared/dialogs.service';
 import { DetalleCuadrillaComponent } from 'src/app/components/shared/detalle-cuadrilla/detalle-cuadrilla.component';
 import { ReportesService } from 'src/app/service/global/reportes.service';
+import { SegmentosService } from 'src/app/service/global/segmentos.service';
 
 
 
@@ -58,14 +59,15 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
   sede = "";
   lider = "";
   integrantes = [] = [];
-  segmento = "";
   actividad_especifica ="";
   rural = "";
   urbano = "";
   fecha ='';
 
-  actos: any[] | null = null;
-
+  segmentos : any = [];
+  selectedSegmento : any;
+  actos: any[] = [];
+  actosFilter : any[] = [];
 
   dtTrigger: Subject<any> = new Subject<any>();
 
@@ -75,7 +77,8 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     private fb:FormBuilder,
     private snackBar: MatSnackBar,
     private dialogsService: DialogsService,
-    private reporteService: ReportesService
+    private reporteService: ReportesService,
+    private segmentosService: SegmentosService
     ) {
 
       this.form = this.fb.group({
@@ -87,6 +90,12 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     this.reporteService.getReportesByEje()
     .subscribe((resp: any) =>{
       this.actos = resp;
+      this.actosFilter = this.actos;
+    })
+
+    this.segmentosService.getSegmentos()
+    .subscribe((resp: any) => {
+      this.segmentos = resp;
     })
 
     this.dtOptions = {
@@ -115,22 +124,34 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     this.dtTrigger.unsubscribe();
   }
 
-  // abrirDetalle(){
-  //   const dialogRef = this.dialog.open(DetalleEvidenciaComponent
-  //     , {height: '400px'}
-  //     );
-
-  //     dialogRef.afterClosed().subscribe(result => {
-  //       console.log(`Dialog result: ${result}`);
-  //     });
-  //   }
-
-
-    public abrirDetalle(codigo: string, lider: string) {
-      this.dialogsService
-        .confirm(codigo, lider)
-        .subscribe((res: any) => this.result = res);
+  changeSegmento(){
+    if(this.selectedSegmento != null){
+      this.actosFilter = [];
+      setTimeout(() => {
+        this.actosFilter = this.actos.filter(e => e.codigo_seg == this.selectedSegmento);
+      }, 100);
     }
+    console.log(this.actosFilter);
+  }
+
+  reset(){
+    this.actosFilter = [];
+    setTimeout(() => {
+      this.actosFilter = this.actos;
+    }, 100);
+  }
+
+  toDate: any;
+  filtrarFecha(){
+
+    console.log(this.toDate);
+  }
+
+  public abrirDetalle(codigo: string, lider: string) {
+    this.dialogsService
+      .confirm(codigo, lider)
+      .subscribe((res: any) => this.result = res);
+  }
 
 }
 
