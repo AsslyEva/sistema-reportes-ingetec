@@ -14,28 +14,41 @@ export class ReporteValorizacionComponent implements OnInit {
  dtOptions: ADTSettings = {};
  sede = "";
  segmento = "";
- actividad ="";
- lider = "";
- integrantes = "";
- fecha ='';
- 
- actos: any[] = [
+ partida = "";
+ descripcion_actividades ="";
+ unidad = 'Und'
+ precio_urbano = "";
+ precio_rural = "";
+ cantidades_urbano = "";
+ cantidades_rural = "";
+ importe_urbano = "";
+ importe_rural = "";
+
+ valorizacion: any[] = [
    {
      sede: "TARMA",
      segmento : "CONEXIONES NUEVAS BT",
-     lider : "AAA AYLAS",
-     integrantes : "AAAAAAAaaa , AAAAaaaaaa ,AAAAAaa,AAAAAaaa",
-     actividad : "Subterráneo Monofásico sin rotura ni resane de vereda",
-     fecha : new Date(),
+     partida: "101CN02",
+     descripcion_actividades: "Aéreo Trifásico",
+     precio_urbano: "400",
+     precio_rural: "200",
+     cantidades_urbano: "15",
+     cantidades_rural: "150",
+     importe_urbano: "s/ 523",
+     importe_rural: "s/ 5412",
    },
 
    {
      sede: "TARMA",
-     segmento : "REINSTALACION DE SERVICIO RS",
-     lider : "AAA AYLAS",
-     integrantes : "AAAAAAAaaaa , AAAAaaa ,AAAAA ,AAAAAaaaa",
-     actividad : "Instalación de medidor monofásico, caja e ITM",
-     fecha : new Date(),
+     segmento : "CONEXIONES NUEVAS BT",
+     partida: "101CN02",
+     descripcion_actividades: "Aéreo Trifásico",
+     precio_urbano: "400",
+     precio_rural: "200",
+     cantidades_urbano: "15",
+     cantidades_rural: "150",
+     importe_urbano: "s/ 523",
+     importe_rural: "s/ 5412",
    },
  ];
 
@@ -69,7 +82,7 @@ export class ReporteValorizacionComponent implements OnInit {
    };
    this.httpClient.get<any[]>('data/data.json')
    .subscribe(data => {
-     this.actos = (data as any).data;
+     this.valorizacion = (data as any).data;
      // Calling the DT trigger to manually render the table
      this.dtTrigger.subscribe();
    });

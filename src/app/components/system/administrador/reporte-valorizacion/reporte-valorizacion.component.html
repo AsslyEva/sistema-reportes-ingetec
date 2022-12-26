@@ -11,28 +11,34 @@
              [dtOptions]="dtOptions"
              class="table table-dark-ingetec">
         <thead>
-          <tr >
+          <tr>
             <th>Sedes</th>
             <th>Segmentos</th>
-            <th>Precio Unitario</th>
-            <th>Lider de Equipo</th>
-            <th>Cantidades ejecutadas</th>
-            <th>Inporte a Valorizar</th>
-            <th>Monto por segmentos</th>
+            <th>Partida Relacion de Actividades</th>
+            <th>Descripción de Actividades</th>
+            <th>Unidad</th>
+            <th>Precio Unitario Urbano</th>
+            <th>Precio Unitario Rural</th>
+            <th>Cantidades Ejecutadas Urbano</th>
+            <th>Cantidades Ejecutadas Rural</th>
+            <th>Importe Valorizado Urbano</th>
+            <th>Importe Valorizado Rural</th>
           </tr>
         </thead>
-        <tbody *ngIf="actos?.length !=0">
-          <tr *ngFor="let acto of actos" class="text-center align-middle border-bottom ">
-            <td>{{acto.sede}}</td>
-            <td>         
-              {{acto.actividad}}
-              </td>   
-            <td>{{acto.lider}}</td>
-            <td>{{acto.integrantes}}</td>
-            <td>{{acto.actividad}}</td>
-            <td>{{acto.actividad}}</td>
+        <tbody *ngIf="valorizacion?.length !=0">
+          <tr *ngFor="let valorizacion of valorizacion" class="text-center align-middle border-bottom ">
+            <td>{{valorizacion.sede}}</td>
+            <td> {{valorizacion.segmento}}</td>   
+            <td> {{valorizacion.segmento}}</td>   
+            <td>{{valorizacion.descripcion_actividades}}</td>
+            <td>Und</td>
+            <td>{{valorizacion.precio_urbano}}</td>
+            <td>{{valorizacion.precio_rural}}</td>
+            <td>{{valorizacion.cantidades_urbano}}</td>
+            <td>{{valorizacion.cantidades_rural}}</td>
+            <td>{{valorizacion.importe_urbano}}</td>
+            <td>{{valorizacion.importe_rural}}</td>
 
-            <td>valor</td>
           </tr>
         </tbody>
       </table>
