@@ -135,7 +135,8 @@
                                       placeholder="Ingrese fecha"
                                       [matDatepicker]="picker"
                                       [formControl]="fecha_act"
-                                      [ngModel]="todayDate">
+                                      [ngModel]="todayDate"
+                                      [max]="tomorrow">
                                       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                       <mat-datepicker #picker></mat-datepicker>
 

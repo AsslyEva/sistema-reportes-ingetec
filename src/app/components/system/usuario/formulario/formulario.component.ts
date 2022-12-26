@@ -82,6 +82,7 @@ export class FormularioComponent implements OnInit {
   // inicializa fecha
   todayDate : Date = new Date();
   fecha_act =  new FormControl('');
+  tomorrow = new Date();
 
 
 // inicializacion integrantes
@@ -121,7 +122,7 @@ deselectAll(select: MatSelect) {
     private cantidadesEjeService : CantidadesEjecutadasService,
     ) {
     // this.createForm();
-
+    this.tomorrow.setDate(this.tomorrow.getDate());
     this.productForm = this.fb.group({
       actividades: this.fb.array([]) ,
     });
