@@ -8,6 +8,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogsService } from 'src/app/components/shared/dialogs.service';
 import { DetalleCuadrillaComponent } from 'src/app/components/shared/detalle-cuadrilla/detalle-cuadrilla.component';
+import { ReportesService } from 'src/app/service/global/reportes.service';
 
 
 
@@ -40,11 +41,6 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
 
   public result: any;
 
-
-
-
-
-
   required: boolean = true;
 
 
@@ -55,7 +51,7 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
   //Configuracion para datatable
   dtOptions: ADTSettings = {};
 
-  // inicializacion de variables  
+  // inicializacion de variables
   // actos: Actividad[] = [];
   form: FormGroup;
 
@@ -67,52 +63,32 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
   rural = "";
   urbano = "";
   fecha ='';
-  
-  actos: any[] = [
-    {
-      id_actividad: 1,
-      sede: "TARMA",
-      lider : "Javier Coella",
-      integrantes : ["Bryan" , "Assly" , "Franco"],
-      segmento : "CONEXIONES NUEVAS BT",
-      actividad_especifica : "Subterráneo Monofásico sin rotura ni resane de vereda",
-      urbano : 2,
-      rural : 5,
-      fecha : new Date(),
-    },
 
-    {
-      id_actividad: 4,
-      sede: "TARMA",
-      lider : "Efrain Aylas",
-      integrantes : ["Bryan" , "Diana" , "Franco"],
-      segmento : "REINSTALACION DE SERVICIO RS",
-      actividad_especifica : "Instalación de medidor monofásico, caja e ITM",
-      urbano : 0,
-      rural : 3,
-      fecha : new Date(),
-    },
-  ];
+  actos: any[] | null = null;
 
 
   dtTrigger: Subject<any> = new Subject<any>();
 
-  
+
   constructor(
     public dialog: MatDialog,
     private fb:FormBuilder,
     private snackBar: MatSnackBar,
     private dialogsService: DialogsService,
-    // private httpClient: HttpClient  
+    private reporteService: ReportesService
     ) {
 
       this.form = this.fb.group({
         actividad: ['',[Validators.required]]
       });
     }
- 
+
   ngOnInit(): void {
-    const that = this;
+    this.reporteService.getReportesByEje()
+    .subscribe((resp: any) =>{
+      this.actos = resp;
+    })
+
     this.dtOptions = {
       dom: '<"top"if>rt<"bottom"lp><"clear">',
       pagingType: 'simple_numbers',
@@ -131,12 +107,7 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         { className: "text-center align-middle border-bottom", "targets": [0, 1, 2] },
       ],
     };
-    // this.httpClient.get<any[]>('data/data.json')
-    // .subscribe(data => {
-    //   this.actos = (data as any).data;
-    //   // Calling the DT trigger to manually render the table
-    //   this.dtTrigger.subscribe();
-    // });
+
   }
 
   ngOnDestroy(): void {
@@ -148,16 +119,16 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
   //   const dialogRef = this.dialog.open(DetalleEvidenciaComponent
   //     , {height: '400px'}
   //     );
-  
+
   //     dialogRef.afterClosed().subscribe(result => {
   //       console.log(`Dialog result: ${result}`);
   //     });
   //   }
 
 
-    public abrirDetalle() {
+    public abrirDetalle(codigo: string, lider: string) {
       this.dialogsService
-        .confirm('Confirm Dialog', 'Are you sure you want to do this?')
+        .confirm(codigo, lider)
         .subscribe((res: any) => this.result = res);
     }
 

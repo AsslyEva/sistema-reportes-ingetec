@@ -9,11 +9,13 @@ export class DialogsService {
 
     constructor(private dialog: MatDialog) { }
 
-    public confirm(title: string, message: string): Observable<boolean> {
+    public confirm(codigo: string, lider: string): Observable<boolean> {
 
         let dialogRef: MatDialogRef<DetalleCuadrillaComponent>;
 
-        dialogRef = this.dialog.open(DetalleCuadrillaComponent);
+        dialogRef = this.dialog.open(DetalleCuadrillaComponent,{
+          data: {codigo: codigo, lider: lider}
+        });
 
         // dialogRef.componentInstance.title = title;
         // dialogRef.componentInstance.message = message;

@@ -1,8 +1,8 @@
 <div class="content-inicio">
   <app-title-frame
   [title]="'INGRESE DATOS EN EL FORMULARIO'"
-  ></app-title-frame> 
-    
+  ></app-title-frame>
+
   <form class="form-general">
         <!-- <p>INGRESA LOS DATOS REQUERIDOS</p> -->
     <div>
@@ -13,7 +13,7 @@
               <ng-template matStepLabel>Sede</ng-template>
               <mat-form-field  appearance="outline" >
                   <mat-label>Seleccione Sede</mat-label>
-                  <mat-select 
+                  <mat-select
                               [(ngModel)]="selectedSede"
                               (ngModelChange)="changeSede()"
                               required
@@ -45,12 +45,12 @@
               <mat-form-field appearance="outline">
                 <mat-label>Lider de Equipo</mat-label>
 
-                <mat-select 
+                <mat-select
                             required
                             formControlName="thirdCtrl">
-                  <mat-option *ngFor="let lider of integrantesList" 
-                              [value]="lider">
-                    {{lider}}
+                  <mat-option *ngFor="let lider of integrantesList"
+                              [value]="lider.codigo_integrante">
+                    {{lider.nombres_integrante + ' ' +lider.apellidos_integrante}}
                   </mat-option>
                 </mat-select>
                 <br />
@@ -65,32 +65,32 @@
             <form [formGroup]="CuadrillaFormGroup">
               <mat-form-field appearance="outline">
                 <mat-label>Integrantes del equipo</mat-label>
-                <mat-select  
-                            [multiple]="true" 
-                            [(ngModel)]="selectedIntegrantes" 
+                <mat-select
+                            [multiple]="true"
+                            [(ngModel)]="selectedIntegrantes"
                             #integrantesSelect
                             #multiSelect
                             required
                             formControlName="secondCtrl">
                 <div class="options">
-                  <button 
-                  mat-raised-button 
-                  class="mat-primary fill text-sm" 
+                  <button
+                  mat-raised-button
+                  class="mat-primary fill text-sm"
                   (click)="selectAll(integrantesSelect, integrantesList, selectedIntegrantes)">
                   Selecciona todo
                   </button>
-                  <button 
-                  mat-raised-button 
-                  class="mat-warn fill text-sm" 
+                  <button
+                  mat-raised-button
+                  class="mat-warn fill text-sm"
                   (click)="deselectAll(integrantesSelect)">
                   Elimina a todos
                   </button>
                 </div>
 
-                  <mat-option *ngFor="let integrantes of integrantesList" 
-                              [value]="integrantes" 
+                  <mat-option *ngFor="let integrantes of integrantesList"
+                              [value]="integrantes.codigo_integrante"
                               >
-                  {{integrantes}}
+                  {{integrantes.nombres_integrante + ' ' +integrantes.apellidos_integrante}}
                   </mat-option>
                 </mat-select>
                 <br />
@@ -104,12 +104,12 @@
             </form>
             <br>
             <div class="historia">
-              <p>
+              <!-- <p>
                 Lider de Equipo: {{lider.value}}
               </p>
               <p >
                 Integrantes de equipo
-              </p>
+              </p> -->
               <ul>
               <mat-chip-list>
                 <mat-chip  *ngFor="let integrantes of integrantesSelect?.value">
@@ -117,7 +117,7 @@
                 </mat-chip>
               </mat-chip-list>
               </ul>
-            </div> 
+            </div>
           </mat-step>
 
           <mat-step>
@@ -132,9 +132,9 @@
                     <mat-form-field class=" date"  appearance="outline" >
                       <mat-label>Ingrese Fecha de Actividad</mat-label>
                       <input matInput style="text-align: center;"
-                                      placeholder="Ingrese fecha"  
-                                      [matDatepicker]="picker" 
-                                      [formControl]="fecha_act" 
+                                      placeholder="Ingrese fecha"
+                                      [matDatepicker]="picker"
+                                      [formControl]="fecha_act"
                                       [ngModel]="todayDate">
                                       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                       <mat-datepicker #picker></mat-datepicker>
@@ -145,9 +145,9 @@
                         <mat-label>Segmento Realizado</mat-label>
                         <!-- [(ngModel)]="selectedSegmento.id_segmento"
                         (change)="onSelect($event.target.value)" -->
-                        <mat-select   [formControl]="segmento" 
+                        <mat-select   [formControl]="segmento"
                                       [(ngModel)]="selectedSegmento"
-                                      (ngModelChange)="changeSegmento()"> 
+                                      (ngModelChange)="changeSegmento()">
 
                           <option value="0"></option>
 
@@ -160,12 +160,12 @@
 
                     <mat-form-field appearance="outline">
                       <mat-label>Seleccione Actividad Realizada</mat-label>
-                      <mat-select 
+                      <mat-select
                                 [(ngModel)]="selectActividad_especifica"
                                 [formControl]="actividad_especifica" >
 
                         <!-- <option value="0">--Select--</option> -->
-                        <mat-option 
+                        <mat-option
                         *ngFor="let actividad_especifica of actividades_especifica" [value]= "actividad_especifica.codigo_act">
                         {{actividad_especifica.descripcion_act}}
                         </mat-option>
@@ -177,11 +177,11 @@
                     <label>Cantidades realizadas</label>
                       <div class="cantidad">
                         <div class="item-cantidad">
-                          <ul>Urbano</ul> 
+                          <ul>Urbano</ul>
                           <input type="number" [formControl]="rural" class="form-control col-md-6" required>
                         </div>
                         <div class="item-cantidad">
-                          <ul>Rural</ul> 
+                          <ul>Rural</ul>
                           <input type="number" [formControl]="urbano" class="form-control col-md-6 " required>
                         </div>
                       </div >
@@ -200,38 +200,38 @@
                     <div class="actividades" *ngFor="let actividad of actividades().controls; let i=index" [formGroupName]="i">
 
                       <div>
-                        <ul>Fecha Ingresada  <mat-icon>check_circle_outline</mat-icon></ul> 
-                        <input style="text-align: center;" 
-                              formControlName="fecha_actividad" 
-                              class="form-control" 
+                        <ul>Fecha Ingresada  <mat-icon>check_circle_outline</mat-icon></ul>
+                        <input style="text-align: center;"
+                              formControlName="fecha_actividad"
+                              class="form-control"
                               [ngModel]="todayDate |  date:'shortDate'"
                               >
                       </div>
-                    
+
                       <div>
-                        <ul>Segmento agregado  <mat-icon>check_circle_outline</mat-icon></ul> 
-                        <input style="text-align: center;"  
-                              formControlName="detalle_segmento" 
+                        <ul>Segmento agregado  <mat-icon>check_circle_outline</mat-icon></ul>
+                        <input style="text-align: center;"
+                              formControlName="detalle_segmento"
                               class="form-control"
                               readonly>
                       </div>
 
                       <div>
-                        <ul>Actividad específica agregada  <mat-icon>check_circle_outline</mat-icon></ul> 
-                        <input style="text-align: center;"  
-                              formControlName="detalle_actividad" 
+                        <ul>Actividad específica agregada  <mat-icon>check_circle_outline</mat-icon></ul>
+                        <input style="text-align: center;"
+                              formControlName="detalle_actividad"
                               class="form-control"
                               readonly>
-                      </div>                  
-                      
+                      </div>
+
                       <!-- <label>Cantidades realizadas</label> -->
                       <div class="cantidad">
                         <div class="item-cantidad">
                         <ul>Cantidad de Rural agregada  <mat-icon>check_circle_outline</mat-icon></ul>
                             <input type="number" style="text-align: center;"  formControlName="cantidad_rural" class="form-control ">
-                        </div> 
+                        </div>
                         <div class="item-cantidad">
-                        <ul>Cantidad en Urbano agregado <mat-icon>check_circle_outline</mat-icon></ul> 
+                        <ul>Cantidad en Urbano agregado <mat-icon>check_circle_outline</mat-icon></ul>
                             <input type="number" style="text-align: center;"  formControlName="cantidad_urbano" class="form-control">
                         </div>
                       </div>
@@ -248,8 +248,8 @@
                         </div>
                       </div>
                     </div>
-                    
-                  </div> 
+
+                  </div>
                 </table>
                 <!-- <button mat-raised-button color="primary" matStepperNext>Siguiente</button> -->
               </form>
@@ -267,7 +267,7 @@
                     <mat-chip>
                       {{sede.value}}
                     </mat-chip>
-                  </mat-chip-list>  
+                  </mat-chip-list>
                 </ul>
               </div>
 
@@ -278,7 +278,7 @@
                     <mat-chip>
                       {{lider.value}}
                     </mat-chip>
-                  </mat-chip-list>    
+                  </mat-chip-list>
                 </ul>
               </div>
 
@@ -291,9 +291,9 @@
                       {{integrantes}}
                     </mat-chip>
                   </mat-chip-list>
-                </ul>            
+                </ul>
               </div>
-            
+
 
               <mat-divider></mat-divider>
 
@@ -301,7 +301,7 @@
                 <label>Fecha de Actividad</label>
                 <ul>
                   {{fecha_act.value |  date:'shortDate'}}
-                </ul>            
+                </ul>
               </div>
 
               <div class="marco-resumen">
@@ -312,11 +312,11 @@
                       {{segmento.value}}
                     </mat-chip>
                   </mat-chip-list>
-                </ul>            
+                </ul>
               </div> -->
-            
 
-            <ul>Si esta seguro de los datos ingresados haga click en "Enviar"</ul> 
+
+            <ul>Si esta seguro de los datos ingresados haga click en "Enviar"</ul>
             <div>
             <!-- <button mat-button matStepperPrevious>Anterior</button> -->
             <div class="options col-12 justify-content-center">
@@ -335,10 +335,10 @@
           </mat-step>
         </mat-vertical-stepper>
       </div>
-    </div>     
+    </div>
   </form>
-      
-      
+
+
   <ngx-spinner
       bdColor = "rgba(14,14,14,0.8)"
       size = "large"

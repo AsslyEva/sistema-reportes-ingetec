@@ -6,13 +6,13 @@
             <div class="col-12">
             <p class="text-filtro">Seleccione un tipo de registro para realizar la búsqueda</p>
             </div>
-            
+
             <div class="filtro">
                 <div class="items-busqueda">
-        
+
                 <mat-form-field class="form-item" appearance="outline">
                     <mat-label>Segmento</mat-label>
-                    <mat-select 
+                    <mat-select
                                 placeholder="Ingresa registra"
                                 formControlName="actividad">
                     <mat-option *ngFor="let actividad of actos" [value]="actividad.id_actividad" >
@@ -20,10 +20,10 @@
                     </mat-option>
                     </mat-select>
                 </mat-form-field>
-        
+
                 <mat-form-field class="form-item" appearance="outline">
                     <mat-label>Lider de Equipo</mat-label>
-                    <mat-select 
+                    <mat-select
                                 placeholder="Ingresa registra"
                                 formControlName="actividad">
                     <mat-option *ngFor="let actividad of actos" [value]="actividad.id_actividad" >
@@ -31,7 +31,7 @@
                     </mat-option>
                     </mat-select>
                 </mat-form-field>
-        
+
                 <mat-form-field class="form-item" appearance="outline">
                     <mat-label>Fecha inicial</mat-label>
                     <input matInput
@@ -40,7 +40,7 @@
                     <mat-datepicker-toggle matIconSuffix [for]="fecInicio"></mat-datepicker-toggle>
                     <mat-datepicker #fecInicio></mat-datepicker>
                 </mat-form-field>
-        
+
                 <mat-form-field appearance="outline" >
                     <mat-label>Fecha final</mat-label>
                     <input matInput
@@ -48,27 +48,27 @@
                             >
                     <mat-datepicker-toggle matIconSuffix [for]="fecfin"></mat-datepicker-toggle>
                     <mat-datepicker #fecfin></mat-datepicker>
-        
+
                 </mat-form-field>
-                
+
                 <button matt-button >BUSCAR
                     <mat-icon>search</mat-icon>
                 </button>
                 </div>
-        
+
             </div>
-        
-        
+
+
         </form> -->
-        
+        <p>Lider: {{data.lider}}</p>
         <div class="content-tabla col-12 ">
-            <table 
+            <table
                     class="table table-dark-ingetec">
             <thead>
                 <tr >
                 <!-- <th>Sede</th> -->
-                <th>Lider de Equipo</th>
-                <th>Cuadrilla</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
                 <!-- <th>Segmento</th>
                 <th>Actividades Realizadas</th>
                 <th>Cantidades Ejecutadas Urbanas</th>
@@ -77,16 +77,16 @@
                 <!-- <th>Cuadrilla</th> -->
                 </tr>
             </thead>
-            <tbody *ngIf="actos?.length !=0">
-                <tr *ngFor="let acto of actos" class="text-center align-middle border-bottom ">
+            <tbody *ngIf="cuadrilla?.length !=0">
+                <tr *ngFor="let integrante of cuadrilla" class="text-center align-middle border-bottom ">
                 <!-- <td>{{acto.sede}}</td> -->
-                <td>{{acto.lider}}</td>
+                <td>{{integrante.nombres_integrante}}</td>
                 <td>
-                    <mat-chip-set>
-                    <mat-chip>
-                        {{acto.integrantes}}
-                    </mat-chip>
-                    </mat-chip-set>
+                    <!-- <mat-chip-set>
+                    <mat-chip> -->
+                        {{integrante.apellidos_integrante}}
+                    <!-- </mat-chip>
+                    </mat-chip-set> -->
                 </td>
                 <!-- <td>{{acto.segmento}}</td>
                 <td>{{acto.actividad_especifica}}</td>
@@ -107,7 +107,7 @@
                         <mat-icon> visibility </mat-icon>
                         </button>
                     </div>
-        
+
                     </div>
                 </td> -->
                 </tr>
@@ -117,7 +117,7 @@
             <button
                 matTooltip="Descargar todo">
                 <span class="text-button">Descargar toda la Tabla</span>
-        
+
                 <mat-icon> download </mat-icon>
             </button>
             </div> -->

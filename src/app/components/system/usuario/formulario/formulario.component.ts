@@ -12,6 +12,8 @@ import { ActividadEspecifica } from 'src/app/model/interfaces/global/actividad_e
 import { SedesService } from 'src/app/service/global/sedes.service';
 import { SegmentosService } from 'src/app/service/global/segmentos.service';
 import { ActividadesService } from 'src/app/service/global/actividades.service';
+import { IntegrantesService } from 'src/app/service/global/integrantes.service';
+import { CantidadesEjecutadasService } from 'src/app/service/global/cantidades-ejecutadas.service';
 
 export interface User {
   name: string;
@@ -52,15 +54,15 @@ export class FormularioComponent implements OnInit {
   productForm: FormGroup;
   rural =  new FormControl('');
   urbano =  new FormControl('');
-  
+
   // *// inicializacion segmento
   segmento = new FormControl('');
   selectedSegmento: Segmento | any;
   segmentos: Segmento[] = [];
   // segmentoList: any;
   // segmentosList: string[] = ['INSTALACION', 'CORTE', 'REPARTO'];
- 
-  // *// inicializacion actividades  
+
+  // *// inicializacion actividades
   actividad_especifica = new FormControl('');
   selectActividad_especifica: ActividadEspecifica | any;
   actividades_especifica: ActividadEspecifica[] = [];
@@ -68,7 +70,7 @@ export class FormularioComponent implements OnInit {
   // actividad_especificaList: string[] = ['Aéreo Monofásico', 'Aéreo Trifásico', 'Subterráneo Monofásico sin rotura ni resane de vereda'];
  // array is selectedIntegrantes
 //  selectedActividad_especifica!: any[];
- 
+
 
   // configuracion autocomplete
   myControl = new FormControl<string | User>('');
@@ -84,16 +86,16 @@ export class FormularioComponent implements OnInit {
 
 // inicializacion integrantes
 integrantes = new FormControl('');
-integrantesList: string[] = ['ANA', 'ERIKA', 'VICTOR', 'BRYAN', 'FRANCO', 'JANESSY'];
+integrantesList: any;
 searchUserForm!: FormGroup;
  // array is selectedIntegrantes
  selectedIntegrantes!: any[];
- 
+
 
  selectAll(select: MatSelect, values: any, array: any) {
   select.value = values;
   array = values;
-  console.log(this.selectedIntegrantes); 
+  console.log(this.selectedIntegrantes);
   // console.log(this.selectedActividad_especifica); // selectedIntegrantes is still undefined
   // selectedIntegrantes is still undefined
 }
@@ -115,7 +117,8 @@ deselectAll(select: MatSelect) {
     private sedesService: SedesService,
     private segmentosService : SegmentosService,
     private actividadesService : ActividadesService,
-    
+    private integrantesService : IntegrantesService,
+    private cantidadesEjeService : CantidadesEjecutadasService,
     ) {
     // this.createForm();
 
@@ -142,8 +145,8 @@ deselectAll(select: MatSelect) {
   // EvidenciaFormGroup: FormGroup = this._formBuilder.group({ninethCtrl: ['']});
 
 
-  
-  
+
+
   ngOnInit(): void {
     this.sedesService.getSedes()
     .subscribe((resp)=> {
@@ -159,6 +162,11 @@ deselectAll(select: MatSelect) {
     .subscribe((resp: Segmento[])=> {
       this.segmentos = resp;
     })
+
+    this.integrantesService.getIntegrantesBySede(this.selectedSede)
+    .subscribe((resp: any) => {
+      this.integrantesList = resp;
+    })
   }
 
   changeSegmento(){
@@ -171,7 +179,7 @@ deselectAll(select: MatSelect) {
   }
   // onSelect(segmentoid: number) {
   //   console.log('value: ' + 'agrega actividad');
-  //   this.actividades_especifica = this.generalService.getActividadEspecifica().filter((item) => item.segmentoid == segmentoid); 
+  //   this.actividades_especifica = this.generalService.getActividadEspecifica().filter((item) => item.segmentoid == segmentoid);
   //  }
 
   /* MANEJO DEL ARRAY DE CANTIDADES */
@@ -197,10 +205,10 @@ deselectAll(select: MatSelect) {
   //Añadir los valores de las canti  dades al array de cantidades
   agregarActividades() {
     if (
-      this.fecha_act.value 
-      && this.segmento.value 
-      && this.actividad_especifica.value 
-      && this.rural.value 
+      this.fecha_act.value
+      && this.segmento.value
+      && this.actividad_especifica.value
+      && this.rural.value
       && this.urbano.value) {
       this.actividades().push(this.nuevaActividad());
       console.log(this.actividades().value)

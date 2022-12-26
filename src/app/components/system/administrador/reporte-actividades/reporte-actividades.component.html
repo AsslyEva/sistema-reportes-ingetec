@@ -16,7 +16,7 @@
 
           <mat-form-field class="form-item" appearance="outline">
             <mat-label>Segmento</mat-label>
-            <mat-select 
+            <mat-select
                         placeholder="Ingresa registra"
                         formControlName="actividad">
               <mat-option *ngFor="let actividad of actos" [value]="actividad.id_actividad" >
@@ -24,10 +24,10 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-<!-- 
+<!--
           <mat-form-field class="form-item" appearance="outline">
             <mat-label>Lider de Equipo</mat-label>
-            <mat-select 
+            <mat-select
                         placeholder="Ingresa registra"
                         formControlName="actividad">
               <mat-option *ngFor="let actividad of actos" [value]="actividad.id_actividad" >
@@ -54,7 +54,7 @@
             <mat-datepicker #fecfin></mat-datepicker>
 
           </mat-form-field>
-          
+
           <button matt-button >BUSCAR
             <mat-icon>search</mat-icon>
           </button>
@@ -65,10 +65,10 @@
 
   </form>
 
-  
 
-  <div class="content-tabla col-12 ">
-    <table 
+
+  <div class="content-tabla col-12 " *ngIf="actos != null">
+    <table
            datatable
            [dtOptions]="dtOptions"
            class="table table-dark-ingetec">
@@ -87,7 +87,7 @@
       </thead>
       <tbody *ngIf="actos?.length !=0">
         <tr *ngFor="let acto of actos" class="text-center align-middle border-bottom ">
-          <td>{{acto.sede}}</td>
+          <td>{{acto.descripcion_sede}}</td>
           <!-- <td>{{acto.lider}}</td>
           <td>
             <mat-chip-list>
@@ -96,11 +96,11 @@
               </mat-chip>
             </mat-chip-list>
           </td> -->
-          <td>{{acto.segmento}}</td>
-          <td>{{acto.actividad_especifica}}</td>
-          <td>{{acto.urbano}}</td>
-          <td>{{acto.rural}}</td>
-          <td>{{acto.fecha}}</td>
+          <td>{{acto.descripcion_seg}}</td>
+          <td>{{acto.descripcion_act}}</td>
+          <td>{{acto.cantidad_urbano_eje}}</td>
+          <td>{{acto.cantidad_rural_eje}}</td>
+          <td>{{acto.fecha_cant_eje}}</td>
           <td>
             <div class="options">
               <div class="button-option view">
@@ -109,7 +109,7 @@
                   color="primary"
                   class="menu-button bg-blue"
                   matTooltip="Ver cuadrilla"
-                  (click)="abrirDetalle()"
+                  (click)="abrirDetalle(acto.codigo_cant_eje, 'Pedro')"
                   >
                   Ver
                   <mat-icon> visibility </mat-icon>
@@ -122,13 +122,13 @@
       </tbody>
     </table>
     <div class="button-option download text-center align-middle border-top pt-5">
-      <button 
+      <button
         class="descargar-all col-12"
         matTooltip="Descargar todo">
         <mat-icon> download </mat-icon>
 
         <span class="text-button">Descargar toda la Tabla</span>
-  
+
       </button>
     </div>
   </div>
