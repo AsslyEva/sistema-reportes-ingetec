@@ -103,12 +103,15 @@ ul{
     font-weight: bold;
     font-family: 'Montserrat';
     color: g.$ingetec-cyan;
-    display: flex;
     align-content: center;
     justify-content: center;
     align-items: center;
     mat-icon{
         color: g.$ingetec-aprobe;
+        font-size: 1.5rem;
+        margin-top: 0.5rem;
+        // left: 2.5rem;
+        position: absolute;
     }
  }
 

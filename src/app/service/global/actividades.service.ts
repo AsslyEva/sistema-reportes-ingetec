@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ActividadEspecifica } from 'src/app/model/interfaces/global/actividad_especiifica';
+import { ActividadEspecifica } from 'src/app/model/global/actividad_especiifica';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({

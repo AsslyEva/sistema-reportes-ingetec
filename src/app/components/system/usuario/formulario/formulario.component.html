@@ -1,6 +1,6 @@
 <div class="content-inicio">
   <app-title-frame
-  [title]="'INGRESE DATOS EN EL FORMULARIO'"
+  [title]="'INGRESE LOS DATOS EN EL FORMULARIO'"
   ></app-title-frame>
 
   <form class="form-general">
@@ -66,27 +66,30 @@
               <mat-form-field appearance="outline">
                 <mat-label>Integrantes del equipo</mat-label>
                 <mat-select
-                            [multiple]="true"
-                            [(ngModel)]="selectedIntegrantes"
+                            (ngModelChange)="changeIntegrantes()"
+                            [(ngModel)]="arrayIntegrantes"
+                            [compareWith]="equals"
+                            formControlName="secondCtrl"
+                            multiple
                             #integrantesSelect
-                            #multiSelect
                             required
-                            formControlName="secondCtrl">
-                <div class="options">
-                  <button
-                  mat-raised-button
-                  class="mat-primary fill text-sm"
-                  (click)="selectAll(integrantesSelect, integrantesList, selectedIntegrantes)">
-                  Selecciona todo
-                  </button>
-                  <button
-                  mat-raised-button
-                  class="mat-warn fill text-sm"
-                  (click)="deselectAll(integrantesSelect)">
-                  Elimina a todos
-                  </button>
-                </div>
-
+                            >
+                  <div class="options">
+                    <button
+                    mat-raised-button
+                    class="mat-primary fill text-sm"
+                    (click)="selectAll(integrantesSelect, integrantesList, arrayIntegrantes)"
+                    >
+                    Selecciona todo
+                    </button>
+                    <button
+                    mat-raised-button
+                    class="mat-warn fill text-sm"
+                    (click)="deselectAll(integrantesSelect)">
+                    Elimina a todos
+                    </button>
+                  </div>
+                  
                   <mat-option *ngFor="let integrantes of integrantesList"
                               [value]="integrantes.codigo_integrante"
                               >
@@ -112,8 +115,8 @@
               </p> -->
               <ul>
               <mat-chip-list>
-                <mat-chip  *ngFor="let integrantes of integrantesSelect?.value">
-                  {{integrantes}}
+                <mat-chip  *ngFor="let integrantes of selectedIntegrantes">
+                  {{integrantes.nombres_integrante + ' ' +integrantes.apellidos_integrante}}
                 </mat-chip>
               </mat-chip-list>
               </ul>
@@ -228,7 +231,7 @@
                       <!-- <label>Cantidades realizadas</label> -->
                       <div class="cantidad">
                         <div class="item-cantidad">
-                        <ul>Cantidad de Rural agregada  <mat-icon>check_circle_outline</mat-icon></ul>
+                        <ul>Cantidad de Rural agregada<mat-icon>check_circle_outline</mat-icon></ul>
                             <input type="number" style="text-align: center;"  formControlName="cantidad_rural" class="form-control ">
                         </div>
                         <div class="item-cantidad">

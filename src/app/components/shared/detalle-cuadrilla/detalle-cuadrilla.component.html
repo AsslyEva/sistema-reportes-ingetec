@@ -2,125 +2,43 @@
 
 <div class="">
     <div class="">
-        <!-- <form class="row form-filtro">
-            <div class="col-12">
-            <p class="text-filtro">Seleccione un tipo de registro para realizar la búsqueda</p>
-            </div>
-
-            <div class="filtro">
-                <div class="items-busqueda">
-
-                <mat-form-field class="form-item" appearance="outline">
-                    <mat-label>Segmento</mat-label>
-                    <mat-select
-                                placeholder="Ingresa registra"
-                                formControlName="actividad">
-                    <mat-option *ngFor="let actividad of actos" [value]="actividad.id_actividad" >
-                        {{actividad.segmento}}
-                    </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="form-item" appearance="outline">
-                    <mat-label>Lider de Equipo</mat-label>
-                    <mat-select
-                                placeholder="Ingresa registra"
-                                formControlName="actividad">
-                    <mat-option *ngFor="let actividad of actos" [value]="actividad.id_actividad" >
-                        {{actividad.lider}}
-                    </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="form-item" appearance="outline">
-                    <mat-label>Fecha inicial</mat-label>
-                    <input matInput
-                            [matDatepicker]="fecInicio"
-                            >
-                    <mat-datepicker-toggle matIconSuffix [for]="fecInicio"></mat-datepicker-toggle>
-                    <mat-datepicker #fecInicio></mat-datepicker>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" >
-                    <mat-label>Fecha final</mat-label>
-                    <input matInput
-                            [matDatepicker]="fecfin"
-                            >
-                    <mat-datepicker-toggle matIconSuffix [for]="fecfin"></mat-datepicker-toggle>
-                    <mat-datepicker #fecfin></mat-datepicker>
-
-                </mat-form-field>
-
-                <button matt-button >BUSCAR
-                    <mat-icon>search</mat-icon>
-                </button>
-                </div>
-
-            </div>
-
-
-        </form> -->
-        <p>Lider: {{data.lider}}</p>
         <div class="content-tabla col-12 ">
+
+
+            <mat-label style="text-align: center;">Lider de Equipo</mat-label>
+
             <table
                     class="table table-dark-ingetec">
             <thead>
-                <tr >
-                <!-- <th>Sede</th> -->
+                <tr>
+                <th>Nombres y Apellidos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center align-middle border-bottom">
+                    <td style= "font-size: 13px;">{{data.lider}} </td>
+                </tr>
+            </tbody>
+            </table>
+
+
+            <mat-label style="text-align: center;">Integrantes</mat-label>
+
+            <table
+                    class="table table-dark-ingetec">
+            <thead>
+                <tr>
                 <th>Nombres</th>
                 <th>Apellidos</th>
-                <!-- <th>Segmento</th>
-                <th>Actividades Realizadas</th>
-                <th>Cantidades Ejecutadas Urbanas</th>
-                <th>Cantidades Ejecutadas Rurales</th> -->
-                <!-- <th>Fecha</th> -->
-                <!-- <th>Cuadrilla</th> -->
                 </tr>
             </thead>
             <tbody *ngIf="cuadrilla?.length !=0">
                 <tr *ngFor="let integrante of cuadrilla" class="text-center align-middle border-bottom ">
-                <!-- <td>{{acto.sede}}</td> -->
-                <td>{{integrante.nombres_integrante}}</td>
-                <td>
-                    <!-- <mat-chip-set>
-                    <mat-chip> -->
-                        {{integrante.apellidos_integrante}}
-                    <!-- </mat-chip>
-                    </mat-chip-set> -->
-                </td>
-                <!-- <td>{{acto.segmento}}</td>
-                <td>{{acto.actividad_especifica}}</td>
-                <td>{{acto.urbano}}</td>
-                <td>{{acto.rural}}</td> -->
-                <!-- <td>{{acto.fecha }}</td> -->
-                <!-- <td>
-                    <div class="options">
-                    <div class="button-option view">
-                        <button
-                        mat-flat-button
-                        color="primary"
-                        class="menu-button bg-blue"
-                        matTooltip="Ver cuadrilla"
-                        (click)="abrirDetalle()"
-                        >
-                        Ver
-                        <mat-icon> visibility </mat-icon>
-                        </button>
-                    </div>
-
-                    </div>
-                </td> -->
+                    <td>{{integrante.nombres_integrante}}</td>
+                    <td>{{integrante.apellidos_integrante}}</td>
                 </tr>
             </tbody>
             </table>
-            <!-- <div class="dercargar-all col-12  d-flex justify-content-center">
-            <button
-                matTooltip="Descargar todo">
-                <span class="text-button">Descargar toda la Tabla</span>
-
-                <mat-icon> download </mat-icon>
-            </button>
-            </div> -->
         </div>
     </div>
 

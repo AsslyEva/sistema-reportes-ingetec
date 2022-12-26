@@ -1,19 +1,20 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ThemePalette } from '@angular/material/core';
+import { MatOption, ThemePalette } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSelect } from '@angular/material/select';
 import { map, Observable, startWith } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import {Sort} from '@angular/material/sort';
 import Swal from 'sweetalert2';
-import { Segmento } from 'src/app/model/interfaces/global/segmento';
-import { ActividadEspecifica } from 'src/app/model/interfaces/global/actividad_especiifica';
+import { Segmento } from 'src/app/model/global/segmento';
+import { ActividadEspecifica } from 'src/app/model/global/actividad_especiifica';
 import { SedesService } from 'src/app/service/global/sedes.service';
 import { SegmentosService } from 'src/app/service/global/segmentos.service';
 import { ActividadesService } from 'src/app/service/global/actividades.service';
 import { IntegrantesService } from 'src/app/service/global/integrantes.service';
 import { CantidadesEjecutadasService } from 'src/app/service/global/cantidades-ejecutadas.service';
+import { Integrante } from 'src/app/model/global/integrantes';
 
 export interface User {
   name: string;
@@ -59,18 +60,11 @@ export class FormularioComponent implements OnInit {
   segmento = new FormControl('');
   selectedSegmento: Segmento | any;
   segmentos: Segmento[] = [];
-  // segmentoList: any;
-  // segmentosList: string[] = ['INSTALACION', 'CORTE', 'REPARTO'];
 
   // *// inicializacion actividades
   actividad_especifica = new FormControl('');
   selectActividad_especifica: ActividadEspecifica | any;
   actividades_especifica: ActividadEspecifica[] = [];
-
-  // actividad_especificaList: string[] = ['Aéreo Monofásico', 'Aéreo Trifásico', 'Subterráneo Monofásico sin rotura ni resane de vereda'];
- // array is selectedIntegrantes
-//  selectedActividad_especifica!: any[];
-
 
   // configuracion autocomplete
   myControl = new FormControl<string | User>('');
@@ -87,24 +81,49 @@ export class FormularioComponent implements OnInit {
 
 // inicializacion integrantes
 integrantes = new FormControl('');
-integrantesList: any;
-searchUserForm!: FormGroup;
- // array is selectedIntegrantes
- selectedIntegrantes!: any[];
+integrantesList: any[] =[];
+// array is Integrantes
+arrayIntegrantes: any[] =[];
+
+selectedIntegrantes: any;
+
+  // @ViewChild('integrantesSelect')
+  // select!: MatSelect;
+
+// equals(objOne: { id: any; }, objTwo: { id: any; }) {
+//   if (typeof objOne !== 'undefined' && typeof objTwo !== 'undefined') {
+//     return objOne.id === objTwo.id;
+//   }
+// }
 
 
- selectAll(select: MatSelect, values: any, array: any) {
-  select.value = values;
-  array = values;
-  console.log(this.selectedIntegrantes);
-  // console.log(this.selectedActividad_especifica); // selectedIntegrantes is still undefined
-  // selectedIntegrantes is still undefined
+equals(objOne: any, objTwo: any): boolean {
+  if (typeof objOne !== 'undefined' && typeof objTwo !== 'undefined') {
+    return objOne.codigo_integrante === objTwo.codigo_integrante;
+  }
+  return false
 }
 
+
+// BOTON SELECCIONAR DE INTEGRANTES  
+ selectAll(select: MatSelect, values: any, array: any) {
+  // if (this.selectedIntegrantes) {
+  //   this.select.options.forEach((item: MatOption) => item.select());
+  // }
+  select.value = values;
+  array = values;
+  console.log(this.arrayIntegrantes);
+}
+
+
 deselectAll(select: MatSelect) {
-  this.selectedIntegrantes = [];
-  // this.selectedActividad_especifica = [];
+  this.arrayIntegrantes = [];
   select.value = [];
+}
+
+
+changeIntegrantes(){
+  console.log(this.arrayIntegrantes)
 }
 
 
@@ -114,14 +133,12 @@ deselectAll(select: MatSelect) {
   constructor(
     private fb:FormBuilder,
     private _formBuilder: FormBuilder,
-    // private generalService: GeneralServide,
     private sedesService: SedesService,
     private segmentosService : SegmentosService,
     private actividadesService : ActividadesService,
     private integrantesService : IntegrantesService,
     private cantidadesEjeService : CantidadesEjecutadasService,
     ) {
-    // this.createForm();
     this.tomorrow.setDate(this.tomorrow.getDate());
     this.productForm = this.fb.group({
       actividades: this.fb.array([]) ,
@@ -178,10 +195,8 @@ deselectAll(select: MatSelect) {
       this.actividades_especifica = resp;
     })
   }
-  // onSelect(segmentoid: number) {
-  //   console.log('value: ' + 'agrega actividad');
-  //   this.actividades_especifica = this.generalService.getActividadEspecifica().filter((item) => item.segmentoid == segmentoid);
-  //  }
+
+
 
   /* MANEJO DEL ARRAY DE CANTIDADES */
 
@@ -232,7 +247,6 @@ deselectAll(select: MatSelect) {
   quitarActividades(i:number) {
     this.actividades().removeAt(i);
   }
-
 
 
 
