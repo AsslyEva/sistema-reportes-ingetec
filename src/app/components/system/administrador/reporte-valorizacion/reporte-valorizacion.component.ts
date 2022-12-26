@@ -80,12 +80,12 @@ export class ReporteValorizacionComponent implements OnInit {
        { className: "text-center align-middle border-bottom", "targets": [0, 1, 2] },
      ],
    };
-   this.httpClient.get<any[]>('data/data.json')
-   .subscribe(data => {
-     this.valorizacion = (data as any).data;
-     // Calling the DT trigger to manually render the table
-     this.dtTrigger.subscribe();
-   });
+  //  this.httpClient.get<any[]>('data/data.json')
+  //  .subscribe(data => {
+  //    this.valorizacion = (data as any).data;
+  //    // Calling the DT trigger to manually render the table
+  //    this.dtTrigger.subscribe();
+  //  });
  }
 
  ngOnDestroy(): void {
