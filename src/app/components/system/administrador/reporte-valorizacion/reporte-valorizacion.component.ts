@@ -4,6 +4,8 @@ import { Subject } from 'rxjs';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { HttpClient } from '@angular/common/http';
 import { ReportesService } from 'src/app/service/global/reportes.service';
+import { downloadReportExcel } from 'src/app/components/shared/generate-excel/generate-excel';
+import { environment } from 'src/environments/environment.prod';
 @Component({
   selector: 'app-reporte-valorizacion',
   templateUrl: './reporte-valorizacion.component.html',
@@ -25,7 +27,7 @@ export class ReporteValorizacionComponent implements OnInit {
  importe_urbano = "";
  importe_rural = "";
 
- valorizacion: any = null;
+ valorizacion: any[] = [];
 
 
  dtTrigger: Subject<any> = new Subject<any>();
@@ -34,6 +36,7 @@ export class ReporteValorizacionComponent implements OnInit {
   constructor(
     private reportesService: ReportesService
   ) {}
+  __downloadReportExcel = downloadReportExcel;
 
  ngOnInit(): void {
    this.reportesService.getReportesAgrupados()
@@ -70,4 +73,81 @@ export class ReporteValorizacionComponent implements OnInit {
    // Do not forget to unsubscribe the event
    this.dtTrigger.unsubscribe();
  }
+
+     // for reports
+     headerAndSize=[
+      {
+        header:  "N°",
+        size: 5
+      },
+      {
+        header:  "SEDE",
+        size: 15
+      },
+      {
+        header:  "SEGMENTO",
+        size: 40
+      },
+      {
+        header:  "PARTIDA",
+        size: 9
+      },
+      {
+        header:  "ACTIVIDAD",
+        size: 40
+      },
+      {
+        header:  "UNIDAD",
+        size: 7
+      },
+      {
+        header:  "CANT URB",
+        size: 7
+      },
+      {
+        header:  "CANT RURAL",
+        size: 7
+      },
+      {
+        header:  "PRECIO UNI URB",
+        size: 9
+      },
+      {
+        header:  "PRECIO UNI RURAL",
+        size: 9
+      },
+      {
+        header:  "IMP. VAL. URB",
+        size: 10
+      },
+      {
+        header:  "IMP. VAL. RURAL",
+        size: 10
+      }
+    ];
+    title = 'REPORTE ACTIVIDADES AGRUPADAS';
+    informativeText = `Este reporte fue generado por el ${ environment.systemName }`
+
+
+  dwnExcel(){
+    let dataExcel: any[];
+    dataExcel = this.valorizacion.map((x1, index) => {
+      return ([
+        index + 1,
+        x1.descripcion_sede,
+        x1.descripcion_seg,
+        x1.partida_act,
+        x1.descripcion_act,
+        x1.unidad_act,
+        x1.cantidad_urbano_eje,
+        x1.cantidad_rural_eje,
+        x1.pre_uni_urbano_act,
+        x1.pre_uni_rural_act,
+        x1.pre_uni_urbano_act * x1.cantidad_urbano_eje,
+        x1.pre_uni_rural_act * x1.cantidad_rural_eje
+      ]);
+    });
+
+    this.__downloadReportExcel( this.title, this.headerAndSize, dataExcel, {} );
+  }
 }

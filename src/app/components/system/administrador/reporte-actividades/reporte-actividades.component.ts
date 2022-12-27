@@ -10,6 +10,8 @@ import { DialogsService } from 'src/app/components/shared/dialogs.service';
 import { DetalleCuadrillaComponent } from 'src/app/components/shared/detalle-cuadrilla/detalle-cuadrilla.component';
 import { ReportesService } from 'src/app/service/global/reportes.service';
 import { SegmentosService } from 'src/app/service/global/segmentos.service';
+import { downloadReportExcel } from 'src/app/components/shared/generate-excel/generate-excel';
+import { environment } from 'src/environments/environment.prod';
 
 
 
@@ -89,6 +91,8 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         actividad: ['',[Validators.required]]
       });
     }
+    __downloadReportExcel = downloadReportExcel;
+
 
   ngOnInit(): void {
     this.reporteService.getReportesByEje()
@@ -176,6 +180,58 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
       .subscribe((res: any) => this.result = res);
   }
 
+    // for reports
+    headerAndSize=[
+      {
+        header:  "N°",
+        size: 5
+      },
+      {
+        header:  "SEDE",
+        size: 15
+      },
+      {
+        header:  "SEGMENTO",
+        size: 40
+      },
+      {
+        header:  "ACTIVIDAD REALIZADA",
+        size: 40
+      },
+      {
+        header:  "CANT URB",
+        size: 7
+      },
+      {
+        header:  "CANT RURAL",
+        size: 7
+      },
+      {
+        header:  "FECHA",
+        size: 12
+      }
+    ];
+    title = 'REPORTE ACTIVIDADES REALIZADAS';
+    informativeText = `Este reporte fue generado por el ${ environment.systemName }`
+
+
+  dwnExcel(){
+    let dataExcel: any[];
+    dataExcel = this.actosFilter.map((x1, index) => {
+      let fecha = new Date(x1.fecha_cant_eje).toLocaleDateString();
+      return ([
+        index + 1,
+        x1.descripcion_sede,
+        x1.descripcion_seg,
+        x1.descripcion_act,
+        x1.cantidad_urbano_eje,
+        x1.cantidad_rural_eje,
+        fecha
+      ]);
+    });
+
+    this.__downloadReportExcel( this.title, this.headerAndSize, dataExcel, this.range.value );
+  }
 }
 
 

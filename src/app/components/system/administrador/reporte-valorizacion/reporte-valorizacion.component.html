@@ -10,7 +10,7 @@
               datatable
               [dtOptions]="dtOptions"
               class="table table-dark-ingetec"
-              *ngIf="valorizacion != null">
+              *ngIf="valorizacion.length != 0">
         <thead>
           <tr>
             <th>Sedes</th>
@@ -49,7 +49,8 @@
       <button
           mat-flat-button
           class="descargar-all col-12"
-          matTooltip="Descargar todo">
+          matTooltip="Descargar todo"
+          (click)="dwnExcel()">
           <mat-icon> download </mat-icon>
           <span class="text-button">Descargar toda la Tabla</span>
 
