@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Segmento } from 'src/app/model/interfaces/global/segmento';
+import { Segmento } from 'src/app/model/global/segmento';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({

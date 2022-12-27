@@ -96,7 +96,7 @@ p {
 
 
 .content-inicio {
-  height: calc(102vh - 90px);
+  // height: calc(102vh - 90px);
   align-items: center;
   justify-content: cent2r;
   display: flex;
@@ -191,7 +191,7 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .table>:not(caption)>*>* {
-  padding: 0 !important;
+  padding: 4px !important;
   background-color: transparent !important;
 }
 
@@ -420,19 +420,19 @@ mat-sidenav-container {
 
 @media (max-width:1250px){
   *{
-    font-size: 10px;
+    font-size: 11px;
   }
 }
 
 @media (max-width:900px){
   *{
-    font-size: 10px;
+    font-size: 11px;
   }
 }
 
 @media (max-width:730px){
   *{
-    font-size: 9px;
+    font-size: 12px;
   }
 }
 
