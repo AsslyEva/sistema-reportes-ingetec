@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { LenguajeDataTable } from 'src/app/utils/utils';
-import { Subject } from 'rxjs';
+import { filter, Subject } from 'rxjs';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -71,6 +71,10 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
 
   dtTrigger: Subject<any> = new Subject<any>();
 
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
 
   constructor(
     public dialog: MatDialog,
@@ -124,14 +128,38 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     this.dtTrigger.unsubscribe();
   }
 
-  changeSegmento(){
-    if(this.selectedSegmento != null){
+  filtrar(){
+    const rango = this.range.value;
+    if(rango.start != null || rango.end != null || rango.start || rango.end ){
       this.actosFilter = [];
       setTimeout(() => {
-        this.actosFilter = this.actos.filter(e => e.codigo_seg == this.selectedSegmento);
+        this.actosFilter = this.filterDate(rango.start, rango.end, this.actos);
+        console.log("actosFilter",this.actosFilter);
+        this.filtrarSegmento(this.actosFilter);
+      }, 100);
+    } else {
+      this.filtrarSegmento(this.actos);
+      console.log('desde filtrar sin fecha',this.actosFilter);
+    }
+  }
+
+  filterDate(fromDate: any, ToDate: any, data: any){
+    return data.filter( (resp:any) => new Date(resp.fecha_cant_eje).getTime() > new Date( fromDate ).getTime()
+      // console.log('dede el filter data', new Date(resp.fecha_cant_eje), new Date( fromDate ))
+      ).filter( (resp:any) =>
+        new Date(resp.fecha_cant_eje).getTime() < new Date( ToDate ).getTime()
+      )
+  }
+
+  filtrarSegmento(data: any){
+    if(this.selectedSegmento != null){
+      const datosFiltrados = data;
+      this.actosFilter = [];
+      setTimeout(() => {
+        this.actosFilter = datosFiltrados.filter((e:any) => e.codigo_seg == this.selectedSegmento);
+        console.log('desdefilteregmento',this.actosFilter);
       }, 100);
     }
-    console.log(this.actosFilter);
   }
 
   reset(){
@@ -139,12 +167,7 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     setTimeout(() => {
       this.actosFilter = this.actos;
     }, 100);
-  }
-
-  toDate: any;
-  filtrarFecha(){
-
-    console.log(this.toDate);
+    this.selectedSegmento = null;
   }
 
   public abrirDetalle(codigo: string, lider: string) {
