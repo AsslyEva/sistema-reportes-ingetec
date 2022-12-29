@@ -3,6 +3,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment.prod';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class SystemLayoutComponent{
 
   constructor(
     private observer: BreakpointObserver,
-    // private _authService: AuthService,
+    private router: Router,
     ) {}
   ngOnInit(): void {
     // this.userdata = this._authService.usuario;
@@ -41,6 +42,8 @@ export class SystemLayoutComponent{
 
   logout(){
     // this._authService.logout();
+    localStorage.removeItem("token");
+    this.router.navigate(["/login"]);
     Swal.fire({
       icon: "success",
       title: "Has cerrado sesión con éxito",

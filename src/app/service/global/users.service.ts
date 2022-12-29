@@ -6,14 +6,14 @@ import { environment } from 'src/environments/environment.prod';
   providedIn: 'root'
 })
 export class UsersService {
-  url: string=environment.urlEndPoint
+  url: string=environment.urlEndPoint;
 
   constructor(
     private http: HttpClient
   ) { }
 
-  login(body: any){
-    return this.http.post(`${this.url}login`, body)
+  login(user: any, password: any){
+    return this.http.post(`${this.url}login`, {name: user, password: password})
   }
 
   registrar(body: any){

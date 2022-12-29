@@ -66,18 +66,19 @@
 
   <mat-divider></mat-divider>
 
-  <button 
-  mat-button class="button-menu" 
+  <button
+  mat-button class="button-menu"
+  (click)="logout()"
   >
     <mat-icon>power_settings_new</mat-icon>
     <span>Cerrar sesión</span>
   </button>
 
    </div>
-   
-    
+
+
     <mat-divider></mat-divider>
-    
+
     <div class="version">
       <span>{{version}}</span>
     </div>
@@ -85,7 +86,7 @@
 
   <mat-sidenav-content>
     <div>
-      
+
       <router-outlet>
         <!-- <button
         mat-icon-button
