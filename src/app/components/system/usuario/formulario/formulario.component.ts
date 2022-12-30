@@ -6,7 +6,7 @@ import { MatSelect } from '@angular/material/select';
 import { map, Observable, startWith } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import {Sort} from '@angular/material/sort';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { Segmento } from 'src/app/model/global/segmento';
 import { ActividadEspecifica } from 'src/app/model/global/actividad_especiifica';
 import { SedesService } from 'src/app/service/global/sedes.service';
@@ -72,6 +72,7 @@ export class FormularioComponent implements OnInit {
 
   // inicializacion lider
   lider = new FormControl('');
+  selectedLider: any;
 
   // inicializa fecha
   todayDate : Date = new Date();
@@ -79,53 +80,36 @@ export class FormularioComponent implements OnInit {
   tomorrow = new Date();
 
 
-// inicializacion integrantes
-integrantes = new FormControl('');
-integrantesList: any[] =[];
-// array is Integrantes
-arrayIntegrantes: any[] =[];
+  // inicializacion integrantes
+  integrantes = new FormControl('');
+  integrantesList: any[] =[];
+  // array is Integrantes
+  arrayIntegrantes: any[] =[];
 
-selectedIntegrantes: any;
+  selectedIntegrantes: any;
 
-  // @ViewChild('integrantesSelect')
-  // select!: MatSelect;
-
-// equals(objOne: { id: any; }, objTwo: { id: any; }) {
-//   if (typeof objOne !== 'undefined' && typeof objTwo !== 'undefined') {
-//     return objOne.id === objTwo.id;
-//   }
-// }
-
-
-equals(objOne: any, objTwo: any): boolean {
-  if (typeof objOne !== 'undefined' && typeof objTwo !== 'undefined') {
-    return objOne.codigo_integrante === objTwo.codigo_integrante;
+  equals(objOne: any, objTwo: any): boolean {
+    console.log("objOne",objOne)
+    if (typeof objOne !== 'undefined' && typeof objTwo !== 'undefined') {
+      return objOne.codigo_integrante == objTwo.codigo_integrante;
+    }
+    return false
   }
-  return false
-}
 
+// BOTON SELECCIONAR DE INTEGRANTES
+  selectAll(select: MatSelect, values: any, array: any) {
 
-// BOTON SELECCIONAR DE INTEGRANTES  
- selectAll(select: MatSelect, values: any, array: any) {
-  // if (this.selectedIntegrantes) {
-  //   this.select.options.forEach((item: MatOption) => item.select());
-  // }
-  select.value = values;
-  array = values;
-  console.log(this.arrayIntegrantes);
-}
+    select.value = this.integrantesList;
+    array = values;
+    this.arrayIntegrantes = this.integrantesList;
+    console.log(this.arrayIntegrantes);
+    console.log(select.value);
+  }
 
-
-deselectAll(select: MatSelect) {
-  this.arrayIntegrantes = [];
-  select.value = [];
-}
-
-
-changeIntegrantes(){
-  console.log(this.arrayIntegrantes)
-}
-
+  deselectAll(select: MatSelect) {
+    this.arrayIntegrantes = [];
+    select.value = [];
+  }
 
   // color configuracion selec
   colorControl = new FormControl('primary' as ThemePalette);
@@ -162,9 +146,6 @@ changeIntegrantes(){
   FechaFormGroup: FormGroup = this._formBuilder.group({eighthCtrl: ['']});
   // EvidenciaFormGroup: FormGroup = this._formBuilder.group({ninethCtrl: ['']});
 
-
-
-
   ngOnInit(): void {
     this.sedesService.getSedes()
     .subscribe((resp)=> {
@@ -196,8 +177,6 @@ changeIntegrantes(){
     })
   }
 
-
-
   /* MANEJO DEL ARRAY DE CANTIDADES */
 
   //Inicializa el array de cantidades
@@ -208,13 +187,16 @@ changeIntegrantes(){
   //Guardar valores para las cantidades
   nuevaActividad(): FormGroup {
     return this.fb.group({
-      fecha_actividad: this.fecha_act.value,
+      fecha_cant_eje: this.fecha_act.value,
       codigo_segmento: this.segmento.value,
-      codigo_actividad: this.actividad_especifica.value,
+      codigo_act: this.actividad_especifica.value,
       detalle_segmento: this.segmentos.find(element => element.codigo_seg == parseInt(this.selectedSegmento))?.descripcion_seg,
       detalle_actividad: this.actividades_especifica.find(element => element.codigo_act == parseInt(this.selectActividad_especifica))?.descripcion_act,
-      cantidad_rural: this.rural.value,
-      cantidad_urbano: this.urbano.value,
+      cantidad_rural_eje: this.rural.value,
+      cantidad_urbano_eje: this.urbano.value,
+      cantidad_urbrural_eje: 0,
+      lider_eje: this.selectedLider,
+      integrantes: [ this.arrayIntegrantes ]
     })
   }
 
@@ -249,9 +231,78 @@ changeIntegrantes(){
   }
 
 
-
   onSubmit() {
-    console.log(this.productForm.value);
+    // console.log(this.productForm.value);
+    const arrayActividades = this.actividades().value;
+
+    arrayActividades.forEach((element: any)=> {
+      this.cantidadesEjeService.postInsertarEje( element ).
+      subscribe( (resp: any) => {
+        console.log(resp);
+        Swal.fire(
+          `Registraste exitosamente tu ejecución`
+        )
+      },
+      (err) => {
+        // this.spinner.hide();
+
+        if (err.status != 500) {
+
+          let errorIcon = "error" ;
+          let errorTitle = "Error no especifico al momento de ingresar al módulo";
+          let errorDescription = "Por favor comunicarse con soporte del " + environment.systemName;
+
+          switch ( err.status ) {
+            case 400:
+              errorTitle = err.error.error_description;
+              if ( err.error.error == "invalid_grant" ) {//valida si usuario o contraseña no coincide
+                errorDescription = "Por favor verificar si sus credenciales son correctas";
+              }
+              break;
+            case 401:
+              errorIcon = "info";
+              errorTitle = err.error.error_description;
+              errorDescription = "Por favor enviar este mensaje al soporte del sistema";
+              break;
+            case 403:
+              errorIcon = "warning";
+              errorTitle = err.error.error_description;
+              break;
+            case 0:
+              errorTitle = "El servidor del sistema se encuentra en actualización o apagado";
+              break;
+          }
+
+          Swal.fire({
+            icon: errorIcon as SweetAlertIcon,
+            title: errorTitle,
+            text: errorDescription,
+            // allowEnterKey: false,
+            // allowEscapeKey: false,
+            allowOutsideClick: false,
+            confirmButtonColor: '#00A5A5',
+            confirmButtonText: '<span style="padding: 0 15px;">OK</span>'
+          });
+
+        } else {
+
+          Swal.fire({
+            icon: "error",
+            title: "Se ha producido un error al intentar ingresar al módulo (Esto puede ser debido por una desconexión a la base de datos o algun error en el programa)",
+            text: "Intente nuevamente, si persiste por favor comunicarse con Mesa de Ayuda o personal de soporte del " + environment.systemName,
+            // allowEnterKey: false,
+            // allowEscapeKey: false,
+            allowOutsideClick: false,
+            confirmButtonColor: '#00A5A5',
+            confirmButtonText: '<span style="padding: 0 15px;">OK</span>'
+          });
+
+        }
+
+      }
+
+    );
+    });
   }
 
   disableThirdHeader = false;

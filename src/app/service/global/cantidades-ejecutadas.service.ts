@@ -21,6 +21,7 @@ export class CantidadesEjecutadasService {
     // parametros.append("co_evento", body.);
     // parametros.append("co_usu", co_usu);
     // parametros.append("certificado", certificado);
-    return this.http.post(`${this.url}ejecuciones/insertar`, body, this.httpOptions)
+    console.log(body)
+    return this.http.post(`${this.url}ejecuciones/insertar`, body)
   }
 }

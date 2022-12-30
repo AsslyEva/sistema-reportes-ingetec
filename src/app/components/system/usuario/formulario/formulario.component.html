@@ -45,7 +45,7 @@
               <mat-form-field appearance="outline">
                 <mat-label>Lider de Equipo</mat-label>
 
-                <mat-select
+                <mat-select [(ngModel)]="selectedLider"
                             required
                             formControlName="thirdCtrl">
                   <mat-option *ngFor="let lider of integrantesList"
@@ -66,13 +66,12 @@
               <mat-form-field appearance="outline">
                 <mat-label>Integrantes del equipo</mat-label>
                 <mat-select
-                            (ngModelChange)="changeIntegrantes()"
                             [(ngModel)]="arrayIntegrantes"
                             [compareWith]="equals"
                             formControlName="secondCtrl"
                             multiple
-                            #integrantesSelect
                             required
+                            #integrantesSelect
                             >
                   <div class="options">
                     <button
@@ -89,12 +88,13 @@
                     Elimina a todos
                     </button>
                   </div>
-                  
+
                   <mat-option *ngFor="let integrantes of integrantesList"
-                              [value]="integrantes.codigo_integrante"
+                              [value]="integrantes"
                               >
                   {{integrantes.nombres_integrante + ' ' +integrantes.apellidos_integrante}}
                   </mat-option>
+                  <!-- {{arrayIntegrantes | json}} -->
                 </mat-select>
                 <br />
                 <mat-error
@@ -206,7 +206,7 @@
                       <div>
                         <ul>Fecha Ingresada  <mat-icon>check_circle_outline</mat-icon></ul>
                         <input style="text-align: center;"
-                              formControlName="fecha_actividad"
+                              formControlName="fecha_cant_eje"
                               class="form-control"
                               [ngModel]="todayDate |  date:'shortDate'"
                               >
@@ -232,11 +232,11 @@
                       <div class="cantidad">
                         <div class="item-cantidad">
                         <ul>Cantidad de Rural agregada<mat-icon>check_circle_outline</mat-icon></ul>
-                            <input type="number" style="text-align: center;"  formControlName="cantidad_rural" class="form-control ">
+                            <input type="number" style="text-align: center;"  formControlName="cantidad_rural_eje" class="form-control ">
                         </div>
                         <div class="item-cantidad">
                         <ul>Cantidad en Urbano agregado <mat-icon>check_circle_outline</mat-icon></ul>
-                            <input type="number" style="text-align: center;"  formControlName="cantidad_urbano" class="form-control">
+                            <input type="number" style="text-align: center;"  formControlName="cantidad_urbano_eje" class="form-control">
                         </div>
                       </div>
 
@@ -255,71 +255,11 @@
 
                   </div>
                 </table>
-                <!-- <button mat-raised-button color="primary" matStepperNext>Siguiente</button> -->
               </form>
           </mat-step>
 
           <mat-step >
             <ng-template matStepLabel>ENVIAR</ng-template>
-
-            <!-- <ul>RESUMEN DE ACTIVIDAD</ul>
-
-              <div class="marco-resumen">
-                <label>Sede</label>
-                <ul>
-                  <mat-chip-list>
-                    <mat-chip>
-                      {{sede.value}}
-                    </mat-chip>
-                  </mat-chip-list>
-                </ul>
-              </div>
-
-              <div class="marco-resumen">
-                <label>Lider de Equipo</label>
-                <ul>
-                  <mat-chip-list>
-                    <mat-chip>
-                      {{lider.value}}
-                    </mat-chip>
-                  </mat-chip-list>
-                </ul>
-              </div>
-
-
-              <div class="marco-resumen">
-                <label>Cuadrilla</label>
-                <ul>
-                  <mat-chip-list>
-                    <mat-chip  *ngFor="let integrantes of integrantesSelect?.value">
-                      {{integrantes}}
-                    </mat-chip>
-                  </mat-chip-list>
-                </ul>
-              </div>
-
-
-              <mat-divider></mat-divider>
-
-              <div class="marco-resumen">
-                <label>Fecha de Actividad</label>
-                <ul>
-                  {{fecha_act.value |  date:'shortDate'}}
-                </ul>
-              </div>
-
-              <div class="marco-resumen">
-                <label>Segmento</label>
-                <ul>
-                  <mat-chip-list>
-                    <mat-chip>
-                      {{segmento.value}}
-                    </mat-chip>
-                  </mat-chip-list>
-                </ul>
-              </div> -->
-
-
             <ul>Si esta seguro de los datos ingresados haga click en "Enviar"</ul>
             <div>
             <!-- <button mat-button matStepperPrevious>Anterior</button> -->
@@ -329,6 +269,7 @@
                     class="send"
                     type="button"
                     color="primary"
+                    (click)="onSubmit()"
                     >
                     Enviar
                     <mat-icon class="icon">send</mat-icon>&nbsp;
