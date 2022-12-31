@@ -18,12 +18,14 @@ export class SystemLayoutComponent{
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
+  _rol: any;
+
   constructor(
     private observer: BreakpointObserver,
     private router: Router,
     ) {}
   ngOnInit(): void {
-    // this.userdata = this._authService.usuario;
+    this._rol = localStorage.getItem('rol');
   }
 
   ngAfterViewInit() {
