@@ -132,7 +132,6 @@ export class FormularioComponent implements OnInit {
       actividades: this.fb.array([]) ,
     });
 
-
   }
 
 // cofiguracion de matStep
@@ -152,7 +151,6 @@ export class FormularioComponent implements OnInit {
       this.sedesList=resp
     })
   }
-
 
   changeSede(){
     console.log (this.selectedSede)
@@ -232,7 +230,6 @@ export class FormularioComponent implements OnInit {
 
 
   onSubmit() {
-    // console.log(this.productForm.value);
     const arrayActividades = this.actividades().value;
 
     arrayActividades.forEach((element: any)=> {
@@ -244,7 +241,6 @@ export class FormularioComponent implements OnInit {
         )
       },
       (err) => {
-        // this.spinner.hide();
 
         if (err.status != 500) {
 

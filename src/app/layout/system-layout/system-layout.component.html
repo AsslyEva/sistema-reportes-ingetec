@@ -49,12 +49,12 @@
     <span>Formulario</span>
   </button>
 
-  <button mat-button class="button-menu"   routerLink="/administrador/inicio">
+  <button mat-button class="button-menu"   routerLink="/administrador/inicio" *ngIf="_rol == 2">
     <mat-icon>receipt_long</mat-icon>
     <span>Reporte de Actividades</span>
   </button>
 
-  <button mat-button class="button-menu"   routerLink="/administrador/valorizacion">
+  <button mat-button class="button-menu"   routerLink="/administrador/valorizacion" *ngIf="_rol == 2">
     <mat-icon>personal_injury</mat-icon>
     <span>Reporte de Valorización</span>
   </button>

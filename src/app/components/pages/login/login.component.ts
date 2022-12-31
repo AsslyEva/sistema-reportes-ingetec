@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
-
   }
 
   buildForm(){
@@ -67,6 +66,7 @@ export class LoginComponent implements OnInit {
           // console.log('Respuesta',response);
           // Guardar
           localStorage.setItem("token", response.token);
+          localStorage.setItem("rol", response.rol);
           this.router.navigate(["/administrador"]);
           Swal.fire(
             `Hola has iniciado sesión con éxito.`,
