@@ -67,7 +67,13 @@ export class LoginComponent implements OnInit {
           // Guardar
           localStorage.setItem("token", response.token);
           localStorage.setItem("rol", response.rol);
-          this.router.navigate(["/administrador"]);
+
+          if(response.rol == 2){
+            this.router.navigate(["/administrador"]);
+          }else{
+            this.router.navigate(["/usuario/inicio"]);
+          }
+
           Swal.fire(
             `Hola has iniciado sesión con éxito.`,
             environment.systemName,
