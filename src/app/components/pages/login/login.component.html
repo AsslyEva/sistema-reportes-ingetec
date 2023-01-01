@@ -23,7 +23,8 @@
                         <input formControlName="name"
                               class="form-control-ingetec"
                               type="text"
-                              placeholder="Ingrese su usuario">
+                              placeholder="Ingrese su usuario"
+                              style="text-transform:uppercase;">
                               <mat-icon>person</mat-icon>
                   </div>
                   <!-- <div *ngIf="usuarioForm?.invalid && (usuarioForm?.dirty || usuarioForm?.touched)">
@@ -38,7 +39,8 @@
                       <input  formControlName="password"
                               class="form-control-ingetec"
                               [type]="hide ? 'password' : 'text'"
-                              placeholder="Ingrese su contraseña">
+                              placeholder="Ingrese su contraseña"
+                              style="text-transform:uppercase;">
                               <mat-icon
                               matSuffix
                               (click)="hide = !hide">
@@ -71,7 +73,7 @@
 <ngx-spinner
     bdColor = "rgba(14,14,14,0.8)"
     size = "large"
-    color = "#9ad424"
+    color = "#025D8C"
     type = "square-jelly-box"
     [fullScreen] = "false">
     <p style="color: white" > Cargando, espere por favor </p>
