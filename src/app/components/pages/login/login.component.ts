@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
 
     if ( this.formLogin.valid ) {
       this.spinner.show();
-      this.userService.login(username, pass)
+      this.userService.login(username.toUpperCase(), pass)
       .subscribe(
         (response: any) => {
           this.spinner.hide();

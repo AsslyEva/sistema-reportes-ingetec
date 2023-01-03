@@ -78,7 +78,8 @@ export class FormularioComponent implements OnInit {
   todayDate : Date = new Date();
   fecha_act =  new FormControl('');
   tomorrow = new Date();
-
+  yesterday = new Date();
+  dateForm!: FormGroup;
 
   // inicializacion integrantes
   integrantes = new FormControl('');
@@ -132,6 +133,7 @@ export class FormularioComponent implements OnInit {
       actividades: this.fb.array([]) ,
     });
 
+    this.yesterday.setDate(this.yesterday.getDate() - 1);
   }
 
 // cofiguracion de matStep
@@ -185,7 +187,7 @@ export class FormularioComponent implements OnInit {
   //Guardar valores para las cantidades
   nuevaActividad(): FormGroup {
     return this.fb.group({
-      fecha_cant_eje: this.fecha_act.value,
+      fecha_cant_eje: new Date(this.fecha_act.value!),
       codigo_segmento: this.segmento.value,
       codigo_act: this.actividad_especifica.value,
       detalle_segmento: this.segmentos.find(element => element.codigo_seg == parseInt(this.selectedSegmento))?.descripcion_seg,
@@ -228,6 +230,9 @@ export class FormularioComponent implements OnInit {
     this.actividades().removeAt(i);
   }
 
+  toChange(){
+    console.log(this.todayDate);
+  }
 
   onSubmit() {
     const arrayActividades = this.actividades().value;

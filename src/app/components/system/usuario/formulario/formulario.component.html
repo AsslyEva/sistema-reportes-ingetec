@@ -139,7 +139,9 @@
                                       [matDatepicker]="picker"
                                       [formControl]="fecha_act"
                                       [ngModel]="todayDate"
-                                      [max]="tomorrow">
+                                      [max]="tomorrow"
+                                      (ngModelChange)="toChange()"
+                                      [min]="yesterday">
                                       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                       <mat-datepicker #picker></mat-datepicker>
 
