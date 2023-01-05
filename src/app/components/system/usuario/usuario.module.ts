@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { FormularioComponent } from './formulario/formulario.component';
+import { MinMaxDirective } from './formulario/min-max.directive';
 // import { GeneralServide } from 'src/app/service/global/general.service';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FormularioComponent } from './formulario/formulario.component';
     UsuarioRoutingModule,
   ],
   declarations: [
-    FormularioComponent
+    FormularioComponent,
+    MinMaxDirective
   ],
 
   schemas: [ 
