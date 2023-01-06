@@ -200,7 +200,7 @@ export class FormularioComponent implements OnInit {
   //Guardar valores para las cantidades
   nuevaActividad(): FormGroup {
     return this.fb.group({
-      fecha_cant_eje: new Date(this.fecha_act.value!),
+      fecha_cant_eje: this.formatDate(this.fecha_act.value!),
       codigo_segmento: this.segmento.value,
       codigo_act: this.actividad_especifica.value,
       detalle_segmento: this.segmentos.find(element => element.codigo_seg == parseInt(this.selectedSegmento))?.descripcion_seg,
@@ -213,6 +213,19 @@ export class FormularioComponent implements OnInit {
     })
   }
 
+  formatDate(date: string) {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
   //Añadir los valores de las canti  dades al array de cantidades
   agregarActividades() {
     if (
