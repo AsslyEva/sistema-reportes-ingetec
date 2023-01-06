@@ -159,10 +159,10 @@ export class ReporteValorizacionComponent implements OnInit {
         x1.cantidad_urbrural_eje,
         x1.cantidad_rural_eje,
         x1.pre_uni_urbano_act,
-        x1.pre_uni_urbrural_act,
+        x1.pre_uni_ruralUrbano_act,
         x1.pre_uni_rural_act,
         x1.pre_uni_urbano_act * x1.cantidad_urbano_eje,
-        x1.pre_uni_urbrural_act * x1.cantidad_urbrural_eje,
+        x1.pre_uni_ruralUrbano_act * x1.cantidad_urbrural_eje,
         x1.pre_uni_rural_act * x1.cantidad_rural_eje
       ]);
     });
