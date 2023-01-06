@@ -189,8 +189,19 @@
                           [max]="maxValue"
                           minMax  
                           value="0"  
-                          [formControl]="rural" class="form-control col-md-6" required>
+                          [formControl]="urbano" class="form-control col-md-4" required>
                         </div>
+
+                        <div class="item-cantidad">
+                          <ul>Urbano-Rural</ul>
+                          <input type="number"  
+                          [min]="minValue"
+                          [max]="maxValue"
+                          minMax   
+                          value="0" 
+                          [formControl]="urbano_rural" class="form-control col-md-4" required>
+                        </div>
+
                         <div class="item-cantidad">
                           <ul>Rural</ul>
                           <input type="number"  
@@ -198,7 +209,7 @@
                           [max]="maxValue"
                           minMax   
                           value="0" 
-                          [formControl]="urbano" class="form-control col-md-6 " required>
+                          [formControl]="rural" class="form-control col-md-4" required>
                         </div>
                       </div >
                     <tr class="td-actividad">
@@ -243,12 +254,18 @@
                       <!-- <label>Cantidades realizadas</label> -->
                       <div class="cantidad">
                         <div class="item-cantidad">
+                          <ul>Cantidad en Urbano agregado <mat-icon>check_circle_outline</mat-icon></ul>
+                              <input type="number" style="text-align: center;"  formControlName="cantidad_urbano_eje" class="form-control">
+                        </div>
+
+                        <div class="item-cantidad">
+                          <ul>Cantidad de Urbano - Rural agregada<mat-icon>check_circle_outline</mat-icon></ul>
+                              <input type="number" style="text-align: center;"  formControlName="cantidad_urbrural_eje" class="form-control ">
+                        </div>
+
+                        <div class="item-cantidad">
                         <ul>Cantidad de Rural agregada<mat-icon>check_circle_outline</mat-icon></ul>
                             <input type="number" style="text-align: center;"  formControlName="cantidad_rural_eje" class="form-control ">
-                        </div>
-                        <div class="item-cantidad">
-                        <ul>Cantidad en Urbano agregado <mat-icon>check_circle_outline</mat-icon></ul>
-                            <input type="number" style="text-align: center;"  formControlName="cantidad_urbano_eje" class="form-control">
                         </div>
                       </div>
 

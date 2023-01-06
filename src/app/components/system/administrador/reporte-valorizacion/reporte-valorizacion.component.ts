@@ -21,8 +21,10 @@ export class ReporteValorizacionComponent implements OnInit {
  descripcion_actividades ="";
  unidad = 'Und'
  precio_urbano = "";
+ precio_urbano_rural = "";
  precio_rural = "";
  cantidades_urbano = "";
+ cantidades_urbano_rural = "";
  cantidades_rural = "";
  importe_urbano = "";
  importe_rural = "";
@@ -104,6 +106,12 @@ export class ReporteValorizacionComponent implements OnInit {
         header:  "CANT URB",
         size: 7
       },
+
+      {
+        header:  "CANT URBRURAL",
+        size: 7
+      },
+
       {
         header:  "CANT RURAL",
         size: 7
@@ -113,11 +121,19 @@ export class ReporteValorizacionComponent implements OnInit {
         size: 9
       },
       {
+        header:  "PRECIO UNI URBRURAL",
+        size: 9
+      },
+      {
         header:  "PRECIO UNI RURAL",
         size: 9
       },
       {
         header:  "IMP. VAL. URB",
+        size: 10
+      },
+      {
+        header:  "IMP. VAL. URBRURAL",
         size: 10
       },
       {
@@ -140,10 +156,13 @@ export class ReporteValorizacionComponent implements OnInit {
         x1.descripcion_act,
         x1.unidad_act,
         x1.cantidad_urbano_eje,
+        x1.cantidad_urbrural_eje,
         x1.cantidad_rural_eje,
         x1.pre_uni_urbano_act,
+        x1.pre_uni_urbrural_act,
         x1.pre_uni_rural_act,
         x1.pre_uni_urbano_act * x1.cantidad_urbano_eje,
+        x1.pre_uni_urbrural_act * x1.cantidad_urbrural_eje,
         x1.pre_uni_rural_act * x1.cantidad_rural_eje
       ]);
     });

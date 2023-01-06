@@ -55,9 +55,13 @@ export class FormularioComponent implements OnInit {
   productForm: FormGroup;
   rural =  new FormControl('');
   urbano =  new FormControl('');
+  urbano_rural =  new FormControl('');
 
-  public value!: number;
-  public value2!: number;
+
+  // public value!: number;
+  // public value2!: number;
+  // public value3!: number;
+
 
   public maxValue: number = 999;
   public minValue: number = 0;
@@ -203,7 +207,7 @@ export class FormularioComponent implements OnInit {
       detalle_actividad: this.actividades_especifica.find(element => element.codigo_act == parseInt(this.selectActividad_especifica))?.descripcion_act,
       cantidad_rural_eje: this.rural.value,
       cantidad_urbano_eje: this.urbano.value,
-      cantidad_urbrural_eje: 0,
+      cantidad_urbrural_eje: this.urbano_rural.value,
       lider_eje: this.selectedLider,
       integrantes: [ this.arrayIntegrantes ]
     })
@@ -216,7 +220,8 @@ export class FormularioComponent implements OnInit {
       && this.segmento.value
       && this.actividad_especifica.value
       && this.rural.value || 0 <= 1000
-      && this.urbano.value || 0 <= 1000) {
+      && this.urbano.value || 0 <= 1000
+      && this.urbano_rural.value || 0 <= 1000) {
       this.actividades().push(this.nuevaActividad());
       console.log(this.actividades().value)
       //limpiar controls
@@ -225,6 +230,7 @@ export class FormularioComponent implements OnInit {
       this.actividad_especifica.reset();
       this.rural.reset();
       this.urbano.reset();
+      this.urbano_rural.reset();
     } else {
       Swal.fire(
         'Es necesario ingresar tdodos los datos, en caso no exista coloque "0", para agregarlo',

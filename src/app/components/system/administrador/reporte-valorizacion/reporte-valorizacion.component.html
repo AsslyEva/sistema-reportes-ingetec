@@ -19,10 +19,13 @@
             <th>Descripción de Actividades</th>
             <th>Unidad</th>
             <th>Precio Unitario Urbano</th>
+            <th>Precio Unitario Urbano - Rural</th>
             <th>Precio Unitario Rural</th>
             <th>Cantidades Ejecutadas Urbano</th>
+            <th>Cantidades Ejecutadas Urbano - Rural</th>
             <th>Cantidades Ejecutadas Rural</th>
             <th>Importe Valorizado Urbano</th>
+            <th>Importe Valorizado Urbano - Rural</th>
             <th>Importe Valorizado Rural</th>
           </tr>
         </thead>
@@ -34,10 +37,13 @@
             <td>{{valorizacion.descripcion_act}}</td>
             <td>{{valorizacion.unidad_act}}</td>
             <td>{{valorizacion.pre_uni_urbano_act}}</td>
+            <td>{{valorizacion.pre_uni_urbrural_act}}</td>
             <td>{{valorizacion.pre_uni_rural_act}}</td>
             <td>{{valorizacion.cantidad_urbano_eje}}</td>
+            <td>{{valorizacion.cantidad_urbrural_eje}}</td>
             <td>{{valorizacion.cantidad_rural_eje}}</td>
             <td>{{valorizacion.pre_uni_urbano_act * valorizacion.cantidad_urbano_eje}}</td>
+            <td>{{valorizacion.pre_uni_urbrural_act * valorizacion.cantidad_urbrural_eje}}</td>
             <td>{{valorizacion.pre_uni_rural_act * valorizacion.cantidad_rural_eje}}</td>
 
           </tr>

@@ -65,6 +65,7 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
   actividad_especifica ="";
   rural = "";
   urbano = "";
+  urbano_rural = "";
   fecha ='';
 
   segmentos : any = [];
@@ -205,6 +206,10 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         size: 7
       },
       {
+        header:  "CANT URBRURAL",
+        size: 7
+      },
+      {
         header:  "CANT RURAL",
         size: 7
       },
@@ -227,6 +232,7 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         x1.descripcion_seg,
         x1.descripcion_act,
         x1.cantidad_urbano_eje,
+        x1.cantidad_urbrural_eje,
         x1.cantidad_rural_eje,
         fecha
       ]);
