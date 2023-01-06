@@ -12,6 +12,7 @@ import { ReportesService } from 'src/app/service/global/reportes.service';
 import { SegmentosService } from 'src/app/service/global/segmentos.service';
 import { downloadReportExcel } from 'src/app/components/shared/generate-excel/generate-excel';
 import { environment } from 'src/environments/environment.prod';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -84,12 +85,13 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     private snackBar: MatSnackBar,
     private dialogsService: DialogsService,
     private reporteService: ReportesService,
-    private segmentosService: SegmentosService
+    private segmentosService: SegmentosService,
     ) {
 
       this.form = this.fb.group({
         actividad: ['',[Validators.required]]
       });
+
     }
     __downloadReportExcel = downloadReportExcel;
 

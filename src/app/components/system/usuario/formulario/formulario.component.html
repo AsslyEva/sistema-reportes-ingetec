@@ -184,11 +184,21 @@
                       <div class="cantidad">
                         <div class="item-cantidad">
                           <ul>Urbano</ul>
-                          <input type="number" [formControl]="rural" class="form-control col-md-6" required>
+                          <input type="number"  
+                          [min]="minValue"
+                          [max]="maxValue"
+                          minMax  
+                          value="0"  
+                          [formControl]="rural" class="form-control col-md-6" required>
                         </div>
                         <div class="item-cantidad">
                           <ul>Rural</ul>
-                          <input type="number" [formControl]="urbano" class="form-control col-md-6 " required>
+                          <input type="number"  
+                          [min]="minValue"
+                          [max]="maxValue"
+                          minMax   
+                          value="0" 
+                          [formControl]="urbano" class="form-control col-md-6 " required>
                         </div>
                       </div >
                     <tr class="td-actividad">
@@ -257,6 +267,9 @@
 
                   </div>
                 </table>
+
+                <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+
               </form>
           </mat-step>
 
@@ -272,6 +285,7 @@
                     type="button"
                     color="primary"
                     (click)="onSubmit()"
+                    
                     >
                     Enviar
                     <mat-icon class="icon">send</mat-icon>&nbsp;

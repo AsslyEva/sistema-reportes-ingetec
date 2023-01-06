@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatOption, ThemePalette } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -55,6 +55,15 @@ export class FormularioComponent implements OnInit {
   productForm: FormGroup;
   rural =  new FormControl('');
   urbano =  new FormControl('');
+
+  public value!: number;
+  public value2!: number;
+
+  public maxValue: number = 999;
+  public minValue: number = 0;
+
+
+
 
   // *// inicializacion segmento
   segmento = new FormControl('');
@@ -219,12 +228,12 @@ export class FormularioComponent implements OnInit {
       this.fecha_act.value
       && this.segmento.value
       && this.actividad_especifica.value
-      && this.rural.value
-      && this.urbano.value) {
+      && this.rural.value || 0 <= 1000
+      && this.urbano.value || 0 <= 1000) {
       this.actividades().push(this.nuevaActividad());
       console.log(this.actividades().value)
       //limpiar controls
-      this.fecha_act.reset();
+      // this.fecha_act.reset();
       this.segmento.reset();
       this.actividad_especifica.reset();
       this.rural.reset();
@@ -253,11 +262,27 @@ export class FormularioComponent implements OnInit {
     arrayActividades.forEach((element: any)=> {
       this.cantidadesEjeService.postInsertarEje( element ).
       subscribe( (resp: any) => {
+        
         console.log(resp);
         Swal.fire(
-          `Registraste exitosamente tu ejecución`
+          {
+            position: 'center',
+            icon: 'success',
+            title: 'Registraste exitosamente tu ejecución',
+            showConfirmButton: false,
+            timer: 1500
+          }
         )
+
+        this.SedeFormGroup.reset();
+        this.lider.reset();
+        this.LiderFormGroup.reset();
+        this.CuadrillaFormGroup.reset();
+
+        // solo resetea actividaes 
+        this.actividades().reset(); 
       },
+      
       (err) => {
 
         if (err.status != 500) {
