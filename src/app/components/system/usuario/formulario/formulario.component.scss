@@ -38,15 +38,6 @@ ng-template{
 }
 
 
-.cantidad{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    // .item-cantidad{
-    //     // width: 100%;
-
-    // }
-}
 
 .form-general{
     margin: 4rem 0 !important;
@@ -108,7 +99,7 @@ ul{
     align-items: center;
     mat-icon{
         color: g.$ingetec-aprobe;
-        font-size: 1.5rem;
+        font-size: 12px;
         margin-top: 0.5rem;
         // left: 2.5rem;
         position: absolute;
@@ -116,14 +107,58 @@ ul{
  }
 
  .actividades{
-    gap: 2.5rem 0;
+    // gap: 2.5rem 0;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    align-items: stretch;
+    width: 90%;
  }
+
+ .caracteristicas{
+    display: flex;
+    flex-direction: column;
+ }
+
+ .carac{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    // width: 90%;
+ }
+ .cant{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    // width: 90%;
+ }
+
+.cantidad{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // margin-top: 2rem ;
+    // .item-cantidad{
+    //     // width: 100%;
+
+    // }
+}
+
+.cantidad-succes{
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem ;
+    // width: 90%;
+    // .item-cantidad{
+    //     // width: 100%;
+
+    // }
+}
+
+textarea{
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+}
 
  .item-actividad{
     border: 1px solid #00000026;
@@ -150,7 +185,7 @@ ul{
     color: g.$ingetec-white;
     font-weight: bold;
     width: 100%;
-    padding: 2rem;
+    padding: 0.5rem;
 }
 .add{
     background-color: g.$ingetec-aprobe !important;

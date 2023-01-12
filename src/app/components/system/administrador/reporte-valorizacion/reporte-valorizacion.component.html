@@ -5,12 +5,89 @@
     [link]="'/administrador/inicio'"
     ></app-title-frame>
 
-    <div class="content-tabla col-12">
+    <form class="row form-filtro" [formGroup]="form">
+      <div class="col-12">
+        <p class="text-filtro">Seleccione filtro para realizar la búsqueda</p>
+      </div>
+  
+        <div class="filtro">
+          <div class="items-busqueda">
+  
+            <mat-form-field class="form-item" appearance="outline">
+              <mat-label>Segmento</mat-label>
+              <mat-select
+                          placeholder="Ingresa registra"
+                          formControlName="actividad"
+                          [(ngModel)]="selectedSegmento">
+                <mat-option *ngFor="let segmento of segmentos" [value]="segmento.codigo_seg" >
+                  {{segmento.descripcion_seg}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  <!--
+            <mat-form-field class="form-item" appearance="outline">
+              <mat-label>Lider de Equipo</mat-label>
+              <mat-select
+                          placeholder="Ingresa registra"
+                          formControlName="actividad">
+                <mat-option *ngFor="let actividad of actos" [value]="actividad.id_actividad" >
+                  {{actividad.lider}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> -->
+  
+            <mat-form-field appearance="fill">
+              <mat-label>Enter a date range</mat-label>
+              <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                <input matStartDate formControlName="start" placeholder="Start date">
+                <input matEndDate formControlName="end" placeholder="End date">
+              </mat-date-range-input>
+              <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+  
+              <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+              <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+            </mat-form-field>
+  
+            <!-- <mat-form-field class="form-item" appearance="outline" >
+              <mat-label>Fecha inicial</mat-label>
+              <input matInput [(ngModel)]="toDate"
+                      >
+              <mat-datepicker-toggle matIconSuffix [for]="fecInicio" ></mat-datepicker-toggle>
+              <mat-datepicker #fecInicio></mat-datepicker>
+            </mat-form-field>
+  
+            <mat-form-field class="form-item" appearance="outline" >
+              <mat-label>Fecha final</mat-label>
+              <input matInput
+                      [matDatepicker]="fecfin"
+                      >
+              <mat-datepicker-toggle matIconSuffix [for]="fecfin"></mat-datepicker-toggle>
+              <mat-datepicker #fecfin></mat-datepicker>
+  
+            </mat-form-field> -->
+  
+            <button matt-button (click)="filtrar()">BUSCAR
+              <mat-icon>search</mat-icon>
+            </button>
+  
+            <button style="background-color: blue;" matt-button (click)="reset()">LIMPIAR
+              <mat-icon>cleaning_services</mat-icon>
+            </button>
+          </div>
+  
+        </div>
+  
+  
+    </form>
+  
+    <div class="content-tabla col-12" *ngIf="valorizacion.length != 0">
       <table
               datatable
               [dtOptions]="dtOptions"
               class="table table-dark-ingetec"
-              *ngIf="valorizacion.length != 0">
+              >
         <thead>
           <tr>
             <th>Sedes</th>

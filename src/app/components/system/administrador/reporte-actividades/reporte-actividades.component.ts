@@ -40,7 +40,6 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
 
 
   name!: string;
-  animal!: string;
 
 
   public result: any;
@@ -164,7 +163,7 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
       this.actosFilter = [];
       setTimeout(() => {
         this.actosFilter = datosFiltrados.filter((e:any) => e.codigo_seg == this.selectedSegmento);
-        console.log('desdefilteregmento',this.actosFilter);
+        console.log('desdefilteSegmento',this.actosFilter);
       }, 100);
     }
   }

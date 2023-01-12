@@ -53,9 +53,9 @@ export class FormularioComponent implements OnInit {
 
   // configuracion actividades
   productForm: FormGroup;
-  rural =  new FormControl('');
-  urbano =  new FormControl('');
-  urbano_rural =  new FormControl('');
+  rural =  new FormControl('0');
+  urbano =  new FormControl('0');
+  urbano_rural =  new FormControl('0');
 
 
   // public value!: number;
@@ -189,6 +189,20 @@ export class FormularioComponent implements OnInit {
       this.actividades_especifica = resp;
     })
   }
+  formatDate(date: string) {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
 
   /* MANEJO DEL ARRAY DE CANTIDADES */
 
@@ -213,37 +227,25 @@ export class FormularioComponent implements OnInit {
     })
   }
 
-  formatDate(date: string) {
-    let d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
 
-    if (month.length < 2)
-        month = '0' + month;
-    if (day.length < 2)
-        day = '0' + day;
-
-    return [year, month, day].join('-');
-}
   //Añadir los valores de las canti  dades al array de cantidades
   agregarActividades() {
     if (
       this.fecha_act.value
       && this.segmento.value
       && this.actividad_especifica.value
-      && this.rural.value || 0 <= 1000
-      && this.urbano.value || 0 <= 1000
-      && this.urbano_rural.value || 0 <= 1000) {
+      && this.rural.value 
+      && this.urbano.value 
+      && this.urbano_rural.value ) {
       this.actividades().push(this.nuevaActividad());
       console.log(this.actividades().value)
       //limpiar controls
-      // this.fecha_act.reset();
+      //this.fecha_act.reset();
       this.segmento.reset();
       this.actividad_especifica.reset();
-      this.rural.reset();
-      this.urbano.reset();
-      this.urbano_rural.reset();
+      this.rural.setValue('0');
+      this.urbano.setValue('0');
+      this.urbano_rural.setValue('0');
     } else {
       Swal.fire(
         'Es necesario ingresar tdodos los datos, en caso no exista coloque "0", para agregarlo',
@@ -279,11 +281,15 @@ export class FormularioComponent implements OnInit {
             timer: 1500
           }
         )
-
         this.SedeFormGroup.reset();
         this.lider.reset();
         this.LiderFormGroup.reset();
         this.CuadrillaFormGroup.reset();
+        
+        // elimina tabla actividades 
+        this.actividades().removeAt(this.selectedSegmento);
+        this.actividades().removeAt(this.selectedSegmento);
+        this.actividades().removeAt(this.selectActividad_especifica);
 
         // solo resetea actividaes 
         this.actividades().reset(); 

@@ -65,8 +65,8 @@
             <form [formGroup]="CuadrillaFormGroup">
               <mat-form-field appearance="outline">
                 <mat-label>Integrantes del equipo</mat-label>
+                <!-- [(ngModel)]="arrayIntegrantes" -->
                 <mat-select
-                            [(ngModel)]="arrayIntegrantes"
                             [compareWith]="equals"
                             formControlName="secondCtrl"
                             multiple
@@ -204,12 +204,12 @@
 
                         <div class="item-cantidad">
                           <ul>Rural</ul>
-                          <input type="number"  
-                          [min]="minValue"
-                          [max]="maxValue"
-                          minMax   
-                          value="0" 
-                          [formControl]="rural" class="form-control col-md-4" required>
+                          <input 
+                                type="number"  
+                                [min]="minValue"
+                                [max]="maxValue"
+                                minMax   
+                                [formControl]="rural" class="form-control col-md-4" required>
                         </div>
                       </div >
                     <tr class="td-actividad">
@@ -226,51 +226,53 @@
 
                     <div class="actividades" *ngFor="let actividad of actividades().controls; let i=index" [formGroupName]="i">
 
-                      <div>
-                        <ul>Fecha Ingresada  <mat-icon>check_circle_outline</mat-icon></ul>
-                        <input style="text-align: center;"
-                              formControlName="fecha_cant_eje"
-                              class="form-control"
-                              readonly
-                              >
-                      </div>
+                      <div class="caracteristicas">
+                        <p>Actividades Aagregadas</p>
+                        <div class="carac">
+                          <div>
+                            <ul>Fecha<mat-icon>check_circle_outline</mat-icon></ul>
+                            <textarea style="text-align: center;"
+                                    formControlName="fecha_cant_eje"
+                                    readonly>
+                            </textarea>
+                          </div>
+                          <div>
+                            <ul>Segmento<mat-icon>check_circle_outline</mat-icon></ul>
+                            <textarea style="text-align: center;" 
+                                  formControlName="detalle_segmento"
+                                  readonly>
+                            </textarea>
+                          </div>
+                          <div>
+                            <ul>Actividades<mat-icon>check_circle_outline</mat-icon></ul>
+                            <textarea style="text-align: center;"
+                                  formControlName="detalle_actividad"
+                                  readonly>
+                            </textarea>
+                          </div>
 
-                      <div>
-                        <ul>Segmento agregado  <mat-icon>check_circle_outline</mat-icon></ul>
-                        <input style="text-align: center;"
-                              formControlName="detalle_segmento"
-                              class="form-control"
-                              readonly>
-                      </div>
-
-                      <div>
-                        <ul>Actividad específica agregada  <mat-icon>check_circle_outline</mat-icon></ul>
-                        <input style="text-align: center;"
-                              formControlName="detalle_actividad"
-                              class="form-control"
-                              readonly>
-                      </div>
-
-                      <!-- <label>Cantidades realizadas</label> -->
-                      <div class="cantidad">
-                        <div class="item-cantidad">
-                          <ul>Cantidad en Urbano agregado <mat-icon>check_circle_outline</mat-icon></ul>
-                              <input type="number" style="text-align: center;"  formControlName="cantidad_urbano_eje" class="form-control">
-                        </div>
-
-                        <div class="item-cantidad">
-                          <ul>Cantidad de Urbano - Rural agregada<mat-icon>check_circle_outline</mat-icon></ul>
-                              <input type="number" style="text-align: center;"  formControlName="cantidad_urbrural_eje" class="form-control ">
-                        </div>
-
-                        <div class="item-cantidad">
-                        <ul>Cantidad de Rural agregada<mat-icon>check_circle_outline</mat-icon></ul>
-                            <input type="number" style="text-align: center;"  formControlName="cantidad_rural_eje" class="form-control ">
                         </div>
                       </div>
 
+
+                      <div class="cantidad-succes">
+                          <div class="item-cantidad">
+                            <ul>Urbano<mat-icon>check_circle_outline</mat-icon></ul>
+                            <input type="number" style="text-align: center;"  formControlName="cantidad_urbano_eje">
+                          </div>
+                          <div class="item-cantidad">
+                            <ul>Urbano - Rural<mat-icon>check_circle_outline</mat-icon></ul>
+                            <input type="number" style="text-align: center;"  formControlName="cantidad_urbrural_eje" >
+                          </div>
+                          <div class="item-cantidad">
+                            <ul>Rural<mat-icon>check_circle_outline</mat-icon></ul>
+                            <input type="number" style="text-align: center;"  formControlName="cantidad_rural_eje">
+                        </div>
+
+                      </div>
+
                       <div>
-                        <div class="col-md-12">
+                        <div>
                           <button (click)="quitarActividades(i)"
                                   class="actividad-button delete"
                                   matTooltip="Eliminar cantidad"
