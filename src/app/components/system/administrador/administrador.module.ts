@@ -11,6 +11,7 @@ import { AppComponent } from 'src/app/app.component';
 import { DynamicModule } from 'ng-dynamic-component';
 import { DataTablesModule } from 'angular-datatables';
 import { DialogsService } from '../../shared/dialogs.service';
+import { ReporteEmpleadosComponent } from './reporte-empleados/reporte-empleados.component';
 // import { GeneralServide } from 'src/app/service/global/general.service';
 
 
@@ -31,6 +32,7 @@ import { DialogsService } from '../../shared/dialogs.service';
   declarations: [
     ReporteActividadesComponent,
     ReporteValorizacionComponent,
+    ReporteEmpleadosComponent,
   ],
   providers: [
     DialogsService,

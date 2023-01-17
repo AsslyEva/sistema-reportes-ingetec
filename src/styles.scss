@@ -144,9 +144,11 @@ app-menu-item{
 /*Estilos para datatable*/
 .content-tabla{
   padding: 1rem;
-  // border: 1px solid #00000026;
-  // box-shadow: 0 1px 3px #00000040;
-  // position: relative;
+  border-radius: 2px;
+
+  border: 1px solid #00000026;
+  box-shadow: 0 1px 3px #00000040;
+  position: relative;
 }
 
 table.dataTable thead th {
@@ -172,20 +174,22 @@ tbody, td, tfoot, th, thead, tr {
 }
 .table-dark-ingetec{
   width: 100%;
-  border-radius: 2rem;
+  // border-radius: 2rem;
   thead{
       background-color: $ingetec-dark;
       color: $ingetec-white;
-      font-size: 0.54rem;
+      font-size: 12px;
       font-family: 'Montserrat';
-      padding: 1rem;
+      // border-radius: 4rem 4rem 0 0;
+
+      // padding: 0.2rem;
       th{
-        padding: 1.5rem !important;
+        padding: 0.9rem !important;
       }
   }
   tbody{
       font-family: 'AvenirLTStd-Medium';
-      font-size: 1.1rem;
+      font-size: 11px;
       color: $ingetec-gray-dark;
   }
 }
@@ -194,6 +198,108 @@ tbody, td, tfoot, th, thead, tr {
   padding: 4px !important;
   background-color: transparent !important;
 }
+
+
+// .options{
+//     display: flex;
+//     gap: 1rem 1rem;
+// }
+
+// .menu-button{
+//     // display: flex;
+//     width: 80%;
+//     mat-icon{
+//         width: 100%;
+//     }
+// }
+.button-option{
+    display: flex;
+    justify-content: center;
+}
+
+.descargar-all{
+    background: #3cd419;
+    // width: 50%;
+    color: white;
+    font-family: "Montserrat";
+    justify-content: center;
+    border-color: transparent;
+    display: flex;
+    border-radius: 2rem;    
+    padding: 0.5rem 2rem;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 1.5em !important;
+}
+.row > * {
+    padding-left: 0 1rem 0 1rem !important; 
+}
+
+.form-filtro{
+    border-radius: 2rem;
+    border-style: dotted;
+    border-width: 2px;
+    border-color: $ingetec-aprobe;
+    // width: 80%;
+    // height: 10%;
+    // padding: 1rem;
+    margin: 1.5rem;
+    text-align: center;
+}
+
+.text-filtro{
+    font-size: 11px;
+    color: $ingetec-aprobe;
+    font-weight: bold;
+    font-family: 'Montserrat';
+}
+
+.items-busqueda{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    button{
+        // width: 70%;
+        // background-color: $ingetec-aprobe;
+        padding: 1em 3rem;
+        border-radius: 1rem;
+        border: none;
+        // color: white;
+        display: flex;
+        /* flex-direction: row; */
+        /* flex-wrap: nowrap; */
+        /* align-content: center; */
+        /* justify-content: center; */
+        align-items: center;
+    }
+}
+mat-form-field{
+    color: $ingetec-green;
+    font-size: 2rem;
+    // background: #ffff;
+
+} 
+
+mat-label{
+    font-size: 1.4rem;
+} 
+
+mat-datepicker-toggle{
+    color: $ingetec-aprobe;
+}
+mat-datepicker{
+    font-size: 2rem;
+}
+
+.view{
+    border-radius: 5rem;
+}
+
 
 
 /*Estilos para boton observar del dialog*/
@@ -320,9 +426,9 @@ mat-sidenav-container {
   height: 92.8vh !important;
 }
 
-.mat-drawer-backdrop.mat-drawer-shown {
-  background-color: transparent !important;
-}
+// .mat-drawer-backdrop.mat-drawer-shown {
+//   background-color: transparent !important;
+// }
 // .mat-drawer-container {
 //   background-color: #dc2929f3 !important;
 // }
