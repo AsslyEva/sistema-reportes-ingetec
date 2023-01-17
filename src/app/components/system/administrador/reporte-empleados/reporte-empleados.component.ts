@@ -97,7 +97,7 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
       this.actosFilter = this.actos;
     })
 
-    this.participanteService.getIntegrantesByEje('1')
+    this.participanteService.getIntegrantesBySede('1')
     .subscribe((resp: any) => {
       this.participantes = resp;
     })

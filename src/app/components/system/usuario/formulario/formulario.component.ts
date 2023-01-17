@@ -225,7 +225,9 @@ export class FormularioComponent implements OnInit {
       codigo_sede: this.selectedSede,
       lider_eje: this.selectedLider,
       integrantes: [ this.arrayIntegrantes ]
+
     })
+
   }
 
 
@@ -240,6 +242,7 @@ export class FormularioComponent implements OnInit {
       && this.urbano_rural.value ) {
       this.actividades().push(this.nuevaActividad());
       console.log(this.actividades().value)
+      console.log('integrantes', this.arrayIntegrantes)
       //limpiar controls
       //this.fecha_act.reset();
       this.segmento.reset();
