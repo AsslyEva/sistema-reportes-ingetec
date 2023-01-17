@@ -22,8 +22,8 @@
                           placeholder="Ingresa registra"
                           formControlName="actividad"
                           [(ngModel)]="selectedParticipante">
-                <mat-option *ngFor="let participante of participantes" [value]="participante.codigo_seg" >
-                  {{participante.descripcion_seg}}
+                <mat-option *ngFor="let participante of participantes" [value]="participante.codigo_integrante" >
+                  {{participante.nombres_integrante + ' ' +participante.apellidos_integrante}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
