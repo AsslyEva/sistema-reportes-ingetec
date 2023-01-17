@@ -1,5 +1,5 @@
 export const environment = {
-  urlEndPoint: "https://sistema-reportes-nodejs-production.up.railway.app/",
+  urlEndPoint: "http://localhost:5000/",
   systemName: 'SISTEMA DE GESTION DE ACTIVIDADES COMERCIALES',
   production: true,
   version: 'v1.0.0'

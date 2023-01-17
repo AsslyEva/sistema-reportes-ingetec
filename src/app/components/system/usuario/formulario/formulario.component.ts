@@ -222,6 +222,7 @@ export class FormularioComponent implements OnInit {
       cantidad_rural_eje: this.rural.value,
       cantidad_urbano_eje: this.urbano.value,
       cantidad_urbrural_eje: this.urbano_rural.value,
+      codigo_sede: this.selectedSede,
       lider_eje: this.selectedLider,
       integrantes: [ this.arrayIntegrantes ]
     })
@@ -234,8 +235,8 @@ export class FormularioComponent implements OnInit {
       this.fecha_act.value
       && this.segmento.value
       && this.actividad_especifica.value
-      && this.rural.value 
-      && this.urbano.value 
+      && this.rural.value
+      && this.urbano.value
       && this.urbano_rural.value ) {
       this.actividades().push(this.nuevaActividad());
       console.log(this.actividades().value)
@@ -270,7 +271,7 @@ export class FormularioComponent implements OnInit {
     arrayActividades.forEach((element: any)=> {
       this.cantidadesEjeService.postInsertarEje( element ).
       subscribe( (resp: any) => {
-        
+
         console.log(resp);
         Swal.fire(
           {
@@ -285,16 +286,16 @@ export class FormularioComponent implements OnInit {
         this.lider.reset();
         this.LiderFormGroup.reset();
         this.CuadrillaFormGroup.reset();
-        
-        // elimina tabla actividades 
+
+        // elimina tabla actividades
         this.actividades().removeAt(this.selectedSegmento);
         this.actividades().removeAt(this.selectedSegmento);
         this.actividades().removeAt(this.selectActividad_especifica);
 
-        // solo resetea actividaes 
-        this.actividades().reset(); 
+        // solo resetea actividaes
+        this.actividades().reset();
       },
-      
+
       (err) => {
 
         if (err.status != 500) {
