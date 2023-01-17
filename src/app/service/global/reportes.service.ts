@@ -19,4 +19,8 @@ export class ReportesService {
   getReportesAgrupados(){
     return this.http.get(`${this.url}reportes/listar/agrupado`)
   }
+
+  getReportesParticipante(){
+    return this.http.get(`${this.url}reportes/listar/participantes`)
+  }
 }

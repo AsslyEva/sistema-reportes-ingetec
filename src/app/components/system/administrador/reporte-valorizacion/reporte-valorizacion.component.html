@@ -68,11 +68,11 @@
   
             </mat-form-field> -->
   
-            <button matt-button (click)="filtrar()">BUSCAR
+            <button style="background-color: #3cd419; color: #ffff;" matt-button (click)="filtrar()">BUSCAR
               <mat-icon>search</mat-icon>
             </button>
   
-            <button style="background-color: blue;" matt-button (click)="reset()">LIMPIAR
+            <button style="background-color: blue;color: #ffff;"  matt-button (click)="reset()">LIMPIAR
               <mat-icon>cleaning_services</mat-icon>
             </button>
           </div>
@@ -126,20 +126,23 @@
           </tr>
         </tbody>
       </table>
-    </div>
-
-    <div class="button-option download text-center align-middle border-top pt-5">
-      <button
-          mat-flat-button
+      <div class="button-option download text-center align-middle border-top pt-5">
+        <button
           class="descargar-all col-12"
           matTooltip="Descargar todo"
           (click)="dwnExcel()">
           <mat-icon> download </mat-icon>
           <span class="text-button">Descargar toda la Tabla</span>
-
         </button>
+      </div>
+
     </div>
   </div>
+
+
+
+
+
 
   <ngx-spinner
       bdColor = "rgba(14,14,14,0.8)"

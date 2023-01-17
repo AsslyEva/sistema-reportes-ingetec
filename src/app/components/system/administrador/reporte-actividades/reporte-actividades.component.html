@@ -69,11 +69,11 @@
 
           </mat-form-field> -->
 
-          <button matt-button (click)="filtrar()">BUSCAR
+          <button style="background-color: #3cd419; color: #ffff;" matt-button (click)="filtrar()">BUSCAR
             <mat-icon>search</mat-icon>
           </button>
 
-          <button style="background-color: blue;" matt-button (click)="reset()">LIMPIAR
+          <button style="background-color: blue; color: #ffff;"matt-button (click)="reset()">LIMPIAR
             <mat-icon>cleaning_services</mat-icon>
           </button>
         </div>
@@ -82,8 +82,6 @@
 
 
   </form>
-
-
 
   <div class="content-tabla col-12 " *ngIf="actosFilter.length != 0">
     <table
@@ -135,7 +133,6 @@
                   <mat-icon> visibility </mat-icon>
                 </button>
               </div>
-
             </div>
           </td>
         </tr>
@@ -147,15 +144,10 @@
         matTooltip="Descargar todo"
         (click)="dwnExcel()">
         <mat-icon> download </mat-icon>
-
         <span class="text-button">Descargar toda la Tabla</span>
-
       </button>
     </div>
   </div>
-
-
-
 </div>
 
 

@@ -55,8 +55,13 @@
   </button>
 
   <button mat-button class="button-menu"   routerLink="/administrador/valorizacion" *ngIf="_rol == 2">
-    <mat-icon>personal_injury</mat-icon>
+    <mat-icon>money</mat-icon>
     <span>Reporte de Valorización</span>
+  </button>
+
+  <button mat-button class="button-menu"   routerLink="/administrador/empleados" *ngIf="_rol == 2">
+    <mat-icon>personal_injury</mat-icon>
+    <span>Reporte de Empleados</span>
   </button>
 
   <!-- <button mat-button class="button-menu"   routerLink="/administrador/evidencia">
