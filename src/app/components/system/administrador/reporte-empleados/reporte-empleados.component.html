@@ -4,30 +4,31 @@
     [title]="'REPORTE POR EMPLEADO'"
     [link]="'/administrador/inicio'"
     ></app-title-frame>
-  
-  
+
+
     <form class="row form-filtro" [formGroup]="form">
       <div class="col-12">
         <p class="text-filtro">Seleccione filtro para realizar la búsqueda</p>
       </div>
-  
+
         <div class="filtro">
           <div class="items-busqueda">
 
 
-  
+
             <mat-form-field class="form-item" appearance="outline">
               <mat-label>Participante</mat-label>
               <mat-select
                           placeholder="Ingresa registra"
                           formControlName="actividad"
-                          [(ngModel)]="selectedParticipante">
+                          [(ngModel)]="selectedParticipante"
+                          (ngModelChange)="cargarReporte(selectedParticipante)">
                 <mat-option *ngFor="let participante of participantes" [value]="participante.codigo_integrante" >
                   {{participante.nombres_integrante + ' ' +participante.apellidos_integrante}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-  
+
             <mat-form-field appearance="fill">
               <mat-label>Enter a date range</mat-label>
               <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
@@ -37,25 +38,25 @@
               <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-date-range-picker #picker></mat-date-range-picker>
-  
+
               <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
               <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
             </mat-form-field>
-  
+
             <button style="background-color: #3cd419; color: #ffff;" matt-button (click)="filtrar()">BUSCAR
               <mat-icon>search</mat-icon>
             </button>
-  
+
             <button style="background-color: blue; color: #ffff;"matt-button (click)="reset()">LIMPIAR
               <mat-icon>cleaning_services</mat-icon>
             </button>
           </div>
-  
+
         </div>
-  
-  
+
+
     </form>
-  
+
     <div class="content-tabla col-12 " *ngIf="actosFilter.length != 0">
       <table
               datatable
@@ -95,16 +96,16 @@
       </div>
     </div>
   </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
   <ngx-spinner
       bdColor = "rgba(14,14,14,0.8)"
       size = "large"
@@ -113,4 +114,3 @@
       [fullScreen] = "false">
       <p style="color: white" > Cargando, espere por favor </p>
   </ngx-spinner>
-  

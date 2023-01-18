@@ -32,7 +32,7 @@ export interface Actividad {
 })
 export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
 
- 
+
   name!: string;
 
 
@@ -91,11 +91,6 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
 
 
   ngOnInit(): void {
-    this.reporteService.getReportesByEje()
-    .subscribe((resp: any) =>{
-      this.actos = resp;
-      this.actosFilter = this.actos;
-    })
 
     this.participanteService.getIntegrantesBySede('1')
     .subscribe((resp: any) => {
@@ -128,6 +123,14 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
     this.dtTrigger.unsubscribe();
   }
 
+  cargarReporte(id: Number){
+    this.reporteService.getReportesParticipante(id)
+    .subscribe((resp: any) =>{
+      this.actos = resp;
+      this.actosFilter = this.actos;
+    })
+  }
+
   filtrar(){
     const rango = this.range.value;
     if(rango.start != null || rango.end != null || rango.start || rango.end ){
@@ -137,10 +140,11 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
         console.log("actosFilter",this.actosFilter);
         this.filtrarParticipante(this.actosFilter);
       }, 100);
-    } else {
-      this.filtrarParticipante(this.actos);
-      console.log('desde filtrar sin fecha',this.actosFilter);
     }
+    // else {
+    //   this.filtrarParticipante(this.actos);
+    //   console.log('desde filtrar sin fecha',this.actosFilter);
+    // }
   }
 
   filterDate(fromDate: any, ToDate: any, data: any){
@@ -156,7 +160,7 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
       const datosFiltrados = data;
       this.actosFilter = [];
       setTimeout(() => {
-        this.actosFilter = datosFiltrados.filter((e:any) => e.codigo_seg == this.selectedParticipante);
+        this.actosFilter = datosFiltrados.filter((e:any) => e.codigo_integrante == this.selectedParticipante);
         console.log('desdefilteParticipante',this.actosFilter);
       }, 100);
     }

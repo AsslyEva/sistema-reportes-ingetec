@@ -68,6 +68,7 @@
                 <!-- [(ngModel)]="arrayIntegrantes" -->
                 <mat-select
                             [compareWith]="equals"
+                            [(ngModel)]="arrayIntegrantes"
                             formControlName="secondCtrl"
                             multiple
                             required
@@ -94,25 +95,19 @@
                               >
                   {{integrantes.nombres_integrante + ' ' +integrantes.apellidos_integrante}}
                   </mat-option>
-                  <!-- {{arrayIntegrantes | json}} -->
                 </mat-select>
                 <br />
                 <mat-error
-                  *ngIf="CuadrillaFormGroup.controls['secondCtrl'].hasError('required')"
+                *ngIf="CuadrillaFormGroup.controls['secondCtrl'].hasError('required')"
                 >
                 Seleccione Integrantes para continuar
-                </mat-error>
-              </mat-form-field>
-              <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+              </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+            <!-- {{arrayIntegrantes | json}} -->
             </form>
             <br>
             <div class="historia">
-              <!-- <p>
-                Lider de Equipo: {{lider.value}}
-              </p>
-              <p >
-                Integrantes de equipo
-              </p> -->
               <ul>
               <mat-chip-list>
                 <mat-chip  *ngFor="let integrantes of selectedIntegrantes">
@@ -184,31 +179,31 @@
                       <div class="cantidad">
                         <div class="item-cantidad">
                           <ul>Urbano</ul>
-                          <input type="number"  
+                          <input type="number"
                           [min]="minValue"
                           [max]="maxValue"
-                          minMax  
-                          value="0"  
+                          minMax
+                          value="0"
                           [formControl]="urbano" class="form-control col-md-4" required>
                         </div>
 
                         <div class="item-cantidad">
                           <ul>Urbano-Rural</ul>
-                          <input type="number"  
+                          <input type="number"
                           [min]="minValue"
                           [max]="maxValue"
-                          minMax   
-                          value="0" 
+                          minMax
+                          value="0"
                           [formControl]="urbano_rural" class="form-control col-md-4" required>
                         </div>
 
                         <div class="item-cantidad">
                           <ul>Rural</ul>
-                          <input 
-                                type="number"  
+                          <input
+                                type="number"
                                 [min]="minValue"
                                 [max]="maxValue"
-                                minMax   
+                                minMax
                                 [formControl]="rural" class="form-control col-md-4" required>
                         </div>
                       </div >
@@ -238,7 +233,7 @@
                           </div>
                           <div>
                             <ul>Segmento<mat-icon>check_circle_outline</mat-icon></ul>
-                            <textarea style="text-align: center;" 
+                            <textarea style="text-align: center;"
                                   formControlName="detalle_segmento"
                                   readonly>
                             </textarea>
@@ -304,7 +299,7 @@
                     type="button"
                     color="primary"
                     (click)="onSubmit()"
-                    
+
                     >
                     Enviar
                     <mat-icon class="icon">send</mat-icon>&nbsp;
