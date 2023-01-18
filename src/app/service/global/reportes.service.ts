@@ -20,7 +20,7 @@ export class ReportesService {
     return this.http.get(`${this.url}reportes/listar/agrupado`)
   }
 
-  getReportesParticipante(){
-    return this.http.get(`${this.url}reportes/listar/participantes`)
+  getReportesParticipante(id: Number){
+    return this.http.get(`${this.url}reportes/listar/participantes/${id}`)
   }
 }
