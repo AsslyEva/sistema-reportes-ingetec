@@ -7,6 +7,7 @@ import { TitleFrameComponent } from './title-frame/title-frame.component';
 import { TituloDialogComponent } from './titulo-dialog/titulo-dialog.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { DataTablesModule } from 'angular-datatables';
+import { ParticipanteNameComponent } from './participante-name/participante-name.component';
 
 @NgModule({
   imports: [
@@ -14,19 +15,21 @@ import { DataTablesModule } from 'angular-datatables';
     AngularMaterialModule,
     NgxSpinnerModule,
     DataTablesModule,
-
   ],
   declarations: [
     DetalleCuadrillaComponent,
     TitleFrameComponent,
     TituloDialogComponent,
+    ParticipanteNameComponent,
+
 ],
   exports: [
     DetalleCuadrillaComponent,
     AngularMaterialModule,
     TitleFrameComponent,
     TituloDialogComponent,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ParticipanteNameComponent
 ],
   entryComponents: [
     DetalleCuadrillaComponent

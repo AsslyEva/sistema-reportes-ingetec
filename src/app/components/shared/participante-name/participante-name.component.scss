@@ -1,0 +1,63 @@
+@use 'src/assets/sass/general.scss' as g;
+
+  
+  .nombre-title{
+    display: flex;
+    background: red;
+
+    justify-content: center;
+    align-items: center;
+    margin: 0rem 2rem;
+    z-index: 9;
+    h1{
+      border-radius: 2px;
+      position: relative;
+      font-weight: 800;
+      font-family: 'Montserrat';
+      font-style: normal;
+      line-height: 1.8rem;
+      color: #ffff;
+      font-size: 2rem;
+      text-align: center;
+      line-height: 3rem;
+    }
+  }
+
+
+
+
+
+
+
+@media (max-width:1100px){
+  .logo-sunarp{
+    display: none;
+  }
+
+
+}
+
+@media (max-width:730px){
+
+  .button-title{
+    .circle-gira2 {
+      display: none;
+    }
+  
+    .circle-gira {
+      display: none;
+    }
+
+    .title{
+      display: none;
+    }
+  }
+
+  
+}
+
+
+
+
+
+

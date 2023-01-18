@@ -5,7 +5,11 @@
     [link]="'/administrador/inicio'"
     ></app-title-frame>
   
-  
+    <app-participante-name 
+    *ngFor="let item of cuadrilla"
+    [title]="item.nameParticipante"
+    >
+    </app-participante-name>
     <form class="row form-filtro" [formGroup]="form">
       <div class="col-12">
         <p class="text-filtro">Seleccione filtro para realizar la búsqueda</p>
@@ -55,8 +59,11 @@
   
   
     </form>
-  
+
+
     <div class="content-tabla col-12 " *ngIf="actosFilter.length != 0">
+
+
       <table
               datatable
               [dtOptions]="dtOptions"

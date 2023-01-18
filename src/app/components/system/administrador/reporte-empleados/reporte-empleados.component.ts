@@ -32,7 +32,12 @@ export interface Actividad {
 })
 export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
 
- 
+  cuadrilla: any = [
+    {
+      nameParticipante: 'Bryan Villegas Cuba',
+    },
+  ];
+
   name!: string;
 
 
