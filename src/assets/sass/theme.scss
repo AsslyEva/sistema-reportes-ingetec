@@ -1,595 +1,595 @@
-/**************************************/
-/*   THEME FOR 'MARCACIONES' PROJECT  */
-/**************************************/
-
-/*
-    Description:
-    -----------
-    Here you will find all the styles of general components
-    that can be used in the whole application
-*/
-
-/*Importing general variables*/
-
-@import "../sass/general.scss";
-
-/***************/
-/*   CLASSES   */
-/***************/
-
-/*Forms*/
-.form-group-ingetec {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-
-  /*Labels*/
-
-  label {
-    margin-bottom: 0 !important;
-  }
-
-  // .label-ingetec {
-  //   width: 100%;
-  //   height: 100%;
-  //   color: #ffff;
-  //   font-family: $ff-gotham-medium;
-  //   font-size: $font-size-normal;
-  // }
-
-}
-
-/*Buttons*/
-
-.btn-ingetec {
-  width: 100%;
-  border-radius: 12px;
-  border: none;
-  outline: none;
-  padding: 6px 18px;
-  transition: all 300ms ease;
-
-  &:hover {
-    opacity: 0.8;
-  }
-}
-
-.btn-ingetec-cyan {
-  @extend .btn-ingetec;
-  background-color: $ingetec-cyan;
-  color: $ingetec-white;
-}
-
-.btn-ingetec-red {
-  @extend .btn-ingetec;
-  background-color: $ingetec-red;
-  color: $ingetec-white;
-}
-
-.btn-ingetec-green {
-  @extend .btn-ingetec;
-  background-color: $ingetec-green;
-  color: $ingetec-white;
-}
-
-.btn-ingetec-yellow {
-  @extend .btn-ingetec;
-  background-color: $ingetec-yellow;
-  color: $ingetec-white;
-}
-
-.btn-ingetec-gray-dark {
-  @extend .btn-ingetec;
-  background-color: $ingetec-gray-dark;
-  color: $ingetec-white;
-}
-
-.btn-outline-ingetec-white {
-  @extend .btn-ingetec;
-  background-color: transparent;
-  border: 2px solid $ingetec-white  !important;
-  font-size: $font-size-small;
-  border-radius: 15px;
-  color: $ingetec-white;
-  transition: 300ms all ease;
-
-  &:hover {
-    transform: scale(1.05);
-    opacity: 1 !important;
-  }
-}
-
-.icon-ingetec {
-  margin-right: 6px;
-}
-
-/*Header sizes*/
-
-.h1-ingetec {
-  font-family: $ff-gotham-bold;
-  font-size: $font-size-h1;
-}
-
-
-/*General background classses*/
-
-.bg-ingetec-green {
-  background-color: $ingetec-green;
-}
-
-.bg-ingetec-red {
-  background-color: $ingetec-red;
-}
-
-.bg-ingetec-cyan {
-  background-color: $ingetec-cyan;
-}
-
-.bg-ingetec-yellow {
-  background-color: $ingetec-yellow;
-}
-
-
-/*General text color classes*/
-
-.text-ingetec-green {
-  color: $ingetec-green;
-}
-.text-ingetec-red {
-  color: $ingetec-red;
-}
-.text-ingetec-cyan {
-  color: $ingetec-cyan;
-}
-.text-ingetec-yellow {
-  color: $ingetec-yellow;
-}
-.text-ingetec-gray-dark {
-  color: $ingetec-gray-dark;
-}
-.text-ingetec-white {
-  color: $ingetec-white;
-}
-
-/*Outline buttons*/
-
-.btn-outline-ingetec-green {
-  @extend .btn-ingetec;
-  background-color: $ingetec-white;
-  border: 2px solid $ingetec-green;
-  color: $ingetec-green;
-
-  &:hover {
-    background-color: $ingetec-green;
-    color: $ingetec-white;
-    opacity: 1 !important;
-
-  }
-}
-
-
-// /*btn small*/
-
-.btn-sm-ingetec {
-  border-radius: 8px;
-  border: none;
-  font-size: $font-size-small;
-  font-family: $ff-gotham-medium;
-  outline: none;
-  padding: 6px 18px;
-  transform: scale(0.9);
-  transition: all 300ms ease;
-  white-space: nowrap;
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  &.keep {
-    opacity: 1;
-
-    &:hover {
-      transform: scale(0.95);
-    }
-  }
-
-  i {
-    transform: scale(0.9);
-  }
-}
-
-.btn-sm-ingetec-yellow {
-  @extend .btn-sm-ingetec;
-  background-color: $ingetec-yellow;
-  color: $ingetec-white;
-}
-
-.btn-sm-ingetec-view-later {
-  @extend .btn-sm-ingetec;
-  background-color: #919191;
-  color: $ingetec-white;
-}
-
-.btn-sm-ingetec-gray-dark {
-  @extend .btn-sm-ingetec;
-  background-color: $ingetec-gray-dark;
-  color: $ingetec-white;
-}
-
-.btn-sm-ingetec-cyan {
-  @extend .btn-sm-ingetec;
-  background-color: $ingetec-cyan;
-  color: $ingetec-white;
-}
-
-
-// /*Label style*/
-
-label {
-  margin-bottom: 0 !important;
-}
-
-.label-ingetec {
-  font-family: $ff-gotham-medium;
-  font-size: $font-size-normal;
-}
-
-textarea {
-  &.form-control-ingetec {
-    resize: none;
-  }
-}
-
-// /*Badge style*/
-
-.badge-ingetec {
-  border-radius: 8px;
-  font-family: $ff-gotham-medium;
-  font-size: $font-size-extra-small;
-  padding: 3px 6px;
-  white-space: nowrap;
-}
-
-.badge-ingetec-green {
-  @extend .badge-ingetec;
-  background-color: $ingetec-green;
-  color: $ingetec-white;
-}
-
-.badge-ingetec-red {
-  @extend .badge-ingetec;
-  background-color: $ingetec-red;
-  color: $ingetec-white;
-}
-
-.badge-ingetec-cyan {
-  @extend .badge-ingetec;
-  background-color: $ingetec-cyan;
-  color: $ingetec-white;
-}
-
-.badge-ingetec-yellow {
-  @extend .badge-ingetec;
-  background-color: $ingetec-yellow;
-  color: $ingetec-white;
-}
-
-.badge-ingetec-gray-dark {
-  @extend .badge-ingetec;
-  background-color: $ingetec-gray-dark;
-  color: $ingetec-white;
-}
-
-.badge-ingetec-gray-light {
-  @extend .badge-ingetec;
-  background-color: #A9A9A9;
-  color: $ingetec-white;
-}
-
-
-.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-  top: 1.5em;
-}
-
-.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-  transform: translateY(-1.4em) scale(1) !important;
-  -ms-transform: translateY(-1.4em) scale(1) !important;
-  font-size: 12px;
-}
-
-
-// /*TABLES*/
-
-.thead-ingetec {
-  background-color: #EDEDED;
-  color: $ingetec-gray-dark;
-
-  th {
-    font-family: $ff-gotham-bold;
-    height: 36px;
-    font-size: 1.2em;
-    vertical-align: middle !important;
-  }
-}
-
-table.dataTable.table-sm .sorting:before,
-table.dataTable.table-sm .sorting_asc:before,
-table.dataTable.table-sm .sorting_desc:before {
-  right: 16px;
-  top: 13px;
-  content: "\f30c";
-  font-family: 'Font Awesome 5 Pro';
-}
-
-table.dataTable.table-sm .sorting:after,
-table.dataTable.table-sm .sorting_asc:after,
-table.dataTable.table-sm .sorting_desc:after {
-  top: 13px;
-  content: "\f309";
-  font-family: 'Font Awesome 5 Pro';
-}
-
-.tbody-white {
-  border: 1px solid #ddd;
-  color: $ingetec-gray-dark;
-  font-family: $ff-avenirLTStd-book;
-
-  .dataTables_empty {
-    border: 1px solid transparent;
-  }
-}
-
-.row-focus tbody tr:hover {
-  background: #f8f9b2;
-  color: $ingetec-gray-dark;
-  cursor: pointer;
-  transition: all 300ms ease;
-}
-
-table.dataTable {
-  border-collapse: collapse !important;
-}
-
-.top {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  width: 100%;
-
-  .dataTables_info {
-    color: $ingetec-gray-dark;
-    font-family: $ff-gotham-medium;
-    font-size: 0.7rem;
-    text-align: left;
-    width: calc(100% - 255px);
-  }
-
-  .dataTables_filter {
-    display: flex;
-    width: 100%;
-    position: relative;
-    z-index: 20;
-
-    label {
-      font-family: $ff-gotham-medium;
-      font-size: 1rem;
-      // width: 100%;
-      .form-control {
-        border: none;
-        border-bottom: 1px solid $ingetec-gray-dark;
-        border-radius: 0;
-        font-family: $ff-avenirLTStd-book;
-        height: 36px;
-        transition: 300ms all ease;
-        width: 150px;
-
-        &.form-control-sm {
-          padding: 0.15rem 0.5rem !important;
-        }
-      }
-
-      .form-control:focus {
-        border-bottom: 2px solid $ingetec-cyan;
-        box-shadow: none;
-      }
-    }
-  }
-}
-
-.bottom {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 15px;
-
-  .dataTables_length {
-    label {
-      // font-family: $ff-gotham-medium;
-      font-size: 10px;
-      color: $ingetec-gray-dark;
-
-      select {
-        border: none;
-        border-bottom: 1px solid $ingetec-gray-dark;
-        font-family: $ff-avenirLTStd-book;
-        box-shadow: none;
-        border-radius: 0;
-      }
-    }
-  }
-
-  .dataTables_paginate.paging_simple_numbers {
-    .pagination {
-      .paginate_button.page-item {
-        a {
-          font-family: $ff-gotham-medium  !important;
-          font-size: 13px !important;
-          box-shadow: none;
-          color: $ingetec-gray-dark  !important;
-        }
-
-        &.active {
-          a {
-            color: $ingetec-gray-dark  !important;
-            background-color: #EDEDED;
-            border-color: #EDEDED;
-          }
-        }
-
-        &.previous,
-        &.next {
-          .page-link {
-            color: $ingetec-gray-dark  !important;
-          }
-
-          &.disabled {
-            a {
-              color: #a7a7a7 !important;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.dataTables_empty {
-  font-family: $ff-gotham-medium  !important;
-  font-size: $font-size-small  !important;
-}
-
-table.dataTable thead,
-table.dataTable tbody {
-  font-size: 20px;
-}
-
-.dataTables_processing {
-  position: inherit !important;
-  top: 0 !important;
-  left: 0 !important;
-  margin-left: 0 !important;
-  margin-top: 0 !important;
-  width: 100% !important;
-  border: 0px !important;
-  background-color: transparent !important;
-}
-
-table.dataTable table {
-  transition: all 300ms ease;
-}
-
-/*checkbox custom*/
-
-.switch-ingetec {
-  input[type="checkbox"] {
-    --webkit-appearance: none;
-    background: #c6c6c6;
-    border-radius: 15px;
-    border-radius: 30px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    height: 5px;
-    outline: none;
-    position: relative;
-    transition: 0.5s;
-    width: 100%;
-
-    &::before {
-      background: #A5A5A5;
-      border-radius: 100%;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      content: "";
-      height: 12px;
-      left: 0;
-      position: absolute;
-      top: -4px;
-      transform: scale(1.1);
-      transition: 0.5s;
-      width: 12px;
-    }
-  }
-
-  input:checked[type="checkbox"] {
-    background: $ingetec-cyan;
-
-    &::before {
-      background: $ingetec-cyan;
-      left: calc(100% - 12px);
-    }
-  }
-}
-
-.badge-counter {
-  display: inline-flex !important;
-  width: 25px;
-  height: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100%;
-  justify-self: center;
-  font-family: $ff-gotham-medium;
-  font-size: $font-size-extra-small;
-  white-space: nowrap;
-  background-color: $ingetec-red;
-  color: $ingetec-white;
-}
-
-.badge-answer {
-  display: inline-flex !important;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  width: 35px;
-  padding: 1px 0px;
-  border-radius: 6px;
-  font-family: $ff-gotham-medium;
-  font-size: $font-size-extra-small;
-  white-space: nowrap;
-}
-
-.badge-ingetec-yes {
-  @extend .badge-answer;
-  background-color: $ingetec-green;
-  color: $ingetec-white;
-}
-
-.badge-ingetec-no {
-  @extend .badge-answer;
-  background-color: #A9A9A9;
-  color: $ingetec-white;
-}
-
-.badge-ingetec-no-applied {
-  @extend .badge-ingetec-no;
-  width: 75px !important;
-}
-
-/* Input */
-
-.mat-form-field-appearance-legacy .mat-form-field-label {
-  color: $ingetec-gray-dark;
-  font-family: $ff-gotham-bold;
-}
-
-.mat-form-field-label.mat-empty.mat-form-field-empty.ng-star-inserted {
-  .ng-star-inserted {
-    font-size: 14px;
-  }
-}
-
-.mat-input-element.mat-form-field-autofill-control.cdk-text-field-autofill-monitored {
-  font-size: 14px;
-  margin: 0.5rem 0 0 0 ;
-}
-
-
-.mat-input-element:disabled, .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
-  color: rgb(0, 0, 0) !important;
-}
+// /**************************************/
+// /*   THEME FOR 'MARCACIONES' PROJECT  */
+// /**************************************/
+
+// /*
+//     Description:
+//     -----------
+//     Here you will find all the styles of general components
+//     that can be used in the whole application
+// */
+
+// /*Importing general variables*/
+
+// @import "../sass/general.scss";
+
+// /***************/
+// /*   CLASSES   */
+// /***************/
+
+// /*Forms*/
+// .form-group-ingetec {
+//   width: 100%;
+//   display: flex;
+//   flex-wrap: wrap;
+
+//   /*Labels*/
+
+//   label {
+//     margin-bottom: 0 !important;
+//   }
+
+//   // .label-ingetec {
+//   //   width: 100%;
+//   //   height: 100%;
+//   //   color: #ffff;
+//   //   font-family: $ff-gotham-medium;
+//   //   font-size: $font-size-normal;
+//   // }
+
+// }
+
+// /*Buttons*/
+
+// .btn-ingetec {
+//   width: 100%;
+//   border-radius: 12px;
+//   border: none;
+//   outline: none;
+//   padding: 6px 18px;
+//   transition: all 300ms ease;
+
+//   &:hover {
+//     opacity: 0.8;
+//   }
+// }
+
+// .btn-ingetec-cyan {
+//   @extend .btn-ingetec;
+//   background-color: $ingetec-cyan;
+//   color: $ingetec-white;
+// }
+
+// .btn-ingetec-red {
+//   @extend .btn-ingetec;
+//   background-color: $ingetec-red;
+//   color: $ingetec-white;
+// }
+
+// .btn-ingetec-green {
+//   @extend .btn-ingetec;
+//   background-color: $ingetec-green;
+//   color: $ingetec-white;
+// }
+
+// .btn-ingetec-yellow {
+//   @extend .btn-ingetec;
+//   background-color: $ingetec-yellow;
+//   color: $ingetec-white;
+// }
+
+// .btn-ingetec-gray-dark {
+//   @extend .btn-ingetec;
+//   background-color: $ingetec-gray-dark;
+//   color: $ingetec-white;
+// }
+
+// .btn-outline-ingetec-white {
+//   @extend .btn-ingetec;
+//   background-color: transparent;
+//   border: 2px solid $ingetec-white  !important;
+//   font-size: $font-size-small;
+//   border-radius: 15px;
+//   color: $ingetec-white;
+//   transition: 300ms all ease;
+
+//   &:hover {
+//     transform: scale(1.05);
+//     opacity: 1 !important;
+//   }
+// }
+
+// .icon-ingetec {
+//   margin-right: 6px;
+// }
+
+// /*Header sizes*/
+
+// .h1-ingetec {
+//   font-family: $ff-gotham-bold;
+//   font-size: $font-size-h1;
+// }
+
+
+// /*General background classses*/
+
+// .bg-ingetec-green {
+//   background-color: $ingetec-green;
+// }
+
+// .bg-ingetec-red {
+//   background-color: $ingetec-red;
+// }
+
+// .bg-ingetec-cyan {
+//   background-color: $ingetec-cyan;
+// }
+
+// .bg-ingetec-yellow {
+//   background-color: $ingetec-yellow;
+// }
+
+
+// /*General text color classes*/
+
+// .text-ingetec-green {
+//   color: $ingetec-green;
+// }
+// .text-ingetec-red {
+//   color: $ingetec-red;
+// }
+// .text-ingetec-cyan {
+//   color: $ingetec-cyan;
+// }
+// .text-ingetec-yellow {
+//   color: $ingetec-yellow;
+// }
+// .text-ingetec-gray-dark {
+//   color: $ingetec-gray-dark;
+// }
+// .text-ingetec-white {
+//   color: $ingetec-white;
+// }
+
+// /*Outline buttons*/
+
+// .btn-outline-ingetec-green {
+//   @extend .btn-ingetec;
+//   background-color: $ingetec-white;
+//   border: 2px solid $ingetec-green;
+//   color: $ingetec-green;
+
+//   &:hover {
+//     background-color: $ingetec-green;
+//     color: $ingetec-white;
+//     opacity: 1 !important;
+
+//   }
+// }
+
+
+// // /*btn small*/
+
+// .btn-sm-ingetec {
+//   border-radius: 8px;
+//   border: none;
+//   font-size: $font-size-small;
+//   font-family: $ff-gotham-medium;
+//   outline: none;
+//   padding: 6px 18px;
+//   transform: scale(0.9);
+//   transition: all 300ms ease;
+//   white-space: nowrap;
+
+//   &:hover {
+//     opacity: 0.8;
+//   }
+
+//   &.keep {
+//     opacity: 1;
+
+//     &:hover {
+//       transform: scale(0.95);
+//     }
+//   }
+
+//   i {
+//     transform: scale(0.9);
+//   }
+// }
+
+// .btn-sm-ingetec-yellow {
+//   @extend .btn-sm-ingetec;
+//   background-color: $ingetec-yellow;
+//   color: $ingetec-white;
+// }
+
+// .btn-sm-ingetec-view-later {
+//   @extend .btn-sm-ingetec;
+//   background-color: #919191;
+//   color: $ingetec-white;
+// }
+
+// .btn-sm-ingetec-gray-dark {
+//   @extend .btn-sm-ingetec;
+//   background-color: $ingetec-gray-dark;
+//   color: $ingetec-white;
+// }
+
+// .btn-sm-ingetec-cyan {
+//   @extend .btn-sm-ingetec;
+//   background-color: $ingetec-cyan;
+//   color: $ingetec-white;
+// }
+
+
+// // /*Label style*/
+
+// label {
+//   margin-bottom: 0 !important;
+// }
+
+// .label-ingetec {
+//   font-family: $ff-gotham-medium;
+//   font-size: $font-size-normal;
+// }
+
+// textarea {
+//   &.form-control-ingetec {
+//     resize: none;
+//   }
+// }
+
+// // /*Badge style*/
+
+// .badge-ingetec {
+//   border-radius: 8px;
+//   font-family: $ff-gotham-medium;
+//   font-size: $font-size-extra-small;
+//   padding: 3px 6px;
+//   white-space: nowrap;
+// }
+
+// .badge-ingetec-green {
+//   @extend .badge-ingetec;
+//   background-color: $ingetec-green;
+//   color: $ingetec-white;
+// }
+
+// .badge-ingetec-red {
+//   @extend .badge-ingetec;
+//   background-color: $ingetec-red;
+//   color: $ingetec-white;
+// }
+
+// .badge-ingetec-cyan {
+//   @extend .badge-ingetec;
+//   background-color: $ingetec-cyan;
+//   color: $ingetec-white;
+// }
+
+// .badge-ingetec-yellow {
+//   @extend .badge-ingetec;
+//   background-color: $ingetec-yellow;
+//   color: $ingetec-white;
+// }
+
+// .badge-ingetec-gray-dark {
+//   @extend .badge-ingetec;
+//   background-color: $ingetec-gray-dark;
+//   color: $ingetec-white;
+// }
+
+// .badge-ingetec-gray-light {
+//   @extend .badge-ingetec;
+//   background-color: #A9A9A9;
+//   color: $ingetec-white;
+// }
+
+
+// .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+//   top: 1.5em;
+// }
+
+// .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+//   transform: translateY(-1.4em) scale(1) !important;
+//   -ms-transform: translateY(-1.4em) scale(1) !important;
+//   font-size: 12px;
+// }
+
+
+// // /*TABLES*/
+
+// .thead-ingetec {
+//   background-color: #EDEDED;
+//   color: $ingetec-gray-dark;
+
+//   th {
+//     font-family: $ff-gotham-bold;
+//     height: 36px;
+//     font-size: 1.2em;
+//     vertical-align: middle !important;
+//   }
+// }
+
+// table.dataTable.table-sm .sorting:before,
+// table.dataTable.table-sm .sorting_asc:before,
+// table.dataTable.table-sm .sorting_desc:before {
+//   right: 16px;
+//   top: 13px;
+//   content: "\f30c";
+//   font-family: 'Font Awesome 5 Pro';
+// }
+
+// table.dataTable.table-sm .sorting:after,
+// table.dataTable.table-sm .sorting_asc:after,
+// table.dataTable.table-sm .sorting_desc:after {
+//   top: 13px;
+//   content: "\f309";
+//   font-family: 'Font Awesome 5 Pro';
+// }
+
+// .tbody-white {
+//   border: 1px solid #ddd;
+//   color: $ingetec-gray-dark;
+//   font-family: $ff-avenirLTStd-book;
+
+//   .dataTables_empty {
+//     border: 1px solid transparent;
+//   }
+// }
+
+// .row-focus tbody tr:hover {
+//   background: #f8f9b2;
+//   color: $ingetec-gray-dark;
+//   cursor: pointer;
+//   transition: all 300ms ease;
+// }
+
+// table.dataTable {
+//   border-collapse: collapse !important;
+// }
+
+// .top {
+//   align-items: center;
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: space-between;
+//   margin-bottom: 15px;
+//   width: 100%;
+
+//   .dataTables_info {
+//     color: $ingetec-gray-dark;
+//     font-family: $ff-gotham-medium;
+//     font-size: 0.7rem;
+//     text-align: left;
+//     width: calc(100% - 255px);
+//   }
+
+//   .dataTables_filter {
+//     display: flex;
+//     width: 100%;
+//     position: relative;
+//     z-index: 20;
+
+//     label {
+//       font-family: $ff-gotham-medium;
+//       font-size: 1rem;
+//       // width: 100%;
+//       .form-control {
+//         border: none;
+//         border-bottom: 1px solid $ingetec-gray-dark;
+//         border-radius: 0;
+//         font-family: $ff-avenirLTStd-book;
+//         height: 36px;
+//         transition: 300ms all ease;
+//         width: 150px;
+
+//         &.form-control-sm {
+//           padding: 0.15rem 0.5rem !important;
+//         }
+//       }
+
+//       .form-control:focus {
+//         border-bottom: 2px solid $ingetec-cyan;
+//         box-shadow: none;
+//       }
+//     }
+//   }
+// }
+
+// .bottom {
+//   display: flex;
+//   flex-wrap: wrap;
+//   width: 100%;
+//   align-items: center;
+//   justify-content: space-between;
+//   margin-top: 15px;
+
+//   .dataTables_length {
+//     label {
+//       // font-family: $ff-gotham-medium;
+//       font-size: 10px;
+//       color: $ingetec-gray-dark;
+
+//       select {
+//         border: none;
+//         border-bottom: 1px solid $ingetec-gray-dark;
+//         font-family: $ff-avenirLTStd-book;
+//         box-shadow: none;
+//         border-radius: 0;
+//       }
+//     }
+//   }
+
+//   .dataTables_paginate.paging_simple_numbers {
+//     .pagination {
+//       .paginate_button.page-item {
+//         a {
+//           font-family: $ff-gotham-medium  !important;
+//           font-size: 13px !important;
+//           box-shadow: none;
+//           color: $ingetec-gray-dark  !important;
+//         }
+
+//         &.active {
+//           a {
+//             color: $ingetec-gray-dark  !important;
+//             background-color: #EDEDED;
+//             border-color: #EDEDED;
+//           }
+//         }
+
+//         &.previous,
+//         &.next {
+//           .page-link {
+//             color: $ingetec-gray-dark  !important;
+//           }
+
+//           &.disabled {
+//             a {
+//               color: #a7a7a7 !important;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// .dataTables_empty {
+//   font-family: $ff-gotham-medium  !important;
+//   font-size: $font-size-small  !important;
+// }
+
+// table.dataTable thead,
+// table.dataTable tbody {
+//   font-size: 20px;
+// }
+
+// .dataTables_processing {
+//   position: inherit !important;
+//   top: 0 !important;
+//   left: 0 !important;
+//   margin-left: 0 !important;
+//   margin-top: 0 !important;
+//   width: 100% !important;
+//   border: 0px !important;
+//   background-color: transparent !important;
+// }
+
+// table.dataTable table {
+//   transition: all 300ms ease;
+// }
+
+// /*checkbox custom*/
+
+// .switch-ingetec {
+//   input[type="checkbox"] {
+//     --webkit-appearance: none;
+//     background: #c6c6c6;
+//     border-radius: 15px;
+//     border-radius: 30px;
+//     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+//     cursor: pointer;
+//     height: 5px;
+//     outline: none;
+//     position: relative;
+//     transition: 0.5s;
+//     width: 100%;
+
+//     &::before {
+//       background: #A5A5A5;
+//       border-radius: 100%;
+//       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+//       content: "";
+//       height: 12px;
+//       left: 0;
+//       position: absolute;
+//       top: -4px;
+//       transform: scale(1.1);
+//       transition: 0.5s;
+//       width: 12px;
+//     }
+//   }
+
+//   input:checked[type="checkbox"] {
+//     background: $ingetec-cyan;
+
+//     &::before {
+//       background: $ingetec-cyan;
+//       left: calc(100% - 12px);
+//     }
+//   }
+// }
+
+// .badge-counter {
+//   display: inline-flex !important;
+//   width: 25px;
+//   height: 25px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   border-radius: 100%;
+//   justify-self: center;
+//   font-family: $ff-gotham-medium;
+//   font-size: $font-size-extra-small;
+//   white-space: nowrap;
+//   background-color: $ingetec-red;
+//   color: $ingetec-white;
+// }
+
+// .badge-answer {
+//   display: inline-flex !important;
+//   justify-content: center;
+//   display: flex;
+//   align-items: center;
+//   text-align: center;
+//   width: 35px;
+//   padding: 1px 0px;
+//   border-radius: 6px;
+//   font-family: $ff-gotham-medium;
+//   font-size: $font-size-extra-small;
+//   white-space: nowrap;
+// }
+
+// .badge-ingetec-yes {
+//   @extend .badge-answer;
+//   background-color: $ingetec-green;
+//   color: $ingetec-white;
+// }
+
+// .badge-ingetec-no {
+//   @extend .badge-answer;
+//   background-color: #A9A9A9;
+//   color: $ingetec-white;
+// }
+
+// .badge-ingetec-no-applied {
+//   @extend .badge-ingetec-no;
+//   width: 75px !important;
+// }
+
+// /* Input */
+
+// .mat-form-field-appearance-legacy .mat-form-field-label {
+//   color: $ingetec-gray-dark;
+//   font-family: $ff-gotham-bold;
+// }
+
+// .mat-form-field-label.mat-empty.mat-form-field-empty.ng-star-inserted {
+//   .ng-star-inserted {
+//     font-size: 14px;
+//   }
+// }
+
+// .mat-input-element.mat-form-field-autofill-control.cdk-text-field-autofill-monitored {
+//   font-size: 14px;
+//   margin: 0.5rem 0 0 0 ;
+// }
+
+
+// .mat-input-element:disabled, .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
+//   color: rgb(0, 0, 0) !important;
+// }
 

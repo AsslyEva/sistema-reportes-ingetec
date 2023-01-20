@@ -1,15 +1,11 @@
+
 <div class="content-inicio">
 
     <app-title-frame
-    [title]="'REPORTE POR EMPLEADO'"
+    [title]="'REPORTE DE ACTIVIDADES POR EMPLEADO'"
     [link]="'/administrador/inicio'"
     ></app-title-frame>
   
-    <app-participante-name 
-    *ngFor="let item of cuadrilla"
-    [title]="item.nameParticipante"
-    >
-    </app-participante-name>
     <form class="row form-filtro" [formGroup]="form">
       <div class="col-12">
         <p class="text-filtro">Seleccione filtro para realizar la búsqueda</p>
@@ -23,7 +19,8 @@
             <mat-form-field class="form-item" appearance="outline">
               <mat-label>Participante</mat-label>
               <mat-select
-                          placeholder="Ingresa registra"
+                          #sel (change)="changed(sel.value)"
+                          placeholder="Ingresa Participante"
                           formControlName="actividad"
                           [(ngModel)]="selectedParticipante"
                           (ngModelChange)="cargarReporte(selectedParticipante)">
@@ -31,6 +28,7 @@
                   {{participante.nombres_integrante + ' ' +participante.apellidos_integrante}}
                 </mat-option>
               </mat-select>
+
             </mat-form-field>
 
             <mat-form-field appearance="fill">
@@ -47,11 +45,11 @@
               <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
             </mat-form-field>
 
-            <button style="background-color: #3cd419; color: #ffff;" matt-button (click)="filtrar()">BUSCAR
+            <button style="background-color: #3cd419; color: #ffff;" matt-button (click)="filtrar()">Buscar&nbsp;
               <mat-icon>search</mat-icon>
             </button>
 
-            <button style="background-color: blue; color: #ffff;"matt-button (click)="reset()">LIMPIAR
+            <button style="background-color: blue; color: #ffff;"matt-button (click)="reset()">Limpiar&nbsp;
               <mat-icon>cleaning_services</mat-icon>
             </button>
           </div>
@@ -60,18 +58,30 @@
 
 
     </form>
-
-<<<<<<< HEAD
-
-=======
->>>>>>> a6f27a9f3cc5288322ba22a494f78b0cd2bbb3c9
     <div class="content-tabla col-12 " *ngIf="actosFilter.length != 0">
+
+      <app-participante-name 
+        [numero]="selectedParticipante"
+        >
+      </app-participante-name>
+<!--       
+      <div *ngIf="selectedParticipante">
+        <div>
+          <label for="nombres_integrante">Hero name: </label>
+          <input id="nombres_integrante" [(ngModel)]="selectedParticipante" placeholder="name" readonly>
+        </div>
+      
+      </div>  -->
+      <!-- <input id="nombres_integrante" [(ngModel)]="value" placeholder="name" readonly> -->
+      
+      <!-- <mat-hint>Trabjajador :{{selectedParticipante.value?.nombres_integrante}}</mat-hint> -->
 
 
       <table
               datatable
               [dtOptions]="dtOptions"
               class="table table-dark-ingetec">
+
         <thead>
           <tr >
             <th>Sede</th>
@@ -106,7 +116,6 @@
       </div>
     </div>
   </div>
-
 
 
 

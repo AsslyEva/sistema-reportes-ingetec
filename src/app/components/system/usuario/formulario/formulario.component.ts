@@ -44,6 +44,9 @@ export interface integrantes {
 })
 export class FormularioComponent implements OnInit {
   required: boolean = true;
+  public value1 = [];
+  public value2 = [];
+
   // matDatepickerFilter: boolean = true;
 
   // inicializacion sedes
@@ -147,6 +150,9 @@ export class FormularioComponent implements OnInit {
     });
 
     this.yesterday.setDate(this.yesterday.getDate() - 1);
+  
+    this.itemDisabled1 = this.itemDisabled1.bind(this);
+    this.itemDisabled2 = this.itemDisabled2.bind(this);
   }
 
 // cofiguracion de matStep
@@ -158,6 +164,8 @@ export class FormularioComponent implements OnInit {
   ActividadFormGroup: FormGroup = this._formBuilder.group({sixthCtrl: ['']});
   CantidadFormGroup: FormGroup = this._formBuilder.group({seventhCtrl: ['']});
   FechaFormGroup: FormGroup = this._formBuilder.group({eighthCtrl: ['']});
+  // productForm: FormGroup = this._formBuilder.group({ninethCtrl: ['']});
+
   // EvidenciaFormGroup: FormGroup = this._formBuilder.group({ninethCtrl: ['']});
 
   ngOnInit(): void {
@@ -165,6 +173,14 @@ export class FormularioComponent implements OnInit {
     .subscribe((resp)=> {
       this.sedesList=resp
     })
+  }
+
+  public itemDisabled1(itemArgs: { dataItem: never; index: number }) {
+    return this.value2.indexOf(itemArgs.dataItem) !== -1;
+  }
+
+  public itemDisabled2(itemArgs: { dataItem: never; index: number }) {
+    return this.value1.indexOf(itemArgs.dataItem) !== -1;
   }
 
   changeSede(){
@@ -252,7 +268,7 @@ export class FormularioComponent implements OnInit {
       this.urbano_rural.setValue('0');
     } else {
       Swal.fire(
-        'Es necesario ingresar tdodos los datos, en caso no exista coloque "0", para agregarlo',
+        'Es necesario ingresar tdodos los actividades para continuar',
         environment.systemName,
         'warning'
       );
@@ -271,6 +287,12 @@ export class FormularioComponent implements OnInit {
   onSubmit() {
     const arrayActividades = this.actividades().value;
 
+    // if (arrayActividades.value) {;
+    //   }else {
+    //   Swal.fire('Ingrese Actividades para enviar el formulario',environment.systemName,'error');
+    // }
+
+
     arrayActividades.forEach((element: any)=> {
       this.cantidadesEjeService.postInsertarEje( element ).
       subscribe( (resp: any) => {
@@ -282,7 +304,7 @@ export class FormularioComponent implements OnInit {
             icon: 'success',
             title: 'Registraste exitosamente tu ejecución',
             showConfirmButton: false,
-            timer: 1500
+            timer: 2000
           }
         )
         this.SedeFormGroup.reset();

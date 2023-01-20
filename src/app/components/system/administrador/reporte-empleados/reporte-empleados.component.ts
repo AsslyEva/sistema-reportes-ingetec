@@ -32,15 +32,13 @@ export interface Actividad {
 })
 export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
 
-<<<<<<< HEAD
-  cuadrilla: any = [
-    {
-      nameParticipante: 'Bryan Villegas Cuba',
-    },
-  ];
-=======
->>>>>>> a6f27a9f3cc5288322ba22a494f78b0cd2bbb3c9
-
+  // cuadrilla: any = [
+  //   {
+  //     nameParticipante: IntegrantesService.codigo_integrante == 'nombres_integrante',
+  //     numero: 1,
+  //   },
+  // ];
+  value: any;
   name!: string;
 
 
@@ -120,12 +118,17 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
           targets: 2,
           orderable: false,
         },
-        { className: "text-center align-middle border-bottom", "targets": [0, 1, 2] },
+        { className: "text-center align-middle border-bottom", "targets": [0, 1, 2,3,4,5,6] },
       ],
     };
 
   }
 
+
+  changed(value: any) {
+    this.value = value;
+  }
+  
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
