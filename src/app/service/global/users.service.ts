@@ -19,4 +19,12 @@ export class UsersService {
   registrar(body: any){
     return this.http.post(`${this.url}register`, body)
   }
+
+  loggedIn(){
+    return (!!localStorage.getItem('token'));
+  }
+
+  isAdmin(){
+    return (!!localStorage.getItem('token') && !!localStorage.getItem('rol') && localStorage.getItem('rol') == '2');
+  }
 }

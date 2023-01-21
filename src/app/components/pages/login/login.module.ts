@@ -4,6 +4,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { LoginRoutingModule } from './login-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
+import { AuthGuard } from 'src/app/service/auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,9 @@ import { LoginComponent } from './login.component';
     LoginRoutingModule,
     SharedModule,
   ],
+  providers: [
+    AuthGuard
+  ]
 
 })
 
