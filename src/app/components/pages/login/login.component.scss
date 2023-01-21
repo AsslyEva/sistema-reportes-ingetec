@@ -17,7 +17,7 @@
 
     img{
         margin: 1rem 0;
-        width: 40%;
+        width: 30%;
     }
 }
 
@@ -25,7 +25,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    img{
+        width: 80%;
+        padding: 1rem;
+    }
 }
 
 .login-container{
@@ -44,8 +47,13 @@
 }
 
 .text_version{
-    color: #ffff;
-    
+    color: rgb(78, 78, 78);
+    border: 1px solid #b5b3e7;
+    border-radius: 2rem;
+    font-size: 11px;
+    text-align: center;
+    padding: 0;
+    font: none !important;
     // z-index: 1;
 }
 
@@ -57,13 +65,13 @@
     align-items: center;
 
     img{
-        max-width: 80%;
+        max-width: 70%;
         border-radius: 2rem;
     }
     h1{
         color: rgb(255, 255, 255);
         font-family: 'Gotham-Bold';
-        font-size: 4rem;
+        font-size: 3rem;
         text-align: center;
         line-height: 5rem;
         // padding: 0rem 14rem 0 14rem;
@@ -75,7 +83,7 @@
 
 .container-login{
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
     align-items: center;
     align-content: center;
     width: 100%;
@@ -91,22 +99,22 @@
     // z-index: 1;
     // background-color: #ffff;
     border-radius: 3rem;
-    margin: 0 15rem;
+    margin: 0 10rem;
 
 
     form{
         // width: 100%;
         align-items: center;
         background-color:  rgb(255, 255, 255);
-        border-radius: 3rem;
+        border-radius: 4rem;
         padding: 2em;
-        border: 6px solid #ff0000;
+        border: 4px solid #ff0000;
         border-color: g.$ingetec-red g.$ingetec-yellow  g.$ingetec-dark g.$ingetec-cyan;
 
         p{
             color: rgb(0, 0, 0);
             font-family: Montserrat;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             text-align: center;
             // padding: 1rem 0 0 0 ;
             border: solid 1px g.$ingetec-cyan;
@@ -116,7 +124,7 @@
 
 
         .form-ingresar{
-            margin: 1rem 0;
+            // margin: 1rem 0;
             .input-login{
                 display: flex;
                 align-items: center;
@@ -132,18 +140,18 @@
                     align-items: center;
                     margin: 0.9rem 0 1rem 0;
                     right: 1rem;
-                    background: rgba(63, 63, 63, 0.671);
+                    background: rgba(104, 103, 103, 0.671);
                     color: #ffff;
                     border-radius: 50%;
-                    font-size: 2.1rem;
-                    width: 3.2rem;
-                    height: 3.2rem;
+                    font-size: 1.8rem;
+                    width: 2.8rem;
+                    height: 2.8rem;
                 }
                 input{
                     color: rgb(32, 28, 28);
                     font-size: 1.5rem;
                     width: 100%;
-                    padding: 1rem;
+                    padding: 0.8rem 1rem;
                     border-radius: 4rem;
                     border: 1.8px solid #e7e7e7;
                 }
@@ -158,9 +166,12 @@
 
         .label-ingetec {
             font-family: 'Gotham-Medium';
-            margin: 1rem ;
+            margin: 1rem 0 0 0;
             color: rgb(77, 74, 74);
-            padding: 0 0 0.5rem 0;
+            padding: 0 0 0 0.5rem;
+        }
+        .btn-ingetec-cyan{
+            margin: 2rem 0 0 0;
         }
     }
 }
