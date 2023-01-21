@@ -10,7 +10,7 @@ import { SystemLayoutComponent } from './layout/system-layout/system-layout.comp
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PagesLayoutComponent } from './layout/pages-layout/pages-layout.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { DynamicModule } from 'ng-dynamic-component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -57,7 +57,10 @@ export const MY_FORMATS = {
 
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-PE' },
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+    
+// PARA RECARGAR LA APGINA
+    { provide:LocationStrategy, useClass: HashLocationStrategy}
   ]
 
 

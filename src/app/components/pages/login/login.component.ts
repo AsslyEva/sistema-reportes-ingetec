@@ -79,9 +79,12 @@ export class LoginComponent implements OnInit {
             environment.systemName,
             'success'
           )
+          // this.spinner.hide();
+
         },
         (err) => {
           this.spinner.hide();
+
 
           if (err.status != 500) {
 
