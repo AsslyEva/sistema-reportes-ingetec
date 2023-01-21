@@ -141,6 +141,71 @@ app-menu-item{
 
 
 
+/*Buttons*/
+
+.btn-ingetec {
+  width: 100%;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  padding: 6px 18px;
+  transition: all 300ms ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.btn-ingetec-cyan {
+  @extend .btn-ingetec;
+  background-color: $ingetec-cyan;
+  color: $ingetec-white;
+}
+
+.btn-ingetec-red {
+  @extend .btn-ingetec;
+  background-color: $ingetec-red;
+  color: $ingetec-white;
+}
+
+.btn-ingetec-green {
+  @extend .btn-ingetec;
+  background-color: $ingetec-green;
+  color: $ingetec-white;
+}
+
+.btn-ingetec-yellow {
+  @extend .btn-ingetec;
+  background-color: $ingetec-yellow;
+  color: $ingetec-white;
+}
+
+.btn-ingetec-gray-dark {
+  @extend .btn-ingetec;
+  background-color: $ingetec-gray-dark;
+  color: $ingetec-white;
+}
+
+.btn-outline-ingetec-white {
+  @extend .btn-ingetec;
+  background-color: transparent;
+  border: 2px solid $ingetec-white  !important;
+  font-size: $font-size-small;
+  border-radius: 15px;
+  color: $ingetec-white;
+  transition: 300ms all ease;
+
+  &:hover {
+    transform: scale(1.05);
+    opacity: 1 !important;
+  }
+}
+
+.icon-ingetec {
+  margin-right: 6px;
+}
+
+
 /*Estilos para datatable*/
 .content-tabla{
   padding: 1rem;
@@ -199,6 +264,68 @@ tbody, td, tfoot, th, thead, tr {
   background-color: transparent !important;
 }
 
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px solid transparent;
+  border-radius: 4rem !important;
+  // padding: 5px;  
+  background-color: #ffff !important;
+  // /* background-color: transparent; */
+  margin-left: 3px;
+  width: 89%;
+}
+.top {
+
+  .dataTables_info {
+    color: $ingetec-gray-dark;
+    font-family: $ff-gotham-medium;
+    font-size: 1.2rem;
+    text-align: left;
+    // margin: 0 0 10rem 0;
+    // width: 100%;
+  }
+
+  .dataTables_filter {
+    display: flex;
+    // justify-content: flex-start;
+    width: 100%;
+    position: relative;
+    // z-index: 20;
+
+
+    label {
+      font-family: $ff-gotham-medium;
+      font-size: 1.4rem;
+      background: $ingetec-cyan;
+      color: #ffff;
+      padding: 0.1rem 1rem;
+      border-radius: 2rem;
+      width: 100%;
+
+      .form-control {
+        // border: none;
+        border-bottom: 1px solid $ingetec-gray-dark;
+        border-radius: 3rem;
+        // padding: 1rem;
+        font-family: $ff-avenirLTStd-book;
+        // height: 36px;
+        // transition: 300ms all ease;
+        width: 97%;
+        // background: transparent;
+
+        &.form-control-sm {
+          padding: 0.15rem 0.5rem !important;
+        }
+      }
+
+      .form-control:focus {
+        border-bottom: 2px solid $ingetec-cyan;
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+
 
 // .options{
 //     display: flex;
@@ -244,12 +371,12 @@ tbody, td, tfoot, th, thead, tr {
     // width: 80%;
     // height: 10%;
     // padding: 1rem;
-    margin: 1.5rem;
+    margin: 1rem;
     text-align: center;
 }
 
 .text-filtro{
-    font-size: 11px;
+    font-size: 13px;
     color: $ingetec-aprobe;
     font-weight: bold;
     font-family: 'Montserrat';
@@ -280,7 +407,7 @@ tbody, td, tfoot, th, thead, tr {
 }
 mat-form-field{
     color: $ingetec-green;
-    font-size: 2rem;
+    font-size: 1.3rem;
     // background: #ffff;
 
 } 
@@ -293,7 +420,7 @@ mat-datepicker-toggle{
     color: $ingetec-aprobe;
 }
 mat-datepicker{
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .view{

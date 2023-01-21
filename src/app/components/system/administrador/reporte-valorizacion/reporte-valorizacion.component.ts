@@ -15,6 +15,7 @@ import { SegmentosService } from 'src/app/service/global/segmentos.service';
 })
 export class ReporteValorizacionComponent implements OnInit {
   name!: string;
+  nameParticipante = 'Bryan Villegas Cuba';
 
 
   public result: any;

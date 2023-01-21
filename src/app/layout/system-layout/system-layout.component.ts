@@ -30,7 +30,7 @@ export class SystemLayoutComponent{
 
   ngAfterViewInit() {
     this.observer
-      .observe(['(max-width: 2000px)'])
+      .observe(['(max-width: 800px)'])
       .subscribe((res) => {
         if (res.matches) {
           this.sidenav.mode = 'over';
@@ -40,7 +40,9 @@ export class SystemLayoutComponent{
           this.sidenav.open();
         }
       });
+
   }
+
 
   logout(){
     // this._authService.logout();

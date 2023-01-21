@@ -111,8 +111,8 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     this.dtOptions = {
       dom: '<"top"if>rt<"bottom"lp><"clear">',
       pagingType: 'simple_numbers',
-      pageLength: 5,
-      lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
+      pageLength: 4,
+      lengthMenu: [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
       language: LenguajeDataTable(),
       responsive: true,
       autoWidth: false,

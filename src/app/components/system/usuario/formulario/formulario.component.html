@@ -47,12 +47,14 @@
 
                 <mat-select [(ngModel)]="selectedLider"
                             required
-                            formControlName="thirdCtrl">
+                            formControlName="thirdCtrl"
+                            [itemDisabled]="itemDisabled1"
+                            [(value)]="value1">
                   <mat-option *ngFor="let lider of integrantesList"
                               [value]="lider.codigo_integrante">
                     {{lider.nombres_integrante + ' ' +lider.apellidos_integrante}}
                   </mat-option>
-                </mat-select>
+                 </mat-select>
                 <br />
                 <mat-error
                   *ngIf="LiderFormGroup.controls['thirdCtrl'].hasError('required')"
@@ -67,6 +69,8 @@
                 <mat-label>Integrantes del equipo</mat-label>
                 <!-- [(ngModel)]="arrayIntegrantes" -->
                 <mat-select
+                            [itemDisabled]="itemDisabled2"
+                            [(value)]="value2"
                             [compareWith]="equals"
                             [(ngModel)]="arrayIntegrantes"
                             formControlName="secondCtrl"
@@ -119,7 +123,9 @@
           </mat-step>
 
           <mat-step>
-              <form  [formGroup]="productForm" style="text-align: center;">
+              <form  [formGroup]="productForm" 
+                    style="text-align: center;" 
+                    formControlName="sixthCtrl" required>
                 <label>Actividades realizadas</label>
                 <ul>(Click en (+) para agregar nueva actividad)</ul>
                 <ng-template matStepLabel>Actividades</ng-template>
@@ -170,9 +176,9 @@
                         *ngFor="let actividad_especifica of actividades_especifica" [value]= "actividad_especifica.codigo_act">
                         {{actividad_especifica.descripcion_act}}
                         </mat-option>
-
                       </mat-select>
                     </mat-form-field>
+
                     <mat-divider></mat-divider>
 
                     <label>Cantidades realizadas</label>
@@ -219,7 +225,9 @@
                       </button>
                     </tr>
 
-                    <div class="actividades" *ngFor="let actividad of actividades().controls; let i=index" [formGroupName]="i">
+                    <div class="actividades" 
+                        *ngFor="let actividad of actividades().controls; let i=index" 
+                        [formGroupName]="i">
 
                       <div class="caracteristicas">
                         <p>Actividades Aagregadas</p>
@@ -278,12 +286,9 @@
                         </div>
                       </div>
                     </div>
-
                   </div>
                 </table>
-
-                <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
-
+                <button mat-raised-button  color="primary" matStepperNext>Siguiente</button>
               </form>
           </mat-step>
 

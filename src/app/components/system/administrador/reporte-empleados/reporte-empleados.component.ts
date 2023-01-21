@@ -32,7 +32,13 @@ export interface Actividad {
 })
 export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
 
-
+  // cuadrilla: any = [
+  //   {
+  //     nameParticipante: IntegrantesService.codigo_integrante == 'nombres_integrante',
+  //     numero: 1,
+  //   },
+  // ];
+  value: any;
   name!: string;
 
 
@@ -112,12 +118,17 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
           targets: 2,
           orderable: false,
         },
-        { className: "text-center align-middle border-bottom", "targets": [0, 1, 2] },
+        { className: "text-center align-middle border-bottom", "targets": [0, 1, 2,3,4,5,6] },
       ],
     };
 
   }
 
+
+  changed(value: any) {
+    this.value = value;
+  }
+  
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();

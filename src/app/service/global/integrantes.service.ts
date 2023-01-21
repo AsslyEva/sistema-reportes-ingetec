@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class IntegrantesService {
   url: string=environment.urlEndPoint
+  static codigo_integrante: any;
 
   constructor(
     private http: HttpClient

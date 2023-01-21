@@ -1,13 +1,13 @@
 <mat-toolbar class="">
   <div class="header">
-    <button
+    <!-- <button
     mat-icon-button
     *ngIf="sidenav.mode === 'over'"
     (click)="sidenav.toggle()"
     >
     <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
     <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
-    </button>
+    </button> -->
 
     <div class="title">
       <p>{{title | uppercase}}</p>
@@ -55,12 +55,12 @@
   </button>
 
   <button mat-button class="button-menu"   routerLink="/administrador/valorizacion" *ngIf="_rol == 2">
-    <mat-icon>money</mat-icon>
+    <mat-icon>monetization_on</mat-icon>
     <span>Reporte de Valorización</span>
   </button>
 
   <button mat-button class="button-menu"   routerLink="/administrador/empleados" *ngIf="_rol == 2">
-    <mat-icon>personal_injury</mat-icon>
+    <mat-icon>groups</mat-icon>
     <span>Reporte de Empleados</span>
   </button>
 
@@ -71,13 +71,15 @@
 
   <mat-divider></mat-divider>
 
-  <button
-  mat-button class="button-menu"
-  (click)="logout()"
-  >
-    <mat-icon>power_settings_new</mat-icon>
-    <span>Cerrar sesión</span>
-  </button>
+
+  <div class="container-button">
+    <button mat-flat-button
+            (click)="logout()"
+            matTooltip="Cerrar sesion"
+            class="button-logout">
+      <mat-icon class="icon">logout</mat-icon>&nbsp;SALIR
+    </button>
+  </div>
 
    </div>
 
@@ -93,14 +95,14 @@
     <div>
 
       <router-outlet>
-        <!-- <button
+        <button
         mat-icon-button
         *ngIf="sidenav.mode === 'over'"
         (click)="sidenav.toggle()"
         >
-        <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+        <mat-icon *ngIf="!sidenav.opened"> arrow_forward </mat-icon>
         <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
-      </button> -->
+      </button>
       </router-outlet>
     </div>
   </mat-sidenav-content>
