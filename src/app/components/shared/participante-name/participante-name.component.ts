@@ -17,96 +17,66 @@ export class ParticipanteNameComponent implements OnInit {
 
   ngOnInit(): void {
     switch (this.numero) {
-      case 1:
+      case 46:
         this.color = '#235aba';
         this.nameParticipante = 'ELVIS LLACZA GUADALUPE';
       break;
-      case 2:
+      case 47:
         this.color = '#235aba';
         this.nameParticipante = 'EMMY PAREDES ROJAS';
       break;
-      case 7:
-        this.color = '#235aba';
-        this.nameParticipante = 'FERNANDO JOSE JIMENEZ ROMERO';
-        break;
-      case 9:
-        this.color = '#235aba';
-        this.nameParticipante = 'AYRTON KEVIN CAMARENA ALVARO';
-
-        break;
-      case 4:
+      case 35:
         this.color = '#235aba';
         this.nameParticipante = 'JESUS PUCUHUARANGA BALDEON';
 
         break;
-      case 5:
+      case 36:
         this.color = '#235aba';
         this.nameParticipante = 'JHONATAN RICALDI PAREDES';
         break;
 
-      case 12:
-        this.color = '#235aba';
-        this.nameParticipante = 'ALEXANDER MARCOS OROPEZA';
-        break;
-      case 7:
+      case 37:
         this.color = '#235aba';
         this.nameParticipante = 'CRISTIAN VALENCIA MARCOS';
-
         break;
-      case 8:
+
+      case 38:
         this.color = '#235aba';
         this.nameParticipante = 'VICTOR ZURITA PARIAN';
 
         break;
-      case 9:
+      case 39:
         this.color = '#235aba';
         this.nameParticipante = 'SERGIO HILARIO BARRIOS';
         break;
 
-      case 16:
-        this.color = '#235aba';
-        this.nameParticipante = 'MANUEL AVALOS MALLQUI';
-        break;
-      case 17:
-        this.color = '#235aba';
-        this.nameParticipante = 'JESUS GONZALES MILIANO';
-
-        break;
-      case 10:
+      case 40:
         this.color = '#235aba';
         this.nameParticipante = 'FREY ROJAS AGUILAR';
 
         break;
-      case 19:
-        this.color = '#235aba';
-        this.nameParticipante = 'KENNEDY FRANKLIN VILLUGAS';
-        break;
 
-      case 14:
+      case 41:
         this.color = '#235aba';
         this.nameParticipante = 'BRAYAN CRISTIAN AQUINO ORBEZO';
         break;
-      case 15:
+
+      case 44:
         this.color = '#235aba';
         this.nameParticipante = 'ALEX MAURO MARTINEZ VALENCIA';
         break;
 
-      case 11:
+      case 43:
         this.color = '#235aba';
         this.nameParticipante = 'ISAIAS VASQUEZ MALPARTIDA';
         break;
 
-      case 23:
-        this.color = '#235aba';
-        this.nameParticipante = 'JHEN UBER LOPEZ RAMOS';
-        break;
-
-      case 12:
+      case 44:
         this.color = '#235aba';
         this.nameParticipante = 'CRISTIAN BALDEON YAURI';
         break;
         
-      case 13:
+      case 45:
         this.color = '#235aba';
         this.nameParticipante = 'EFRAIN ALLCA MARTINEZ';
         break;
