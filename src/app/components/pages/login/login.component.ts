@@ -63,12 +63,12 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response: any) => {
           this.spinner.hide();
-          console.log('Respuesta',response);
+          // console.log('Respuesta',response);
           // Guardar
           localStorage.setItem("token", response.token);
-          localStorage.setItem("rol_usuario", response.rol);
+          localStorage.setItem("rol", response.rol_usuario);
 
-          if(response.rol == 2){
+          if(response.rol_usuario == 2){
             this.router.navigate(["/administrador"]);
           }else{
             this.router.navigate(["/usuario/inicio"]);

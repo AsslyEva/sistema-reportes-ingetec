@@ -17,6 +17,14 @@ export class ParticipanteNameComponent implements OnInit {
 
   ngOnInit(): void {
     switch (this.numero) {
+      case 1:
+        this.color = '#235aba';
+        this.nameParticipante = 'ELVIS LLACZA GUADALUPE';
+      break;
+      case 2:
+        this.color = '#235aba';
+        this.nameParticipante = 'EMMY PAREDES ROJAS';
+      break;
       case 7:
         this.color = '#235aba';
         this.nameParticipante = 'FERNANDO JOSE JIMENEZ ROMERO';
@@ -26,12 +34,12 @@ export class ParticipanteNameComponent implements OnInit {
         this.nameParticipante = 'AYRTON KEVIN CAMARENA ALVARO';
 
         break;
-      case 10:
+      case 4:
         this.color = '#235aba';
         this.nameParticipante = 'JESUS PUCUHUARANGA BALDEON';
 
         break;
-      case 11:
+      case 5:
         this.color = '#235aba';
         this.nameParticipante = 'JHONATAN RICALDI PAREDES';
         break;
@@ -40,17 +48,17 @@ export class ParticipanteNameComponent implements OnInit {
         this.color = '#235aba';
         this.nameParticipante = 'ALEXANDER MARCOS OROPEZA';
         break;
-      case 13:
+      case 7:
         this.color = '#235aba';
         this.nameParticipante = 'CRISTIAN VALENCIA MARCOS';
 
         break;
-      case 14:
+      case 8:
         this.color = '#235aba';
         this.nameParticipante = 'VICTOR ZURITA PARIAN';
 
         break;
-      case 15:
+      case 9:
         this.color = '#235aba';
         this.nameParticipante = 'SERGIO HILARIO BARRIOS';
         break;
@@ -64,7 +72,7 @@ export class ParticipanteNameComponent implements OnInit {
         this.nameParticipante = 'JESUS GONZALES MILIANO';
 
         break;
-      case 18:
+      case 10:
         this.color = '#235aba';
         this.nameParticipante = 'FREY ROJAS AGUILAR';
 
@@ -74,16 +82,16 @@ export class ParticipanteNameComponent implements OnInit {
         this.nameParticipante = 'KENNEDY FRANKLIN VILLUGAS';
         break;
 
-      case 20:
+      case 14:
         this.color = '#235aba';
         this.nameParticipante = 'BRAYAN CRISTIAN AQUINO ORBEZO';
         break;
-      case 21:
+      case 15:
         this.color = '#235aba';
         this.nameParticipante = 'ALEX MAURO MARTINEZ VALENCIA';
         break;
 
-      case 22:
+      case 11:
         this.color = '#235aba';
         this.nameParticipante = 'ISAIAS VASQUEZ MALPARTIDA';
         break;
@@ -93,14 +101,14 @@ export class ParticipanteNameComponent implements OnInit {
         this.nameParticipante = 'JHEN UBER LOPEZ RAMOS';
         break;
 
-      case 24:
+      case 12:
         this.color = '#235aba';
         this.nameParticipante = 'CRISTIAN BALDEON YAURI';
         break;
         
-      case 25:
+      case 13:
         this.color = '#235aba';
-        this.nameParticipante = 'EFRAIN ALLCA';
+        this.nameParticipante = 'EFRAIN ALLCA MARTINEZ';
         break;
 
       case 26:
@@ -108,10 +116,36 @@ export class ParticipanteNameComponent implements OnInit {
       this.nameParticipante = 'CRISTHIAN RENZO ÑAUPARI ALCÁNTARA';
       break;
         
-      case 22:
+      case 25:
         this.color = '#235aba';
-        this.nameParticipante = 'Victor';
-        break;
+        this.nameParticipante = 'DEYVID KEVIN MENDEZ MEZA';
+      break;
+
+      case 27:
+        this.color = '#235aba';
+        this.nameParticipante = 'EDWUARDO JESUS GARCIA RAMIREZ';
+      break;
+
+      case 28:
+        this.color = '#235aba';
+        this.nameParticipante = 'JASMIN LIDA YAURI LAUREANO';
+      break;
+
+      case 29:
+        this.color = '#235aba';
+        this.nameParticipante = 'WILLIAM MENIZ VENTOCILLA';
+      break;
+
+      case 30:
+        this.color = '#235aba';
+        this.nameParticipante = 'JHOEL BENJAMIN MANDUJANO SALVADOR';
+      break;
+
+      case 31:
+        this.color = '#235aba';
+        this.nameParticipante = 'ALEX MANDUJANO SALVADOR';
+      break;
+
       default:
         break;
     }
