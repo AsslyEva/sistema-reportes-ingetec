@@ -66,10 +66,10 @@
     <span>Reporte de Empleados</span>
   </button>
 
-  <!-- <button mat-button class="button-menu"   routerLink="/administrador/evidencia">
-    <mat-icon>panorama</mat-icon>
-    <span>Reporte de Evidencia</span>
-  </button> -->
+  <button mat-button class="button-menu"   routerLink="/administrador/addEmpleados" *ngIf="_rol == 2">
+    <mat-icon>group_add</mat-icon>
+    <span>Agregar Personal</span>
+  </button>
 
   <mat-divider></mat-divider>
 

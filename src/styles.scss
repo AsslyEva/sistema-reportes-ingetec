@@ -405,6 +405,8 @@ tbody, td, tfoot, th, thead, tr {
         align-items: center;
     }
 }
+
+
 mat-form-field{
     color: $ingetec-green;
     font-size: 1.3rem;
@@ -439,6 +441,10 @@ mat-datepicker{
   }
 }
 
+.form-dialog{
+  padding: 2rem;
+}
+
 // /*stepper-vertical/
 .mat-stepper-horizontal, .mat-stepper-vertical {
   background: #0000 !important; 
@@ -469,6 +475,35 @@ mat-datepicker{
   margin: 10px 0 0 0 !important;
   justify-content: center !important; 
 
+}
+
+.add{
+  display: flex;
+  margin: 2rem 0; 
+  width: 100%;
+
+}
+
+.option-button{
+  gap: 1rem 2rem ;
+  button{
+    border: none;
+    margin: 0.4rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+  }
+
+  mat-icon{
+    color: #ffff;
+  }
+
+  .delete{
+    background: $ingetec-red;
+  }
+
+  .edit{
+    background: $ingetec-green;
+  }
 }
 
 

@@ -12,6 +12,9 @@ import { DynamicModule } from 'ng-dynamic-component';
 import { DataTablesModule } from 'angular-datatables';
 import { DialogsService } from '../../shared/dialogs.service';
 import { ReporteEmpleadosComponent } from './reporte-empleados/reporte-empleados.component';
+import { AgregarEmpleadosComponent } from './agregar-empleados/agregar-empleados.component';
+import { AgregarEmpleadoComponent } from './agregar-empleados/agregar-empleado/agregar-empleado.component';
+import { EditarEmpleadoComponent } from './agregar-empleados/editar-empleado/editar-empleado.component';
 // import { GeneralServide } from 'src/app/service/global/general.service';
 
 
@@ -33,6 +36,9 @@ import { ReporteEmpleadosComponent } from './reporte-empleados/reporte-empleados
     ReporteActividadesComponent,
     ReporteValorizacionComponent,
     ReporteEmpleadosComponent,
+    AgregarEmpleadosComponent,
+    AgregarEmpleadoComponent,
+    EditarEmpleadoComponent,
   ],
   providers: [
     DialogsService,

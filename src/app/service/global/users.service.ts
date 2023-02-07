@@ -13,7 +13,7 @@ export class UsersService {
   ) { }
 
   login(user: any, password: any){
-    return this.http.post(`${this.url}login`, {name: user, password: password})
+    return this.http.post(`${this.url}login`, {nombre_usuario: user, contrasena_usuario: password})
   }
 
   registrar(body: any){

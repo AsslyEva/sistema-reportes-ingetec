@@ -1,0 +1,49 @@
+<app-titulo-dialog [titulo]="titulo"></app-titulo-dialog>
+
+<div class="content-dialog">
+
+    <form class="form-dialog">
+        <!-- <p>INGRESA LOS DATOS REQUERIDOS</p> -->
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre Empleado</mat-label>
+            <input matInput placeholder="Ingrese Nombre Empleado">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Apellido Empleado</mat-label>
+            <input matInput placeholder="Ingrese Aplellido Empleado">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input matInput placeholder="Usuario">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input matInput placeholder="Contraseña">
+        </mat-form-field>
+            <button
+                mat-flat-button
+                color="primary"
+                matTooltip="Agregar Usuario"
+                >
+                Guardar
+                <mat-icon>save</mat-icon>
+            </button>
+
+    </form>
+
+</div>
+
+
+
+<ngx-spinner
+    bdColor = "rgba(14,14,14,0.8)"
+    size = "large"
+    color = "#9ad424"
+    type = "square-jelly-box"
+    [fullScreen] = "false">
+    <p style="color: white" > Cargando, espere por favor </p>
+</ngx-spinner>
+

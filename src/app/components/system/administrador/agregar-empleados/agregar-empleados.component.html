@@ -1,0 +1,76 @@
+
+<div class="content-inicio">
+
+    <app-title-frame
+    [title]="'AGREGAR USUARIO'"
+    [link]="'/administrador/inicio'"
+    ></app-title-frame>
+
+
+    <div class="add">
+        <button
+            mat-flat-button
+            color="primary"
+            matTooltip="Agregar Usuario"
+            (click)="agregarEmpleado()"
+            >
+            Agregar Nuevo
+            <mat-icon>person_add</mat-icon>
+        </button>
+    </div>
+
+    <div class="content-tabla col-12">
+      <table
+            datatable
+            [dtOptions]="dtOptions"
+            class="table table-dark-ingetec">
+        <thead>
+          <tr>
+            <th>Nombre Empleado</th>
+            <th>Apellido Empleado</th>
+            <th>Usuario</th>
+            <th>Contraseña</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr class="text-center align-middle border-bottom ">
+                <td>sdfsdfsdf</td>
+                <td>dsdfsdf</td>
+                <td>sdfsdfsdf</td>
+                <td>fsdfsdf</td>
+                <td>
+                    <div class="option-button ">
+                        <button
+                            color="primary"
+                            class="edit"
+                            matTooltip="Editar Usuario"
+                            (click)="editarEmpleado()"
+                            >
+                            <mat-icon>edit</mat-icon>
+                        </button>
+
+                        <button
+                            color="primary"
+                            class="delete"
+                            matTooltip="Eliminar Usuario"
+                            >
+                            <mat-icon> delete </mat-icon>
+                        </button>
+                    </div>
+                </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+
+<ngx-spinner
+    bdColor = "rgba(14,14,14,0.8)"
+    size = "large"
+    color = "#9ad424"
+    type = "square-jelly-box"
+    [fullScreen] = "false">
+    <p style="color: white" > Cargando, espere por favor </p>
+</ngx-spinner>
