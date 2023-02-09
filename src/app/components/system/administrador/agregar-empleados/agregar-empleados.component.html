@@ -23,29 +23,30 @@
       <table
             datatable
             [dtOptions]="dtOptions"
-            class="table table-dark-ingetec">
+            class="table table-dark-ingetec"
+            *ngIf="integrantes !== null">
         <thead>
           <tr>
+            <th>N°</th>
             <th>Nombre Empleado</th>
             <th>Apellido Empleado</th>
             <th>Usuario</th>
-            <th>Contraseña</th>
             <th>Opciones</th>
           </tr>
         </thead>
         <tbody >
-          <tr class="text-center align-middle border-bottom ">
-                <td>sdfsdfsdf</td>
-                <td>dsdfsdf</td>
-                <td>sdfsdfsdf</td>
-                <td>fsdfsdf</td>
+          <tr class="text-center align-middle border-bottom " *ngFor="let integrante of integrantes; index as i" >
+                <td>{{i+1}}</td>
+                <td>{{integrante.nombres_integrante}}</td>
+                <td>{{integrante.apellidos_integrante}}</td>
+                <td>{{integrante.nombre_usuario}}</td>
                 <td>
                     <div class="option-button ">
                         <button
                             color="primary"
                             class="edit"
                             matTooltip="Editar Usuario"
-                            (click)="editarEmpleado()"
+                            (click)="editarEmpleado(integrante.codigo_integrante)"
                             >
                             <mat-icon>edit</mat-icon>
                         </button>

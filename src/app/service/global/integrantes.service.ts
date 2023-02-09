@@ -24,4 +24,12 @@ export class IntegrantesService {
   getDetalleIntegrante(cod: string){
     return this.http.get(`${this.url}integrantes/verDetalle/${cod}`)
   }
+
+  getIntegrantesUsuarios(){
+    return this.http.get(`${this.url}integrantes/listar/usuarios`)
+  }
+
+  postIntegrantesActualizar(data: any){
+    return this.http.post(`${this.url}integrantes/actualizar`, data)
+  }
 }

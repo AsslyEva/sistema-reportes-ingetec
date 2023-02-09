@@ -150,10 +150,10 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
   }
 
   filterDate(fromDate: any, ToDate: any, data: any){
-    return data.filter( (resp:any) => new Date(resp.fecha_cant_eje).getTime() > new Date( fromDate ).getTime()
+    return data.filter( (resp:any) => new Date(resp.fecha_cant_eje).getTime() >= new Date( fromDate ).getTime()
       // console.log('dede el filter data', new Date(resp.fecha_cant_eje), new Date( fromDate ))
       ).filter( (resp:any) =>
-        new Date(resp.fecha_cant_eje).getTime() < new Date( ToDate ).getTime()
+        new Date(resp.fecha_cant_eje).getTime() <= new Date( ToDate ).getTime()
       )
   }
 
@@ -216,6 +216,11 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         header:  "FECHA",
         size: 12
       }
+      ,
+      {
+        header:  "CUADRILLA",
+        size: 40
+      }
     ];
     title = 'REPORTE ACTIVIDADES REALIZADAS';
     informativeText = `Este reporte fue generado por el ${ environment.systemName }`
@@ -233,7 +238,8 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         x1.cantidad_urbano_eje,
         x1.cantidad_urbrural_eje,
         x1.cantidad_rural_eje,
-        fecha
+        fecha,
+        x1.cuadrilla
       ]);
     });
 

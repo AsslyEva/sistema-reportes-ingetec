@@ -3,9 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { Subject } from 'rxjs';
 import { DialogsService } from 'src/app/components/shared/dialogs.service';
+import { IntegrantesService } from 'src/app/service/global/integrantes.service';
 import { LenguajeDataTable } from 'src/app/utils/utils';
 import { AgregarEmpleadoComponent } from './agregar-empleado/agregar-empleado.component';
 import { EditarEmpleadoComponent } from './editar-empleado/editar-empleado.component';
+import { EditarService } from './editar.service';
 
 @Component({
   selector: 'app-agregar-empleados',
@@ -16,15 +18,15 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
   //Configuracion para datatable
   dtOptions: ADTSettings = {};
   dtTrigger: Subject<any> = new Subject<any>();
-  
 
-  actos: any[] = [];
+
+  integrantes: any[] = [];
   actosFilter : any[] = [];
 
   constructor(
-    private dialogsService: DialogsService,
-    private dialog: MatDialog
-
+    public editarService: EditarService,
+    private dialog: MatDialog,
+    private integrantesService: IntegrantesService
   ){}
 
 
@@ -49,10 +51,16 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
       ],
     };
 
+    this.integrantesService.getIntegrantesUsuarios()
+    .subscribe(
+      (resp: any) => {
+        this.integrantes = resp;
+      }
+    );
   }
 
 
-  
+
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
@@ -67,12 +75,17 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
     } )
   }
 
-  editarEmpleado() {
-    const dialodRef = this.dialog.open( EditarEmpleadoComponent, {
-      width: '30%',
-      autoFocus: false,
-      disableClose: true,
-      panelClass: 'myapp-no-padding-dialog',
-    } )
+  result: any;
+  editarEmpleado(codigo: any) {
+    this.editarService
+      .confirm(codigo)
+    //   .subscribe((res: any) => this.result = res);
+
+    // const dialodRef = this.dialog.open( EditarEmpleadoComponent, {
+    //   width: '30%',
+    //   autoFocus: false,
+    //   disableClose: true,
+    //   panelClass: 'myapp-no-padding-dialog',
+    // } )
   }
 }

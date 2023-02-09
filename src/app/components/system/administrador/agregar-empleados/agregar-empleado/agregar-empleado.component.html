@@ -2,38 +2,54 @@
 
 <div class="content-dialog">
 
-    <form class="form-dialog">
+    <form class="form-dialog" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
         <!-- <p>INGRESA LOS DATOS REQUERIDOS</p> -->
         <mat-form-field appearance="outline">
             <mat-label>Nombre Empleado</mat-label>
-            <input matInput placeholder="Ingrese Nombre Empleado">
+            <input matInput placeholder="Ingrese Nombre Empleado"
+            formControlName="nombres_integrante"
+            >
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Apellido Empleado</mat-label>
-            <input matInput placeholder="Ingrese Aplellido Empleado">
+            <input matInput placeholder="Ingrese Aplellido Empleado"
+            formControlName="apellidos_integrante"
+            >
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Usuario</mat-label>
-            <input matInput placeholder="Usuario">
+            <input matInput placeholder="Usuario"
+            formControlName="nombre_usuario">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Contraseña</mat-label>
-            <input matInput placeholder="Contraseña">
+            <input matInput placeholder="Contraseña"
+            formControlName="contrasena_usuario"
+            >
         </mat-form-field>
-            <button
-                mat-flat-button
-                color="primary"
-                matTooltip="Agregar Usuario"
-                >
-                Guardar
-                <mat-icon>save</mat-icon>
-            </button>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput placeholder="Contraseña"
+          formControlName="rol_usuario"
+          >
+        </mat-form-field>
+
+        <button
+            mat-flat-button
+            color="primary"
+            matTooltip="Agregar Usuario"
+            type="submit"
+            >
+            Guardar
+            <mat-icon>save</mat-icon>
+        </button>
 
     </form>
-
+    <!-- {{ newIntegrante | json }} -->
 </div>
 
 

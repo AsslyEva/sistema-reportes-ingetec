@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  urlEndPoint: "https://ingetecsistemareportes.site/backend/",
+  urlEndPoint: "http://localhost:5000/backend/",
   systemName: 'SISTEMA DE GESTION DE ACTIVIDADES COMERCIALES',
   production: true,
   version: "v1.0.0"

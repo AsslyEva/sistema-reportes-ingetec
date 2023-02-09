@@ -69,6 +69,7 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
 
   participantes : any = [];
   selectedParticipante : any;
+  nombreParticipante : string = "";
   actos: any[] = [];
   actosFilter : any[] = [];
 
@@ -127,8 +128,9 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
 
   changed(value: any) {
     this.value = value;
+    this.nombreParticipante = this.participantes.find((e:any) => e.codigo_integrante == this.selectedParticipante).apellidos_integrante;
   }
-  
+
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
@@ -140,6 +142,8 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
       this.actos = resp;
       this.actosFilter = this.actos;
     })
+    this.nombreParticipante = this.participantes.find((e:any) => e.codigo_integrante == this.selectedParticipante).apellidos_integrante;
+    console.log("desde change :", this.nombreParticipante);
   }
 
   filtrar(){
@@ -159,10 +163,10 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
   }
 
   filterDate(fromDate: any, ToDate: any, data: any){
-    return data.filter( (resp:any) => new Date(resp.fecha_cant_eje).getTime() > new Date( fromDate ).getTime()
+    return data.filter( (resp:any) => new Date(resp.fecha_cant_eje).getTime() >= new Date( fromDate ).getTime()
       // console.log('dede el filter data', new Date(resp.fecha_cant_eje), new Date( fromDate ))
       ).filter( (resp:any) =>
-        new Date(resp.fecha_cant_eje).getTime() < new Date( ToDate ).getTime()
+        new Date(resp.fecha_cant_eje).getTime() <= new Date( ToDate ).getTime()
       )
   }
 
@@ -226,7 +230,8 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
         size: 12
       }
     ];
-    title = 'REPORTE ACTIVIDADES REALIZADAS';
+
+    title = 'REPORTE ACTIVIDADES REALIZADAS: ';
     informativeText = `Este reporte fue generado por el ${ environment.systemName }`
 
 
@@ -246,7 +251,7 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
       ]);
     });
 
-    this.__downloadReportExcel( this.title, this.headerAndSize, dataExcel, this.range.value );
+    this.__downloadReportExcel( this.title + this.nombreParticipante, this.headerAndSize, dataExcel, this.range.value );
   }
 }
 

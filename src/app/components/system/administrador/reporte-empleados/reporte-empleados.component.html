@@ -5,7 +5,7 @@
     [title]="'REPORTE DE ACTIVIDADES POR EMPLEADO'"
     [link]="'/administrador/inicio'"
     ></app-title-frame>
-  
+
     <form class="row form-filtro" [formGroup]="form">
       <div class="col-12">
         <p class="text-filtro">Seleccione filtro para realizar la búsqueda</p>
@@ -60,22 +60,25 @@
     </form>
     <div class="content-tabla col-12 " *ngIf="actosFilter.length != 0">
 
-      <app-participante-name 
+      <!-- <app-participante-name
         [numero]="selectedParticipante"
         >
-      </app-participante-name>
+      </app-participante-name> -->
+      <h4>
+        {{nombreParticipante}}
+      </h4>
 
       <!-- <div *ngIf="selectedParticipante">
         <div>
           <label for="nombres_integrante">Hero name: </label>
           <input id="nombres_integrante" [(ngModel)]="selectedParticipante" placeholder="name" readonly>
         </div> -->
-<!--       
+<!--
 
-      
+
       </div>  -->
       <!-- <input id="nombres_integrante" [(ngModel)]="value" placeholder="name" readonly> -->
-      
+
       <!-- <mat-hint>Trabjajador :{{selectedParticipante.value?.nombres_integrante}}</mat-hint> -->
 
 

@@ -2,47 +2,59 @@
 
 <div class="content-dialog">
 
-    <form class="form-dialog">
-        <!-- <p>INGRESA LOS DATOS REQUERIDOS</p> -->
-        <mat-form-field appearance="outline">
-            <mat-label>Nombre Empleado</mat-label>
-            <input matInput placeholder="Ingrese Nombre Empleado">
-        </mat-form-field>
+  <form class="form-dialog" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <!-- <p>INGRESA LOS DATOS REQUERIDOS</p> -->
+    <mat-form-field appearance="outline">
+        <mat-label>Nombre Empleado</mat-label>
+        <input matInput placeholder="Ingrese Nombre Empleado"
+        formControlName="nombres_integrante"
+        [(ngModel)]="integrante.nombres_integrante"
+        >
+    </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Aplellido Empleado</mat-label>
-            <input matInput placeholder="Ingrese Aplellido Empleado">
-        </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Apellido Empleado</mat-label>
+        <input matInput placeholder="Ingrese Aplellido Empleado"
+        formControlName="apellidos_integrante"
+        [(ngModel)]="integrante.apellidos_integrante"
+        >
+    </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Usuario</mat-label>
-            <input matInput placeholder="Usuario">
-        </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Usuario</mat-label>
+        <input matInput placeholder="Usuario"
+        formControlName="nombre_usuario"
+        [(ngModel)]="integrante.nombre_usuario"
+        >
+    </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Contraseña</mat-label>
-            <input matInput placeholder="Contraseña">
-        </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input matInput placeholder="Contraseña"
+        formControlName="contrasena_usuario"
+        [(ngModel)]="integrante.contrasena_usuario"
+        >
+    </mat-form-field>
 
-            <button
-                mat-flat-button
-                color="accent"
-                class="add"
-                matTooltip="Editar Usuario"
-                > Resetear Usuario y Contraseña
-                <mat-icon>edit</mat-icon>
-            </button>          
+    <mat-form-field appearance="outline">
+      <mat-label>Contraseña</mat-label>
+      <input matInput placeholder="rol"
+      formControlName="rol_usuario"
+      [(ngModel)]="integrante.rol_usuario"
+      >
+    </mat-form-field>
 
-        <button
-            mat-flat-button
-            color="primary"
-            matTooltip="Agregar Usuario"
-            >
-            Modificar
-            <mat-icon>save</mat-icon>
-        </button>
+    <button
+        mat-flat-button
+        color="primary"
+        matTooltip="Agregar Usuario"
+        type="submit"
+        >
+        Actualizar
+        <mat-icon>save</mat-icon>
+    </button>
 
-    </form>
+</form>
 
 </div>
 

@@ -15,6 +15,7 @@ import { ReporteEmpleadosComponent } from './reporte-empleados/reporte-empleados
 import { AgregarEmpleadosComponent } from './agregar-empleados/agregar-empleados.component';
 import { AgregarEmpleadoComponent } from './agregar-empleados/agregar-empleado/agregar-empleado.component';
 import { EditarEmpleadoComponent } from './agregar-empleados/editar-empleado/editar-empleado.component';
+import { EditarService } from './agregar-empleados/editar.service';
 // import { GeneralServide } from 'src/app/service/global/general.service';
 
 
@@ -27,8 +28,8 @@ import { EditarEmpleadoComponent } from './agregar-empleados/editar-empleado/edi
     AdministradorRoutingModule,
     DataTablesModule,
     DynamicModule,
-    FormsModule, 
-    // NoopAnimationsModule, 
+    FormsModule,
+    // NoopAnimationsModule,
 
 
   ],
@@ -42,7 +43,7 @@ import { EditarEmpleadoComponent } from './agregar-empleados/editar-empleado/edi
   ],
   providers: [
     DialogsService,
-    // GeneralServide,
+    EditarService,
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: MAT_DATE_LOCALE, useValue: 'es-PE' },
   ],
