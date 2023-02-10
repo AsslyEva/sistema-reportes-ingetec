@@ -19,12 +19,12 @@
         </button>
     </div>
 
-    <div class="content-tabla col-12">
+    <div class="content-tabla col-12" >
       <table
             datatable
             [dtOptions]="dtOptions"
             class="table table-dark-ingetec"
-            *ngIf="integrantes !== null">
+            *ngIf="integrantes.length != 0">
         <thead>
           <tr>
             <th>N°</th>
@@ -35,31 +35,33 @@
           </tr>
         </thead>
         <tbody >
-          <tr class="text-center align-middle border-bottom " *ngFor="let integrante of integrantes; index as i" >
-                <td>{{i+1}}</td>
-                <td>{{integrante.nombres_integrante}}</td>
-                <td>{{integrante.apellidos_integrante}}</td>
-                <td>{{integrante.nombre_usuario}}</td>
-                <td>
-                    <div class="option-button ">
-                        <button
-                            color="primary"
-                            class="edit"
-                            matTooltip="Editar Usuario"
-                            (click)="editarEmpleado(integrante.codigo_integrante)"
-                            >
-                            <mat-icon>edit</mat-icon>
-                        </button>
+          <tr class="text-center align-middle border-bottom " 
+              *ngFor="let integrante of integrantes; index as i" >
+            <td>{{i+1}}</td>
+            <td>{{integrante.nombres_integrante}}</td>
+            <td>{{integrante.apellidos_integrante}}</td>
+            <td>{{integrante.nombre_usuario}}</td>
+            <td>
+              <div class="option-button ">
+                <button
+                    color="primary"
+                    class="edit"
+                    matTooltip="Editar Usuario"
+                    (click)="editarEmpleado(integrante.codigo_integrante)"
+                    >
+                    <mat-icon>edit</mat-icon>
+                </button>
 
-                        <button
-                            color="primary"
-                            class="delete"
-                            matTooltip="Eliminar Usuario"
-                            >
-                            <mat-icon> delete </mat-icon>
-                        </button>
-                    </div>
-                </td>
+                <button
+                    color="primary"
+                    class="delete"
+                    matTooltip="Eliminar Usuario"
+                    (click)="eliminarEmpleado()"
+                    >
+                    <mat-icon> delete </mat-icon>
+                </button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>

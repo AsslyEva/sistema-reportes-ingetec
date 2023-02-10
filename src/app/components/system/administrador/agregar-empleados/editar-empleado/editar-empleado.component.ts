@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DetalleCuadrillaComponent } from 'src/app/components/shared/detalle-cuadrilla/detalle-cuadrilla.component';
 import { IntegrantesService } from 'src/app/service/global/integrantes.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-empleado',
@@ -58,8 +59,16 @@ export class EditarEmpleadoComponent implements OnInit{
   onSubmit(formulario :any){
     this.integrantesService.postIntegrantesActualizar(formulario)
     .subscribe((resp :any) =>{
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Se ha actualizado datos de usuario correctamente',
+        showConfirmButton: false,
+        timer: 1500
+      })
       console.log(resp);
       this.closeState;
+      this.dialogRef.close();
     })
   }
 

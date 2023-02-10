@@ -1,10 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DataTableDirective } from 'angular-datatables';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { Subject } from 'rxjs';
 import { DialogsService } from 'src/app/components/shared/dialogs.service';
 import { IntegrantesService } from 'src/app/service/global/integrantes.service';
 import { LenguajeDataTable } from 'src/app/utils/utils';
+import Swal from 'sweetalert2';
+import { integrantes } from '../../usuario/formulario/formulario.component';
 import { AgregarEmpleadoComponent } from './agregar-empleado/agregar-empleado.component';
 import { EditarEmpleadoComponent } from './editar-empleado/editar-empleado.component';
 import { EditarService } from './editar.service';
@@ -16,9 +20,8 @@ import { EditarService } from './editar.service';
 })
 export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
   //Configuracion para datatable
-  dtOptions: ADTSettings = {};
+  dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
-
 
   integrantes: any[] = [];
   actosFilter : any[] = [];
@@ -26,7 +29,8 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
   constructor(
     public editarService: EditarService,
     private dialog: MatDialog,
-    private integrantesService: IntegrantesService
+    private integrantesService: IntegrantesService,
+    private httpClient: HttpClient
   ){}
 
 
@@ -35,8 +39,8 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
     this.dtOptions = {
       dom: '<"top"if>rt<"bottom"lp><"clear">',
       pagingType: 'simple_numbers',
-      pageLength: 5,
-      lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
+      pageLength: 4,
+      lengthMenu: [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
       language: LenguajeDataTable(),
       responsive: true,
       autoWidth: false,
@@ -47,7 +51,7 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
           targets: 2,
           orderable: false,
         },
-        { className: "text-center align-middle border-bottom", "targets": [0, 1, 2,3,4] },
+        { className: "text-center align-middle border-bottom", "targets": [0, 1, 2] },
       ],
     };
 
@@ -57,10 +61,9 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
         this.integrantes = resp;
       }
     );
+
   }
-
-
-
+ 
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
@@ -87,5 +90,26 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
     //   disableClose: true,
     //   panelClass: 'myapp-no-padding-dialog',
     // } )
+  }
+
+  eliminarEmpleado(){
+
+    Swal.fire({
+      title: '¿Estas Seguro?',
+      text: "De eliminar al usuario",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, Eliminar ahora'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Eliminado',
+          'Usuario Eliminado',
+          'success'
+        )
+      }
+    })
   }
 }

@@ -103,7 +103,8 @@
         </tr>
       </thead>
       <tbody *ngIf="actosFilter?.length !=0">
-        <tr *ngFor="let acto of actosFilter" class="text-center align-middle border-bottom ">
+        <tr *ngFor="let acto of actosFilter" 
+            class="text-center align-middle border-bottom ">
           <td>{{acto.descripcion_sede}}</td>
           <!-- <td>{{acto.lider}}</td>
           <td>

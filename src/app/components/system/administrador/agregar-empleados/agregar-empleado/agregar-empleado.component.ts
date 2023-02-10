@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DetalleCuadrillaComponent } from 'src/app/components/shared/detalle-cuadrilla/detalle-cuadrilla.component';
 import { IntegrantesService } from 'src/app/service/global/integrantes.service';
 import { UsersService } from 'src/app/service/global/users.service';
+import { environment } from 'src/environments/environment.prod';
+import Swal from 'sweetalert2';
 
 
 class Integrante {
@@ -58,9 +60,17 @@ export class AgregarEmpleadoComponent implements OnInit{
   onSubmit(formulario: any){
     this.userService.registrar(formulario)
     .subscribe((resp :any) =>{
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Se ha añadido correctamente al usuario',
+        showConfirmButton: false,
+        timer: 1500
+      })
       console.log(resp);
       this.closeState;
-    })
+      this.dialogRef.close();
+    })    
   }
 
   closeState(){

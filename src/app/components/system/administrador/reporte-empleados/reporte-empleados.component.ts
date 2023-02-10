@@ -53,6 +53,7 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
 
   //Configuracion para datatable
   dtOptions: ADTSettings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
 
   // inicializacion de variables
   // actos: Actividad[] = [];
@@ -69,11 +70,13 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
 
   participantes : any = [];
   selectedParticipante : any;
+
   nombreParticipante : string = "";
+  apellidoParticipante : string = "";
+
   actos: any[] = [];
   actosFilter : any[] = [];
 
-  dtTrigger: Subject<any> = new Subject<any>();
 
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
@@ -128,7 +131,8 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
 
   changed(value: any) {
     this.value = value;
-    this.nombreParticipante = this.participantes.find((e:any) => e.codigo_integrante == this.selectedParticipante).apellidos_integrante;
+    this.nombreParticipante = this.participantes.find((e:any) => e.codigo_integrante == this.selectedParticipante).nombres_integrante;
+    this.apellidoParticipante = this.participantes.find((e:any) => e.codigo_integrante == this.selectedParticipante).apellidos_integrante;
   }
 
   ngOnDestroy(): void {
@@ -142,7 +146,9 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
       this.actos = resp;
       this.actosFilter = this.actos;
     })
-    this.nombreParticipante = this.participantes.find((e:any) => e.codigo_integrante == this.selectedParticipante).apellidos_integrante;
+    this.nombreParticipante = this.participantes.find((e:any) => e.codigo_integrante == this.selectedParticipante).nombres_integrante;
+    this.apellidoParticipante = this.participantes.find((e:any) => e.codigo_integrante == this.selectedParticipante).apellidos_integrante;
+
     console.log("desde change :", this.nombreParticipante);
   }
 
@@ -251,7 +257,7 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
       ]);
     });
 
-    this.__downloadReportExcel( this.title + this.nombreParticipante, this.headerAndSize, dataExcel, this.range.value );
+    this.__downloadReportExcel( this.title + this.nombreParticipante + this.apellidoParticipante, this.headerAndSize, dataExcel, this.range.value );
   }
 }
 

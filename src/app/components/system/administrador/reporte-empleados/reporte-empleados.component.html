@@ -58,34 +58,21 @@
 
 
     </form>
+
     <div class="content-tabla col-12 " *ngIf="actosFilter.length != 0">
-
-      <!-- <app-participante-name
-        [numero]="selectedParticipante"
-        >
-      </app-participante-name> -->
-      <h4>
-        {{nombreParticipante}}
-      </h4>
-
-      <!-- <div *ngIf="selectedParticipante">
-        <div>
-          <label for="nombres_integrante">Hero name: </label>
-          <input id="nombres_integrante" [(ngModel)]="selectedParticipante" placeholder="name" readonly>
-        </div> -->
-<!--
-
-
-      </div>  -->
-      <!-- <input id="nombres_integrante" [(ngModel)]="value" placeholder="name" readonly> -->
-
-      <!-- <mat-hint>Trabjajador :{{selectedParticipante.value?.nombres_integrante}}</mat-hint> -->
-
+    
+      <div class="title-container">
+        <div class="nombre-title">
+          <h4>
+            Trabajador: {{nombreParticipante}} {{apellidoParticipante}}
+          </h4>        
+        </div>
+      </div>
 
       <table
-              datatable
-              [dtOptions]="dtOptions"
-              class="table table-dark-ingetec">
+        datatable
+        [dtOptions]="dtOptions"
+        class="table table-dark-ingetec">
 
         <thead>
           <tr >

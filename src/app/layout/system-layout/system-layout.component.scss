@@ -68,7 +68,7 @@
 
 mat-sidenav {
   text-align: center;
-  width: 22rem;
+  width: 19rem;
   // height: 99.9%;
   color: #ffff;
   margin: 0.2rem 0;
@@ -154,15 +154,15 @@ mat-sidenav-container{
     align-items: center;
     justify-content: center;
     vertical-align: middle;
-    left: 2rem;
+    left: 1rem;
     font-size: 1.4rem;
   }
   span{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: right;
     vertical-align: middle;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 }
 

@@ -222,7 +222,7 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         size: 40
       }
     ];
-    title = 'REPORTE ACTIVIDADES REALIZADAS';
+    title = 'REPORTE DE ACTIVIDADES COMERCIALES DIARIAS';
     informativeText = `Este reporte fue generado por el ${ environment.systemName }`
 
 

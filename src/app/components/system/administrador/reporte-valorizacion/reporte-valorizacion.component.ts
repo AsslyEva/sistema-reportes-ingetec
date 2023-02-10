@@ -24,9 +24,6 @@ export class ReporteValorizacionComponent implements OnInit {
 
 
   // inicializa filtro
-  todayDate : Date = new Date();
-  fecha_act =  new FormControl('');
-
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
@@ -41,25 +38,25 @@ export class ReporteValorizacionComponent implements OnInit {
 
   // dom: any[];
  //Configuracion para datatable
- dtOptions: ADTSettings = {};
- sede = "";
- segmento = "";
- partida = "";
- descripcion_actividades ="";
- unidad = 'Und'
- precio_urbano = "";
- precio_urbano_rural = "";
- precio_rural = "";
- cantidades_urbano = "";
- cantidades_urbano_rural = "";
- cantidades_rural = "";
- importe_urbano = "";
- importe_rural = "";
+   dtOptions: ADTSettings = {};
+   sede = "";
+   segmento = "";
+   partida = "";
+   descripcion_actividades ="";
+   unidad = 'Und'
+   precio_urbano = "";
+   precio_urbano_rural = "";
+   precio_rural = "";
+   cantidades_urbano = "";
+   cantidades_urbano_rural = "";
+   cantidades_rural = "";
+   importe_urbano = "";
+   importe_rural = "";
 
 
 
 
- dtTrigger: Subject<any> = new Subject<any>();
+   dtTrigger: Subject<any> = new Subject<any>();
 
 
   constructor(
@@ -100,7 +97,7 @@ export class ReporteValorizacionComponent implements OnInit {
          targets: 2,
          orderable: false,
        },
-       { className: "text-center align-middle border-bottom", "targets": [0, 1, 2] },
+       { className: "text-center align-middle border-bottom", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] },
      ],
    };
   //  this.httpClient.get<any[]>('data/data.json')
@@ -181,7 +178,7 @@ export class ReporteValorizacionComponent implements OnInit {
         size: 10
       }
     ];
-    title = 'REPORTE ACTIVIDADES AGRUPADAS';
+    title = 'REPORTE DE VALORIZACION DE ACTIVIDADES COMERCIALES';
     informativeText = `Este reporte fue generado por el ${ environment.systemName }`
 
 
