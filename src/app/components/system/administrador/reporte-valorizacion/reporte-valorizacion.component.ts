@@ -224,10 +224,10 @@ export class ReporteValorizacionComponent implements OnInit {
   }
 
   filterDate(fromDate: any, ToDate: any, data: any){
-    return data.filter( (resp:any) => new Date(resp.fecha_cant_eje).getTime() > new Date( fromDate ).getTime()
+    return data.filter( (resp:any) => new Date(resp.fecha_cant_eje).getTime() >= new Date( fromDate ).getTime()
       // console.log('dede el filter data', new Date(resp.fecha_cant_eje), new Date( fromDate ))
       ).filter( (resp:any) =>
-        new Date(resp.fecha_cant_eje).getTime() < new Date( ToDate ).getTime()
+        new Date(resp.fecha_cant_eje).getTime() <= new Date( ToDate ).getTime()
       )
   }
 
