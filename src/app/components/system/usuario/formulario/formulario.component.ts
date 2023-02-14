@@ -149,7 +149,7 @@ export class FormularioComponent implements OnInit {
       actividades: this.fb.array([]) ,
     });
 
-    this.yesterday.setDate(this.yesterday.getDate() - 1);
+    this.yesterday.setDate(this.yesterday.getDate() - 2);
   
     this.itemDisabled1 = this.itemDisabled1.bind(this);
     this.itemDisabled2 = this.itemDisabled2.bind(this);
@@ -253,9 +253,9 @@ export class FormularioComponent implements OnInit {
       this.fecha_act.value
       && this.segmento.value
       && this.actividad_especifica.value
-      && this.rural.value
-      && this.urbano.value
-      && this.urbano_rural.value ) {
+      && this.rural.value || 0
+      && this.urbano.value || 0
+      && this.urbano_rural.value || 0 ) {
       this.actividades().push(this.nuevaActividad());
       console.log(this.actividades().value)
       console.log('integrantes', this.arrayIntegrantes)
@@ -268,7 +268,7 @@ export class FormularioComponent implements OnInit {
       this.urbano_rural.setValue('0');
     } else {
       Swal.fire(
-        'Es necesario ingresar tdodos los actividades para continuar',
+        'Es necesario ingresar todos los actividades para continuar',
         environment.systemName,
         'warning'
       );

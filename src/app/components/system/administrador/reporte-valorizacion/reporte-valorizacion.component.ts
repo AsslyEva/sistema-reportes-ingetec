@@ -176,6 +176,10 @@ export class ReporteValorizacionComponent implements OnInit {
       {
         header:  "IMP. VAL. RURAL",
         size: 10
+      },
+      {
+        header:  "FECHA",
+        size: 12
       }
     ];
     title = 'REPORTE DE VALORIZACION DE ACTIVIDADES COMERCIALES';
@@ -201,11 +205,12 @@ export class ReporteValorizacionComponent implements OnInit {
         x1.pre_uni_rural_act,
         x1.pre_uni_urbano_act * x1.cantidad_urbano_eje,
         x1.pre_uni_ruralUrbano_act * x1.cantidad_urbrural_eje,
-        x1.pre_uni_rural_act * x1.cantidad_rural_eje
+        x1.pre_uni_rural_act * x1.cantidad_rural_eje,
+        fecha,
       ]);
     });
 
-    this.__downloadReportExcel( this.title, this.headerAndSize, dataExcel, {} );
+    this.__downloadReportExcel( this.title, this.headerAndSize, dataExcel, this.range.value );
   }
 
   filtrar(){

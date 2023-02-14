@@ -57,8 +57,20 @@
                     class="delete"
                     matTooltip="Eliminar Usuario"
                     (click)="eliminarEmpleado()"
+                    *ngIf="estadoDesactivado"
+                    (click)="changeEstadoDesactivado()"
                     >
                     <mat-icon> delete </mat-icon>
+                </button>
+
+                <button
+                    color="primary"
+                    class="activar"
+                    matTooltip="Activar  Usuario"
+                    *ngIf="!estadoDesactivado"
+                    (click)="changeEstadoDesactivado()"
+                    >
+                    <mat-icon> add_task </mat-icon>
                 </button>
               </div>
             </td>

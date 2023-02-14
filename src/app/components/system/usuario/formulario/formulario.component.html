@@ -142,7 +142,8 @@
                                       [ngModel]="todayDate"
                                       [max]="tomorrow"
                                       (ngModelChange)="toChange()"
-                                      [min]="yesterday">
+                                      [min]="yesterday"
+                                      readonly>
                                       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                       <mat-datepicker #picker></mat-datepicker>
 
@@ -210,6 +211,7 @@
                                 [min]="minValue"
                                 [max]="maxValue"
                                 minMax
+                                value="0"
                                 [formControl]="rural" class="form-control col-md-4" required>
                         </div>
                       </div >
@@ -258,16 +260,16 @@
                       </div>
 
 
-                      <div class="cantidad-succes">
-                          <div class="item-cantidad">
+                      <div class="cantidad-succes ">
+                          <div class="item-cantidad ">
                             <ul>Urbano<mat-icon>check_circle_outline</mat-icon></ul>
                             <input type="number" style="text-align: center;"  formControlName="cantidad_urbano_eje">
                           </div>
-                          <div class="item-cantidad">
+                          <div class="item-cantidad ">
                             <ul>Urbano - Rural<mat-icon>check_circle_outline</mat-icon></ul>
                             <input type="number" style="text-align: center;"  formControlName="cantidad_urbrural_eje" >
                           </div>
-                          <div class="item-cantidad">
+                          <div class="item-cantidad ">
                             <ul>Rural<mat-icon>check_circle_outline</mat-icon></ul>
                             <input type="number" style="text-align: center;"  formControlName="cantidad_rural_eje">
                         </div>

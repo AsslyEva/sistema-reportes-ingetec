@@ -26,6 +26,11 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
   integrantes: any[] = [];
   actosFilter : any[] = [];
 
+
+    // activar
+    estadoDesactivado= true;
+
+
   constructor(
     public editarService: EditarService,
     private dialog: MatDialog,
@@ -112,4 +117,11 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
       }
     })
   }
+
+
+  changeEstadoDesactivado() {
+    this.estadoDesactivado = !this.estadoDesactivado;
+    console.log("estado ", this.estadoDesactivado);
+  }
+  
 }
