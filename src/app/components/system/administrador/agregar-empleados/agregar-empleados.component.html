@@ -35,7 +35,7 @@
           </tr>
         </thead>
         <tbody >
-          <tr class="text-center align-middle border-bottom " 
+          <tr class="text-center align-middle border-bottom "
               *ngFor="let integrante of integrantes; index as i" >
             <td>{{i+1}}</td>
             <td>{{integrante.nombres_integrante}}</td>
@@ -56,9 +56,8 @@
                     color="primary"
                     class="delete"
                     matTooltip="Eliminar Usuario"
-                    (click)="eliminarEmpleado()"
-                    *ngIf="estadoDesactivado"
-                    (click)="changeEstadoDesactivado()"
+                    *ngIf="integrante.estado_integrante == 1"
+                    (click)="changeEstado(integrante.codigo_integrante,0)"
                     >
                     <mat-icon> delete </mat-icon>
                 </button>
@@ -67,8 +66,8 @@
                     color="primary"
                     class="activar"
                     matTooltip="Activar  Usuario"
-                    *ngIf="!estadoDesactivado"
-                    (click)="changeEstadoDesactivado()"
+                    *ngIf="integrante.estado_integrante == 0"
+                    (click)="changeEstado(integrante.codigo_integrante,1)"
                     >
                     <mat-icon> add_task </mat-icon>
                 </button>

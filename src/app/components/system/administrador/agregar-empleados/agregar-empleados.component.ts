@@ -68,7 +68,7 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
     );
 
   }
- 
+
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
@@ -97,31 +97,35 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
     // } )
   }
 
-  eliminarEmpleado(){
-
+  changeEstado(cod: string, estado: number) {
+    const data = {estado_integrante: estado, codigo_integrante: cod}
     Swal.fire({
       title: '¿Estas Seguro?',
-      text: "De eliminar al usuario",
+      text: estado == 0 ? "De eliminar al usuario" : "De restaurar al usuario",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, Eliminar ahora'
+      confirmButtonText: 'Sí, ' + (estado == 0 ? 'Eliminar' : 'Restaurar')  + ' ahora'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Eliminado',
-          'Usuario Eliminado',
-          'success'
-        )
+        this.integrantesService.postIntegrantesEliminar(data)
+        .subscribe(
+          (resp: any) => {
+            console.log('desde cambiar estado', resp);
+            Swal.fire(
+              (estado == 0 ? 'Eliminado' : 'Restaurado'),
+              'Usuario '+ (estado == 0 ? 'Eliminado' : 'Restaurado') ,
+              'success'
+            )
+          }
+        );
+
       }
     })
+
+    // this.estadoDesactivado = !this.estadoDesactivado;
+    // console.log("estado ", this.estadoDesactivado);
   }
 
-
-  changeEstadoDesactivado() {
-    this.estadoDesactivado = !this.estadoDesactivado;
-    console.log("estado ", this.estadoDesactivado);
-  }
-  
 }

@@ -32,4 +32,8 @@ export class IntegrantesService {
   postIntegrantesActualizar(data: any){
     return this.http.post(`${this.url}integrantes/actualizar`, data)
   }
+
+  postIntegrantesEliminar(data: any){
+    return this.http.post(`${this.url}integrantes/eliminar`, data)
+  }
 }
