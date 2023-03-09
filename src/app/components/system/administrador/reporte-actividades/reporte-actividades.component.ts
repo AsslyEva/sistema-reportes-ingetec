@@ -13,6 +13,7 @@ import { SegmentosService } from 'src/app/service/global/segmentos.service';
 import { downloadReportExcel } from 'src/app/components/shared/generate-excel/generate-excel';
 import { environment } from 'src/environments/environment.prod';
 import { DatePipe } from '@angular/common';
+import Swal from 'sweetalert2';
 
 
 
@@ -101,6 +102,7 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     .subscribe((resp: any) =>{
       this.actos = resp;
       this.actosFilter = this.actos;
+      console.log(this.actos)
     })
 
     this.segmentosService.getSegmentos()
@@ -176,6 +178,34 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     this.selectedSegmento = null;
   }
 
+  changeEstado(cod: string, estado: number) {
+    const data = {estado_eje: estado, codigo_cant_eje: cod}
+    Swal.fire({
+      title: '¿Estas Seguro?',
+      text: estado == 0 ? "De eliminar el registro" : "De restaurar el registro",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, ' + (estado == 0 ? 'Eliminar' : 'Restaurar')  + ' ahora'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.reporteService.postEliminarEje(data)
+        .subscribe(
+          (resp: any) => {
+            console.log('desde cambiar estado', resp);
+            Swal.fire(
+              (estado == 0 ? 'Eliminado' : 'Restaurado'),
+              'Registro '+ (estado == 0 ? 'Eliminado' : 'Restaurado') ,
+              'success'
+            )
+          }
+        );
+
+      }
+    })
+  }
+
   public abrirDetalle(codigo: string, lider: string) {
     this.dialogsService
       .confirm(codigo, lider)
@@ -213,6 +243,30 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         size: 7
       },
       {
+        header:  "PRECIO UNI URB",
+        size: 9
+      },
+      {
+        header:  "PRECIO UNI URBRURAL",
+        size: 9
+      },
+      {
+        header:  "PRECIO UNI RURAL",
+        size: 9
+      },
+      {
+        header:  "IMP. VAL. URB",
+        size: 10
+      },
+      {
+        header:  "IMP. VAL. URBRURAL",
+        size: 10
+      },
+      {
+        header:  "IMP. VAL. RURAL",
+        size: 10
+      },
+      {
         header:  "FECHA",
         size: 12
       }
@@ -238,6 +292,12 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         x1.cantidad_urbano_eje,
         x1.cantidad_urbrural_eje,
         x1.cantidad_rural_eje,
+        x1.pre_uni_urbano_act,
+        x1.pre_uni_ruralUrbano_act,
+        x1.pre_uni_rural_act,
+        x1.pre_uni_urbano_act * x1.cantidad_urbano_eje,
+        x1.pre_uni_ruralUrbano_act * x1.cantidad_urbrural_eje,
+        x1.pre_uni_rural_act * x1.cantidad_rural_eje,
         fecha,
         x1.cuadrilla
       ]);

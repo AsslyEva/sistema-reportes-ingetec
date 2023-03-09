@@ -149,7 +149,29 @@
               </div>
             </div>
           </td>
-          <td>Eliminar</td>
+          <td>
+            <div class="option-button ">
+              <button
+                  color="primary"
+                  class="delete"
+                  matTooltip="Eliminar Usuario"
+                  *ngIf="acto.estado_eje == 1"
+                  (click)="changeEstado(acto.codigo_cant_eje,0)"
+                  >
+                  <mat-icon> delete </mat-icon>
+              </button>
+
+              <button
+                  color="primary"
+                  class="activar"
+                  matTooltip="Activar  Usuario"
+                  *ngIf="acto.estado_eje == 0"
+                  (click)="changeEstado(acto.codigo_cant_eje,1)"
+                  >
+                  <mat-icon> add_task </mat-icon>
+              </button>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

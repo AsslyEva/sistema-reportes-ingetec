@@ -97,7 +97,7 @@ export class ReporteValorizacionComponent implements OnInit {
          targets: 2,
          orderable: false,
        },
-       { className: "text-center align-middle border-bottom", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] },
+       { className: "text-center align-middle border-bottom", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] },
      ],
    };
   //  this.httpClient.get<any[]>('data/data.json')
@@ -177,10 +177,6 @@ export class ReporteValorizacionComponent implements OnInit {
         header:  "IMP. VAL. RURAL",
         size: 10
       },
-      {
-        header:  "FECHA",
-        size: 12
-      }
     ];
     title = 'REPORTE DE VALORIZACION DE ACTIVIDADES COMERCIALES';
     informativeText = `Este reporte fue generado por el ${ environment.systemName }`
@@ -206,11 +202,10 @@ export class ReporteValorizacionComponent implements OnInit {
         x1.pre_uni_urbano_act * x1.cantidad_urbano_eje,
         x1.pre_uni_ruralUrbano_act * x1.cantidad_urbrural_eje,
         x1.pre_uni_rural_act * x1.cantidad_rural_eje,
-        fecha,
       ]);
     });
 
-    this.__downloadReportExcel( this.title, this.headerAndSize, dataExcel, this.range.value );
+    this.__downloadReportExcel( this.title, this.headerAndSize, dataExcel, {} );
   }
 
   filtrar(){

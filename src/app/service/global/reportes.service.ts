@@ -23,4 +23,9 @@ export class ReportesService {
   getReportesParticipante(id: Number){
     return this.http.get(`${this.url}reportes/listar/participantes/${id}`)
   }
+
+  postEliminarEje(data: any){
+    return this.http.post(`${this.url}reportes/eliminarEje`, data)
+  }
+
 }
