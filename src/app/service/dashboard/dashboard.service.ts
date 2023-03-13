@@ -25,7 +25,7 @@ export class DashboardService {
 
   public getTotalBusquedas(fechaIni: String, fechaFin: String){
     return this.http.get<Response>(
-      `${this.baseEndPoint}/total_busquedas?fecha_ini=${fechaIni}&fecha_fin=${fechaFin}`,
+      `${this.baseEndPoint}/${fechaIni}&fecha_fin=${fechaFin}`,
 
       {
         headers: this.authCheckService.obtenerDatosToken(this.httpHeader)
@@ -46,7 +46,7 @@ export class DashboardService {
   public getTotalTrabjador(fechaInicio: string, fechaFin: string): Observable<ResColumn[]>{
 
     return this.http.get<ResColumn[]>(
-      `${this.baseEndPoint}/top5_busq_frec?fecha_ini=${fechaInicio}&fecha_fin=${fechaFin}`,
+      `${this.baseEndPoint}/${fechaInicio}&fecha_fin=${fechaFin}`,
       {
         headers: this.authCheckService.obtenerDatosToken(this.httpHeader)
       }
@@ -62,7 +62,7 @@ export class DashboardService {
   public getTotalActvidades(fechaInicio: string, fechaFin: string): Observable<ResBar[]>{
 
     return this.http.get<ResBar[]>(
-      `${this.baseEndPoint}/top5_busq_frec?fecha_ini=${fechaInicio}&fecha_fin=${fechaFin}`,
+      `${this.baseEndPoint}/${fechaInicio}&fecha_fin=${fechaFin}`,
       {
         headers: this.authCheckService.obtenerDatosToken(this.httpHeader)
       }
@@ -78,7 +78,7 @@ export class DashboardService {
   public getTotalPie(fechaInicio: string, fechaFin: string): Observable<ResPie[]>{
 
     return this.http.get<ResPie[]>(
-      `${this.baseEndPoint}/top5_busq_frec?fecha_ini=${fechaInicio}&fecha_fin=${fechaFin}`,
+      `${this.baseEndPoint}/${fechaInicio}&fecha_fin=${fechaFin}`,
       {
         headers: this.authCheckService.obtenerDatosToken(this.httpHeader)
       }
