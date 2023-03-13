@@ -25,17 +25,6 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-<!--
-          <mat-form-field class="form-item" appearance="outline">
-            <mat-label>Lider de Equipo</mat-label>
-            <mat-select
-                        placeholder="Ingresa registra"
-                        formControlName="actividad">
-              <mat-option *ngFor="let actividad of actos" [value]="actividad.id_actividad" >
-                {{actividad.lider}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field> -->
 
           <mat-form-field appearance="fill">
             <mat-label>Enter a date range</mat-label>
@@ -51,24 +40,6 @@
             <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
           </mat-form-field>
 
-          <!-- <mat-form-field class="form-item" appearance="outline" >
-            <mat-label>Fecha inicial</mat-label>
-            <input matInput [(ngModel)]="toDate"
-                    >
-            <mat-datepicker-toggle matIconSuffix [for]="fecInicio" ></mat-datepicker-toggle>
-            <mat-datepicker #fecInicio></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field class="form-item" appearance="outline" >
-            <mat-label>Fecha final</mat-label>
-            <input matInput
-                    [matDatepicker]="fecfin"
-                    >
-            <mat-datepicker-toggle matIconSuffix [for]="fecfin"></mat-datepicker-toggle>
-            <mat-datepicker #fecfin></mat-datepicker>
-
-          </mat-form-field> -->
-
           <button style="background-color: #3cd419; color: #ffff;" matt-button (click)="filtrar()">Buscar&nbsp;
             <mat-icon>search</mat-icon>
           </button>
@@ -82,6 +53,12 @@
 
 
   </form>
+
+  <mat-radio-group aria-label="Select an option" [(ngModel)]="estadoData" (change)="filtrar()">
+    <mat-radio-button [value]="1">Activos</mat-radio-button>
+    <mat-radio-button [value]="0">Inactivos</mat-radio-button>
+    <mat-radio-button [value]="3">Ambos</mat-radio-button>
+  </mat-radio-group>
 
   <div class="content-tabla col-12 " *ngIf="actosFilter.length != 0">
     <table
@@ -175,6 +152,9 @@
         </tr>
       </tbody>
     </table>
+
+    <h3>Total: {{sumaTotal}}</h3>
+
     <div class="button-option download text-center align-middle border-top pt-5">
       <button
         class="descargar-all col-12"
@@ -184,16 +164,9 @@
         <span class="text-button">Descargar toda la Tabla</span>
       </button>
     </div>
+
   </div>
 </div>
-
-
-
-
-
-
-
-
 
 
 <ngx-spinner

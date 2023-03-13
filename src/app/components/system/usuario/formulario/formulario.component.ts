@@ -14,7 +14,7 @@ import { SegmentosService } from 'src/app/service/global/segmentos.service';
 import { ActividadesService } from 'src/app/service/global/actividades.service';
 import { IntegrantesService } from 'src/app/service/global/integrantes.service';
 import { CantidadesEjecutadasService } from 'src/app/service/global/cantidades-ejecutadas.service';
-import { Integrante } from 'src/app/model/global/integrantes';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export interface User {
   name: string;
@@ -100,6 +100,7 @@ export class FormularioComponent implements OnInit {
   // inicializacion integrantes
   integrantes = new FormControl('');
   integrantesList: any[] =[];
+  integrantesListoutLider: any[] =[];
   // array is Integrantes
   arrayIntegrantes: any[] =[];
 
@@ -113,12 +114,18 @@ export class FormularioComponent implements OnInit {
     return false
   }
 
-// BOTON SELECCIONAR DE INTEGRANTES
+  // COMBO LIDER
+  changeLider(){
+    console.log(this.selectedLider);
+    this.integrantesListoutLider = this.integrantesList.filter(e=>e.codigo_integrante !== this.selectedLider)
+  }
+
+  // BOTON SELECCIONAR DE INTEGRANTES
   selectAll(select: MatSelect, values: any, array: any) {
 
-    select.value = this.integrantesList;
+    select.value = this.integrantesListoutLider;
     array = values;
-    this.arrayIntegrantes = this.integrantesList;
+    this.arrayIntegrantes = this.integrantesListoutLider;
     console.log(this.arrayIntegrantes);
     console.log(select.value);
   }
@@ -139,6 +146,7 @@ export class FormularioComponent implements OnInit {
     private actividadesService : ActividadesService,
     private integrantesService : IntegrantesService,
     private cantidadesEjeService : CantidadesEjecutadasService,
+    private spinner: NgxSpinnerService,
     ) {
     this.tomorrow.setDate(this.tomorrow.getDate());
     this.productForm = this.fb.group({
@@ -150,7 +158,7 @@ export class FormularioComponent implements OnInit {
     });
 
     this.yesterday.setDate(this.yesterday.getDate() - 2);
-  
+
     this.itemDisabled1 = this.itemDisabled1.bind(this);
     this.itemDisabled2 = this.itemDisabled2.bind(this);
   }
@@ -256,23 +264,23 @@ export class FormularioComponent implements OnInit {
       && this.rural.value || 0
       && this.urbano.value || 0
       && this.urbano_rural.value || 0 ) {
-      this.actividades().push(this.nuevaActividad());
-      console.log(this.actividades().value)
-      console.log('integrantes', this.arrayIntegrantes)
-      //limpiar controls
-      //this.fecha_act.reset();
-      this.segmento.reset();
-      this.actividad_especifica.reset();
-      this.rural.setValue('0');
-      this.urbano.setValue('0');
-      this.urbano_rural.setValue('0');
-    } else {
-      Swal.fire(
-        'Es necesario ingresar todos los actividades para continuar',
-        environment.systemName,
-        'warning'
-      );
-    }
+        this.actividades().push(this.nuevaActividad());
+        console.log(this.actividades().value)
+        console.log('integrantes', this.arrayIntegrantes)
+        //limpiar controls
+        //this.fecha_act.reset();
+        this.segmento.reset();
+        this.actividad_especifica.reset();
+        this.rural.setValue('0');
+        this.urbano.setValue('0');
+        this.urbano_rural.setValue('0');
+      } else {
+        Swal.fire(
+          'Es necesario ingresar todos los actividades para continuar',
+          environment.systemName,
+          'warning'
+        );
+      }
   }
 
   //Quitar cantidad del array
@@ -292,8 +300,8 @@ export class FormularioComponent implements OnInit {
     //   Swal.fire('Ingrese Actividades para enviar el formulario',environment.systemName,'error');
     // }
 
-
     arrayActividades.forEach((element: any)=> {
+      this.spinner.show();
       this.cantidadesEjeService.postInsertarEje( element ).
       subscribe( (resp: any) => {
 
@@ -319,10 +327,11 @@ export class FormularioComponent implements OnInit {
 
         // solo resetea actividaes
         this.actividades().reset();
+        this.spinner.hide();
       },
 
       (err) => {
-
+        this.spinner.hide();
         if (err.status != 500) {
 
           let errorIcon = "error" ;
@@ -362,7 +371,6 @@ export class FormularioComponent implements OnInit {
           });
 
         } else {
-
           Swal.fire({
             icon: "error",
             title: "Se ha producido un error al intentar ingresar al módulo (Esto puede ser debido por una desconexión a la base de datos o algun error en el programa)",
@@ -373,9 +381,7 @@ export class FormularioComponent implements OnInit {
             confirmButtonColor: '#00A5A5',
             confirmButtonText: '<span style="padding: 0 15px;">OK</span>'
           });
-
         }
-
       }
 
     );

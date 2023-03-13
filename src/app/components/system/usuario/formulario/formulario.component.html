@@ -49,12 +49,13 @@
                             required
                             formControlName="thirdCtrl"
                             [itemDisabled]="itemDisabled1"
-                            [(value)]="value1">
+                            [(value)]="value1"
+                            (selectionChange)="changeLider()">
                   <mat-option *ngFor="let lider of integrantesList"
                               [value]="lider.codigo_integrante">
                     {{lider.nombres_integrante + ' ' +lider.apellidos_integrante}}
                   </mat-option>
-                 </mat-select>
+                </mat-select>
                 <br />
                 <mat-error
                   *ngIf="LiderFormGroup.controls['thirdCtrl'].hasError('required')"
@@ -94,7 +95,7 @@
                     </button>
                   </div>
 
-                  <mat-option *ngFor="let integrantes of integrantesList"
+                  <mat-option *ngFor="let integrantes of integrantesListoutLider"
                               [value]="integrantes"
                               >
                   {{integrantes.nombres_integrante + ' ' +integrantes.apellidos_integrante}}
@@ -123,8 +124,8 @@
           </mat-step>
 
           <mat-step>
-              <form  [formGroup]="productForm" 
-                    style="text-align: center;" 
+              <form  [formGroup]="productForm"
+                    style="text-align: center;"
                     formControlName="sixthCtrl" required>
                 <label>Actividades realizadas</label>
                 <ul>(Click en (+) para agregar nueva actividad)</ul>
@@ -227,8 +228,8 @@
                       </button>
                     </tr>
 
-                    <div class="actividades" 
-                        *ngFor="let actividad of actividades().controls; let i=index" 
+                    <div class="actividades"
+                        *ngFor="let actividad of actividades().controls; let i=index"
                         [formGroupName]="i">
 
                       <div class="caracteristicas">

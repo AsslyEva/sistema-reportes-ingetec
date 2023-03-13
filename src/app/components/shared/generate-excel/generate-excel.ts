@@ -6,15 +6,15 @@ import { environment } from 'src/environments/environment.prod';
 // for reports
 const informativeText = `Este reporte fue generado por el ${ environment.systemName }`;
 
-export const downloadReportExcel = (title:string, headers:any[], datos:any[], fromToDate: any) => {
-    const {fromDate, toDate} = fromToDate;
+export const downloadReportExcel = (title:string, headers:any[], datos:any[], fromToDate: any, total?: number) => {
+    const {start, end} = fromToDate;
     let currentdate = new Date;
     let date = `FECHA Y HORA DE GENERACIÓN: ${ currentdate.toLocaleString() } `;
     //create new excel work book
     let workbook = new Workbook();
     //add name to sheet
     let worksheet = workbook.addWorksheet('Hoja 1', {
-      headerFooter:{firstHeader: "&RZONA REGISTRAL  N° IX - SEDE LIMA "},
+      headerFooter:{firstHeader: "&INGETEC "},
       pageSetup:{paperSize: 9, orientation:'landscape'}
     });
 
@@ -34,10 +34,10 @@ export const downloadReportExcel = (title:string, headers:any[], datos:any[], fr
     let titleRow = worksheet.addRow([title]);
 
     // Add fecha
-    if( fromDate && toDate ){
+    if( start && end ){
       worksheet.addRow('');
-      let fromDateRow = worksheet.addRow(['FECHA INICIAL:','', fromDate]);
-      let toDateRow = worksheet.addRow(['FECHA FINAL:','', toDate]);
+      let fromDateRow = worksheet.addRow(['FECHA INICIAL:','', start]);
+      let toDateRow = worksheet.addRow(['FECHA FINAL:','', end]);
       worksheet.addRow('');
       worksheet.mergeCells(`A${fromDateRow.number}:B${fromDateRow.number}`);
       worksheet.mergeCells(`A${toDateRow.number}:B${toDateRow.number}`);
@@ -111,6 +111,11 @@ export const downloadReportExcel = (title:string, headers:any[], datos:any[], fr
         }
       }
     })
+
+    worksheet.addRow('');
+    let totalSuma = worksheet.addRow(['TOTAL:','', total]);
+    worksheet.mergeCells(`A${ totalSuma.number }:B${ totalSuma.number }`);
+    totalSuma.getCell(2).font = { name: 'Calibri', family: 1, size: 11, bold: true };
 
     //set downloadable file name
     let fname=`${title}_${currentdate.toLocaleString()}`

@@ -67,11 +67,12 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
   urbano = "";
   urbano_rural = "";
   fecha ='';
-
+  estadoData = 1;
   segmentos : any = [];
   selectedSegmento : any;
   actos: any[] = [];
   actosFilter : any[] = [];
+  sumaTotal: number = 0;
 
   dtTrigger: Subject<any> = new Subject<any>();
 
@@ -101,7 +102,7 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     this.reporteService.getReportesByEje()
     .subscribe((resp: any) =>{
       this.actos = resp;
-      this.actosFilter = this.actos;
+      this.filtrar();
       console.log(this.actos)
     })
 
@@ -137,23 +138,27 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
   }
 
   filtrar(){
+    this.actosFilter = this.actos;
+    this.sumaTotal = 0;
     const rango = this.range.value;
     if(rango.start != null || rango.end != null || rango.start || rango.end ){
       this.actosFilter = [];
       setTimeout(() => {
-        this.actosFilter = this.filterDate(rango.start, rango.end, this.actos);
-        console.log("actosFilter",this.actosFilter);
-        this.filtrarSegmento(this.actosFilter);
+        this.actosFilter = this.filtrarEstado(this.filtrarSegmento(this.filterDate(rango.start, rango.end, this.actos)));
+        this.actosFilter.map((resp: any) => {
+          this.sumaTotal += (resp.pre_uni_urbano_act * resp.cantidad_urbano_eje) + (resp.pre_uni_ruralUrbano_act * resp.cantidad_urbrural_eje) + (resp.pre_uni_rural_act * resp.cantidad_rural_eje);
+        });
       }, 100);
     } else {
-      this.filtrarSegmento(this.actos);
-      console.log('desde filtrar sin fecha',this.actosFilter);
+      this.actosFilter = this.filtrarEstado(this.filtrarSegmento(this.actos));
+      this.actosFilter.map((resp: any) => {
+        this.sumaTotal += (resp.pre_uni_urbano_act * resp.cantidad_urbano_eje) + (resp.pre_uni_ruralUrbano_act * resp.cantidad_urbrural_eje) + (resp.pre_uni_rural_act * resp.cantidad_rural_eje);
+      });
     }
   }
 
   filterDate(fromDate: any, ToDate: any, data: any){
     return data.filter( (resp:any) => new Date(resp.fecha_cant_eje).getTime() >= new Date( fromDate ).getTime()
-      // console.log('dede el filter data', new Date(resp.fecha_cant_eje), new Date( fromDate ))
       ).filter( (resp:any) =>
         new Date(resp.fecha_cant_eje).getTime() <= new Date( ToDate ).getTime()
       )
@@ -161,13 +166,18 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
 
   filtrarSegmento(data: any){
     if(this.selectedSegmento != null){
-      const datosFiltrados = data;
-      this.actosFilter = [];
-      setTimeout(() => {
-        this.actosFilter = datosFiltrados.filter((e:any) => e.codigo_seg == this.selectedSegmento);
-        console.log('desdefilteSegmento',this.actosFilter);
-      }, 100);
+      console.log('desdefilteSegmento',data.filter((e:any) => e.codigo_seg == this.selectedSegmento));
+      return data.filter((e:any) => e.codigo_seg == this.selectedSegmento);
     }
+    return data;
+  }
+
+  filtrarEstado(data: any){
+    if(this.estadoData == 3){
+      return data;
+    }
+    console.log("desde filter data",data.filter((resp :any) => resp.estado_eje == this.estadoData));
+    return data.filter((resp :any) => resp.estado_eje == this.estadoData);
   }
 
   reset(){
@@ -302,8 +312,7 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         x1.cuadrilla
       ]);
     });
-
-    this.__downloadReportExcel( this.title, this.headerAndSize, dataExcel, this.range.value );
+    this.__downloadReportExcel( this.title, this.headerAndSize, dataExcel, this.range.value, this.sumaTotal );
   }
 }
 
