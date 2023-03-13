@@ -95,15 +95,22 @@
           <th>Cuadrilla</th> -->
           <th>Segmento</th>
           <th>Actividades Realizadas</th>
-          <th>Cantidades Ejecutadas Urbanas</th>
-          <th>Cantidades Ejecutadas Urbana-Rural</th>
-          <th>Cantidades Ejecutadas Rurales</th>
+          <th>Precio Unitario Urbano</th>
+          <th>Precio Unitario Urbano - Rural</th>
+          <th>Precio Unitario Rural</th>
+          <th>Cantidades Ejecutadas Urbano</th>
+          <th>Cantidades Ejecutadas Urbano - Rural</th>
+          <th>Cantidades Ejecutadas Rural</th>
+          <th>Importe Valorizado Urbano</th>
+          <th>Importe Valorizado Urbano - Rural</th>
+          <th>Importe Valorizado Rural</th>
           <th>Fecha</th>
           <th>Cuadrilla</th>
+          <th>Opciones</th>
         </tr>
       </thead>
       <tbody *ngIf="actosFilter?.length !=0">
-        <tr *ngFor="let acto of actosFilter" 
+        <tr *ngFor="let acto of actosFilter"
             class="text-center align-middle border-bottom ">
           <td>{{acto.descripcion_sede}}</td>
           <!-- <td>{{acto.lider}}</td>
@@ -116,9 +123,15 @@
           </td> -->
           <td>{{acto.descripcion_seg}}</td>
           <td>{{acto.descripcion_act}}</td>
+          <td>{{acto.pre_uni_urbano_act}}</td>
+          <td>{{acto.pre_uni_ruralUrbano_act}}</td>
+          <td>{{acto.pre_uni_rural_act}}</td>
           <td>{{acto.cantidad_urbano_eje}}</td>
           <td>{{acto.cantidad_urbrural_eje}}</td>
           <td>{{acto.cantidad_rural_eje}}</td>
+          <td>{{acto.pre_uni_urbano_act * acto.cantidad_urbano_eje}}</td>
+          <td>{{acto.pre_uni_ruralUrbano_act * acto.cantidad_urbrural_eje}}</td>
+          <td>{{acto.pre_uni_rural_act * acto.cantidad_rural_eje}}</td>
           <td>{{acto.fecha_cant_eje}}</td>
           <td>
             <div class="options">
@@ -134,6 +147,29 @@
                   <mat-icon> visibility </mat-icon>
                 </button>
               </div>
+            </div>
+          </td>
+          <td>
+            <div class="option-button ">
+              <button
+                  color="primary"
+                  class="delete"
+                  matTooltip="Eliminar Usuario"
+                  *ngIf="acto.estado_eje == 1"
+                  (click)="changeEstado(acto.codigo_cant_eje,0)"
+                  >
+                  <mat-icon> delete </mat-icon>
+              </button>
+
+              <button
+                  color="primary"
+                  class="activar"
+                  matTooltip="Activar  Usuario"
+                  *ngIf="acto.estado_eje == 0"
+                  (click)="changeEstado(acto.codigo_cant_eje,1)"
+                  >
+                  <mat-icon> add_task </mat-icon>
+              </button>
             </div>
           </td>
         </tr>
