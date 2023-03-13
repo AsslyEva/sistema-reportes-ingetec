@@ -28,4 +28,15 @@ export class ReportesService {
     return this.http.post(`${this.url}reportes/eliminarEje`, data)
   }
 
+  getRankingParticipante(){
+    return this.http.get(`${this.url}reportes/ranking/participantes`)
+  }
+
+  getRankingSedes(){
+    return this.http.get(`${this.url}reportes/ranking/sedes`)
+  }
+
+  getRankingActividades(){
+    return this.http.get(`${this.url}reportes/ranking/actividades`)
+  }
 }

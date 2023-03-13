@@ -3,29 +3,29 @@
 ></app-title-dashboard>
 
 <div class="content-dashboard">
-    <form class="row form-filtro-dashboard" [formGroup]="form">
+    <form class="row form-filtro-dashboard">
         <div class="col-12">
           <p class="text-filtro">Seleccione filtro para realizar la búsqueda</p>
         </div>
         <div class="filtro">
             <div class="items-busqueda">
-                <mat-form-field appearance="fill">
+              <mat-form-field appearance="fill">
                 <mat-label>Enter a date range</mat-label>
                 <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-                    <input matStartDate formControlName="inicio" placeholder="Start date">
-                    <input matEndDate formControlName="fin" placeholder="End date">
+                  <input matStartDate formControlName="start" placeholder="Start date">
+                  <input matEndDate formControlName="end" placeholder="End date">
                 </mat-date-range-input>
                 <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-date-range-picker #picker></mat-date-range-picker>
 
-                <mat-error *ngIf="range.controls.inicio.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-                <mat-error *ngIf="range.controls.fin.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-                </mat-form-field>
-            
-                <button style="background-color: #3cd419; color: #ffff;" matt-button (click)="filtrar()">Buscar&nbsp;
+                <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+              </mat-form-field>
+
+              <button style="background-color: #3cd419; color: #ffff;" matt-button (click)="filtrar()">Buscar&nbsp;
                 <mat-icon>search</mat-icon>
-                </button>
+              </button>
             </div>
         </div>
     </form>
@@ -38,7 +38,7 @@
                     [Highcharts]="HighchartsTrabajador"
                     [options]="chartOptionsTrabajador">
                 </highcharts-chart>
-            </div>  
+            </div>
             <!--Region de Pie-->
             <div class="container-grafico">
                 <highcharts-chart
@@ -46,7 +46,7 @@
                 [options]="chartOptionsPie">
                 </highcharts-chart>
             </div>
-    
+
                 <!--Region de top de mas actividades realizadas-->
             <div class="container-grafico">
                 <highcharts-chart

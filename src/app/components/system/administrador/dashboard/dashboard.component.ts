@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import * as Highcharts from 'highcharts';
 import highcharts3D from 'highcharts/highcharts-3d';
 import { DashboardService } from 'src/app/service/dashboard/dashboard.service';
+import { ReportesService } from 'src/app/service/global/reportes.service';
 highcharts3D(Highcharts);
 
 @Component({
@@ -19,13 +20,6 @@ export class DashboardComponent implements OnInit{
 
   form!: FormGroup;
 
-  // Rango de fecha
-  range = new FormGroup({
-    inicio: new FormControl<Date | any>(new Date(this.fechaActual.getFullYear(),0,1)),
-    fin: new FormControl<Date | any>(new Date()),
-  });
-
-
   HighchartsActividades = Highcharts;
   HighchartsTrabajador = Highcharts;
   HighchartsPie = Highcharts;
@@ -33,64 +27,92 @@ export class DashboardComponent implements OnInit{
   chartOptionsTrabajador: any;
   chartOptionsPie: any;
 
-  menu: any = [
-    {
-      title: 'Total de actividades por empleado',
-      numero: 1,
-      conteo: 0,
-    },
-    {
-      title: 'Total de Actividades realizadas',
-      numero: 2,
-      conteo: 0,
-    },
-    {
-      title: 'Total de descargas QR',
-      numero: 3,
-      conteo: 0,
-    },
-    {
-      title: 'Total de envios a correo',
-      numero: 4,
-      conteo: 0,
-    },
-  ];
+  rankingEmpleados: any[] = [];
+  rankingSedes: any[] = [];
+  rankingActi: any[] = [];
 
   constructor(
-    private __dashboarService: DashboardService
-
+    private __dashboarService: DashboardService,
+    private __reportesService: ReportesService
   ) { }
 
   ngOnInit() {
-    this.obtenerTotalActividades();
-    this.obtenerTotalTrabajador();
-    this.obtenerTotalPie();
+    // this.obtenerTotalTrabajador();
+
+    this.__reportesService.getRankingParticipante()
+    .subscribe((resp: any)=>{
+      this.rankingEmpleados = resp;
+      console.log(this.rankingEmpleados)
+      console.log(this.rankingEmpleados.map((e:any)=>{return e.nombre_completo}))
+      this.obtenerTotalTrabajador(
+        this.rankingEmpleados.map((e:any)=>{return e.nombre_completo}),
+        this.rankingEmpleados.map((e:any)=>{return {name:e.nombre_completo, y: Number(e.total)}})
+      );
+    })
+
+    this.__reportesService.getRankingActividades()
+    .subscribe((resp: any)=>{
+      this.rankingActi = resp;
+      this.obtenerTotalPie(
+        this.rankingActi.map((e:any)=>{return {name:e.descripcion_act, y: Number(e.total)}})
+      );
+    })
+
+    this.__reportesService.getRankingSedes()
+    .subscribe((resp: any)=>{
+      this.rankingSedes = resp;
+      this.obtenerTotalActividades(
+        this.rankingSedes.map((e:any)=>{return e.descripcion_sede}),
+        this.rankingSedes.map((e:any)=>{return {name:e.descripcion_sede, y: Number(e.total)}})
+      );
+    })
   }
 
-  filtrar(){
-    let fechaInicio = new Date(this.range.get('inicio')?.value).toLocaleDateString('es-PY',{year:"numeric",month:"2-digit", day:"2-digit"});
-    let fechaFinal = new Date(this.range.get('fin')?.value).toLocaleDateString('es-PY',{year:"numeric",month:"2-digit", day:"2-digit"});
+  // For filter
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
+  dataRanking1: any[] = [];
+  dataRanking2: any[] = [];
+  dataRanking3: any[] = [];
+  dataRankingFiltrada1: any[] = [];
+  dataRankingFiltrada2: any[] = [];
+  dataRankingFiltrada3: any[] = [];
 
-    this.__dashboarService.getTotalBusquedas(fechaInicio, fechaFinal)
-      .subscribe(
-        (resp: any) => {
-        }
-      )
+  filtrar(){
+    const rango = this.range.value;
+    if(rango.start != null || rango.end != null || rango.start || rango.end ){
+      setTimeout(() => {
+        this.dataRankingFiltrada1 = this.filterDate(rango.start, rango.end, this.rankingEmpleados);
+        // this.dataRankingFiltrada2 = this.filterDate(rango.start, rango.end, this.rankingActi);
+        // this.dataRankingFiltrada3 = this.filterDate(rango.start, rango.end, this.rankingSedes);
+        this.obtenerTotalTrabajador(
+          this.dataRankingFiltrada1.map((e:any)=>{return e.nombre_completo}),
+          this.dataRankingFiltrada1.map((e:any)=>{return {name:e.nombre_completo, y: Number(e.total)}})
+        );
+        // this.obtenerTotalPie(
+        //   this.dataRankingFiltrada2.map((e:any)=>{return {name:e.descripcion_act, y: Number(e.total)}})
+        // );
+        // this.obtenerTotalActividades(
+        //   this.dataRankingFiltrada3.map((e:any)=>{return e.descripcion_sede}),
+        //   this.dataRankingFiltrada3.map((e:any)=>{return {name:e.descripcion_sede, y: Number(e.total)}})
+        // );
+      }, 100);
+    } else {
+
+    }
   }
 
   filterDate(fromDate: any, ToDate: any, data: any){
     return data.filter( (resp:any) => new Date(resp.fecha_cant_eje).getTime() >= new Date( fromDate ).getTime()
-      // console.log('dede el filter data', new Date(resp.fecha_cant_eje), new Date( fromDate ))
       ).filter( (resp:any) =>
         new Date(resp.fecha_cant_eje).getTime() <= new Date( ToDate ).getTime()
       )
   }
 
+  obtenerTotalTrabajador(titulos:any, datos:any){
 
-  obtenerTotalTrabajador(){
-    Highcharts.setOptions({
-      colors: ['#9AA7E6', '#9BE667','#E6C050','#AD685F',  '#7EE6D4' ]
-    });
     this.chartOptionsTrabajador = {
       chart: {
         // renderTo: 'container',
@@ -135,17 +157,11 @@ export class DashboardComponent implements OnInit{
         verticalAlign: "top",
         layout: "horozontal",
         x: 0,
-        y: 0
-        // layout: 'vertical',
-        // floating: true,
-        // align: 'left',
-        // x: -10,
-        // verticalAlign: 'top',
-        // y: -10
+        y: 0,
       },
 
       xAxis: {
-        categories: ['ASSLY ANCHIRAICO AYLAS', 'BRYAN VILLEGAS', 'VICOR AYAIPOMA', 'AXEL DDDDDDDD', 'JOHEL SANDOVAL SANDOVAL', 'DHORLY RUTH ANCHIRAICO YLAS', 'SHIRLEY BLASS SOSA', 'RUBEN ARESTE PIRCA'],
+        categories: titulos,
         // this.arrayTituloActo,
 
         labels: {
@@ -206,7 +222,7 @@ export class DashboardComponent implements OnInit{
       series: [{
         type: 'bar',
         name: 'Total de actividades realizadas',
-        data: [5, 3, 4, 7, 2, 4, 6, 7, 11, 14 , 17, 3, 5],
+        data:  datos,
         // this.actos.map(element => {
         //   return {name:element.titulo_acto, y: element.cantidad}
         // }),
@@ -234,10 +250,7 @@ export class DashboardComponent implements OnInit{
   }
 
 
-  obtenerTotalActividades(){
-    Highcharts.setOptions({
-      colors: ['#9AA7E6', '#7EE6D4', '#E6C050', '#AD685F' , '#9BE667' ]
-    });
+  obtenerTotalActividades(titulos:any, datos:any){
     this.chartOptionsActividades = {
       chart: {
         // renderTo: 'container',
@@ -254,19 +267,16 @@ export class DashboardComponent implements OnInit{
           depth: 100,
         },
       },
-
       title: {
-        text: 'ACTIVIDAD MAS REALIZADA',
+        text: 'ACTIVIDAD POR SEDES',
         style: {
           colorByPoint: true,
           color: '#ffff',
         },
       },
-
       credits: {
         enabled: false
       },
-
       legend: {
         itemStyle: {
           color: '#ffff',
@@ -276,18 +286,9 @@ export class DashboardComponent implements OnInit{
           verticalAlign: 'top',
           labelFormat: '<b>{name}</b>',
           enabled: true
-
-        // layout: 'horizontal',
-        // floating: true,
-        // align: 'left',
-        // x: 100,
-        // verticalAlign: 'top',
-        // y: 70
       },
-
       xAxis: {
-        categories: ['actividad 1', 'actviidad 2', 'actividad 4', 'actviidad 6', 'Jactviidad 6'],
-        // this.arrayRegistro,
+        categories: titulos,
         labels: {
           skew3d: true,
           credits: false,
@@ -307,7 +308,6 @@ export class DashboardComponent implements OnInit{
           }
         },
       },
-
       yAxis: {
         allowDecimals: false,
         min: 0,
@@ -328,18 +328,14 @@ export class DashboardComponent implements OnInit{
           }
         }
       },
-
       tooltip: {
         headerFormat: '<b>{point.key}</b><br>',
         pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y}',
       },
-
-      
-
       series: [{
         type: 'column',
         name: 'Total de búsquedas',
-        data: [5, 3, 4, 7, 2],
+        data: datos,
         // this.registros.map(element => {
         //   return {name:element.nombre_categoria, y: element.cantidad}
         // }),
@@ -356,19 +352,14 @@ export class DashboardComponent implements OnInit{
             colorByPoint: false,
             color: '#ffff',
             fontSize: '23px',
-
           }
         },
       }]
     };
   }
-  
 
-  obtenerTotalPie(){
-    Highcharts.setOptions({
-      colors: ['#9AA7E6', '#AD685F'  , '#9BE667' , '#7EE6D4', '#E6C050']
-    });
 
+  obtenerTotalPie(datos:any){
     this.chartOptionsPie = {
       chart: {
         // renderTo: 'container',
@@ -377,49 +368,24 @@ export class DashboardComponent implements OnInit{
         width:'600',
         height:'600',
 
-        margin: 20,
-        // options3d: {
-        //    enabled: true,
-        //    alpha: 40,
-        //    beta: 0,
-        //   viewDistance: 10,
-        // }
+        margin: 20
       },
 
       title: {
         text: 'PROCESO DE ACTIVIDADES',
         align: 'center',
-        // verticalAlign: 'middle',
-        // y: 60,
         style: {
-          // colorByPoint: true,
           color: '#ffff',
         },
       },
-
-
-
       series:
       [
-       {
-         type: 'pie',
-         name: 'Total de búsquedas',
-        //  color: '#00A5A5',
-         innerSize: '50%',
-         data: [
-          ['Chrome', 73.86],
-          ['Edge', 11.97],
-          ['Firefox', 5.52],
-          ['Safari', 2.98],
-          ['Internet Explorer', 1.90],
-          {
-            name: 'Otros',
-            y: 0.77,
-            dataLabels: {
-              enabled: false
-            }
-          }
-        ],
+        {
+          type: 'pie',
+          name: 'Total de búsquedas',
+          //  color: '#00A5A5',
+          innerSize: '50%',
+          data: datos,
           // this.horas.map(element => {
           //   return {name: element.hora, y: element.total}
           // }),
@@ -439,15 +405,14 @@ export class DashboardComponent implements OnInit{
 
             }
           },
-       }
-       
+        }
       ],
 
       accessibility: {
-       point: {
-         valueSuffix: '%'
-       }
-     },
+        point: {
+          valueSuffix: '%'
+        }
+      },
 
       credits: {
         enabled: false
@@ -456,9 +421,9 @@ export class DashboardComponent implements OnInit{
       legend: {
         allowOverlap: true,
 
-       color: '#ffff',
-       fontWeight: 'bold',
-       backgroundColor: '#00000',
+      color: '#ffff',
+      fontWeight: 'bold',
+      backgroundColor: '#00000',
         itemStyle: {
           color: '#ffff',
           fontWeight: 'bold'
@@ -477,27 +442,27 @@ export class DashboardComponent implements OnInit{
       },
 
       plotOptions: {
-       pie: {
-         allowPointSelect: true,
-         cursor: 'pointer',
-         depth: 35,
-         dataLabels: {
-           enabled: true,
-           distance: -50,
-           format: '{point.name}',
-           style: {
-            fontWeight: 'bold',
-            color: 'white'
-          }
-         },
-        startAngle: -90,
-        endAngle: 90,
-        center: ['50%', '75%'],
-        size: '110%'
-       }
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          depth: 35,
+          dataLabels: {
+            enabled: true,
+            distance: -50,
+            format: '{point.name}',
+            style: {
+              fontWeight: 'bold',
+              color: 'white'
+            }
+          },
+          startAngle: -90,
+          endAngle: 90,
+          center: ['50%', '75%'],
+          size: '110%'
+        }
       },
     };
   }
 
- }
+}
 
