@@ -16,8 +16,18 @@ import { AgregarEmpleadosComponent } from './agregar-empleados/agregar-empleados
 import { AgregarEmpleadoComponent } from './agregar-empleados/agregar-empleado/agregar-empleado.component';
 import { EditarEmpleadoComponent } from './agregar-empleados/editar-empleado/editar-empleado.component';
 import { EditarService } from './agregar-empleados/editar.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
 // import { GeneralServide } from 'src/app/service/global/general.service';
-
+import { HighchartsChartModule } from 'highcharts-angular';
+export const MY_FORMATS = {
+  parse: { dateInput: 'DD/MM/YYYY' },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   imports: [
@@ -29,8 +39,9 @@ import { EditarService } from './agregar-empleados/editar.service';
     DataTablesModule,
     DynamicModule,
     FormsModule,
-    // NoopAnimationsModule,
+    HighchartsChartModule,
 
+    // NoopAnimationsModule,
 
   ],
   declarations: [
@@ -40,6 +51,7 @@ import { EditarService } from './agregar-empleados/editar.service';
     AgregarEmpleadosComponent,
     AgregarEmpleadoComponent,
     EditarEmpleadoComponent,
+    DashboardComponent,
   ],
   providers: [
     DialogsService,

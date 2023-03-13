@@ -15,6 +15,7 @@ import { DynamicModule } from 'ng-dynamic-component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 export const MY_FORMATS = {
   parse: { dateInput: 'DD/MM/YYYY' },
@@ -33,6 +34,7 @@ export const MY_FORMATS = {
 
   ],
   imports: [
+    HighchartsChartModule,
     RouterModule,
     DynamicModule,
     BrowserModule, 

@@ -109,6 +109,21 @@ p {
   background-size: cover;
 }
 
+.content-dashboard {
+  // height: calc(102vh - 90px);
+  align-items: center;
+  justify-content: cent2r;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  overflow: auto;
+  background: $ingetec-gray-dark;
+  // background-attachment: fixed;
+  // background-image: url(\\assets\\img\\menu_fondo.svg);
+  // background-position: center center;
+  // background-size: cover;
+}
+
 .content-body{
   // height: calc(100vh - 0px);
   align-items: center;
@@ -376,6 +391,18 @@ tbody, td, tfoot, th, thead, tr {
     text-align: center;
 }
 
+.form-filtro-dashboard{
+  border-radius: 2rem;
+  border-style: dotted;
+  border-width: 2px;
+  border-color: $ingetec-aprobe;
+  // width: 80%;
+  // height: 10%;
+  // padding: 1rem;
+  margin-top: 4rem !important;  
+  text-align: center;
+}
+
 .text-filtro{
     font-size: 13px;
     color: $ingetec-aprobe;
@@ -407,6 +434,9 @@ tbody, td, tfoot, th, thead, tr {
     }
 }
 
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  border-radius: 10rem !important;
+}
 
 mat-form-field{
     color: $ingetec-green;
@@ -586,11 +616,13 @@ input{
 .mat-drawer {
   background-color: $ingetec-cyan !important;
   box-shadow: none !important;
-  border-radius: 0 1rem 1rem 0;
+  // border-radius: 0 1rem 1rem 0;
+  border-style: double;
+  border: 0.1px double #5d52b3;
 }
 
 mat-sidenav-container {
-  height: 92.8vh !important;
+  height: calc(100vh - 5rem) !important;
 }
 
 // .mat-drawer-backdrop.mat-drawer-shown {
