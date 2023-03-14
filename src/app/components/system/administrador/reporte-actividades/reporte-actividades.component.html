@@ -131,7 +131,7 @@
               <button
                   color="primary"
                   class="delete"
-                  matTooltip="Eliminar Usuario"
+                  matTooltip="Eliminar Registro"
                   *ngIf="acto.estado_eje == 1"
                   (click)="changeEstado(acto.codigo_cant_eje,0)"
                   >
@@ -141,7 +141,7 @@
               <button
                   color="primary"
                   class="activar"
-                  matTooltip="Activar  Usuario"
+                  matTooltip="Activar Registro"
                   *ngIf="acto.estado_eje == 0"
                   (click)="changeEstado(acto.codigo_cant_eje,1)"
                   >

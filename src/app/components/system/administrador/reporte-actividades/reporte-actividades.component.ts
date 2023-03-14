@@ -209,9 +209,15 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
               'Registro '+ (estado == 0 ? 'Eliminado' : 'Restaurado') ,
               'success'
             )
+            // recargar
+            this.reporteService.getReportesByEje()
+            .subscribe((resp: any) =>{
+              this.actos = resp;
+              this.filtrar();
+              console.log(this.actos)
+            })
           }
         );
-
       }
     })
   }
