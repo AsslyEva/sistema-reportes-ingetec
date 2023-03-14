@@ -146,13 +146,13 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
       setTimeout(() => {
         this.actosFilter = this.filtrarEstado(this.filtrarSegmento(this.filterDate(rango.start, rango.end, this.actos)));
         this.actosFilter.map((resp: any) => {
-          this.sumaTotal += (resp.pre_uni_urbano_act * resp.cantidad_urbano_eje) + (resp.pre_uni_ruralUrbano_act * resp.cantidad_urbrural_eje) + (resp.pre_uni_rural_act * resp.cantidad_rural_eje);
+          this.sumaTotal += (Number(resp.total_rural)) + (Number(resp.total_urbano)) + (Number(resp.total_urbRural));
         });
       }, 100);
     } else {
       this.actosFilter = this.filtrarEstado(this.filtrarSegmento(this.actos));
       this.actosFilter.map((resp: any) => {
-        this.sumaTotal += (resp.pre_uni_urbano_act * resp.cantidad_urbano_eje) + (resp.pre_uni_ruralUrbano_act * resp.cantidad_urbrural_eje) + (resp.pre_uni_rural_act * resp.cantidad_rural_eje);
+        this.sumaTotal += (Number(resp.total_rural)) + (Number(resp.total_urbano)) + (Number(resp.total_urbRural));
       });
     }
   }
@@ -305,9 +305,9 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         x1.pre_uni_urbano_act,
         x1.pre_uni_ruralUrbano_act,
         x1.pre_uni_rural_act,
-        x1.pre_uni_urbano_act * x1.cantidad_urbano_eje,
-        x1.pre_uni_ruralUrbano_act * x1.cantidad_urbrural_eje,
-        x1.pre_uni_rural_act * x1.cantidad_rural_eje,
+        x1.total_urbano,
+        x1.total_urbRural,
+        x1.total_rural,
         fecha,
         x1.cuadrilla
       ]);
