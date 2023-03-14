@@ -29,6 +29,7 @@ export class AgregarEmpleadoComponent implements OnInit{
   newIntegrante: Integrante = new Integrante("","","","","");
   @Output() messagestate = new EventEmitter<boolean>();
   message: any;
+  integrantes: any[] = [];
 
   // inicializa fecha
   todayDate : Date = new Date();
@@ -41,6 +42,8 @@ export class AgregarEmpleadoComponent implements OnInit{
   constructor(
     public dialogRef: MatDialogRef<AgregarEmpleadoComponent>,
     private fb:FormBuilder,
+    private integrantesService: IntegrantesService,
+
     private userService: UsersService,
     @Inject(MAT_DIALOG_DATA) public data: any
     ) {
@@ -67,10 +70,14 @@ export class AgregarEmpleadoComponent implements OnInit{
         showConfirmButton: false,
         timer: 1500
       })
+
+      this.onReload();
+
       console.log(resp);
       this.closeState;
       this.dialogRef.close();
-    })    
+    })   
+    
   }
 
   closeState(){
@@ -79,5 +86,9 @@ export class AgregarEmpleadoComponent implements OnInit{
 
   cerrar(){
     this.dialogRef.close();
+  }
+
+  onReload() {
+    window.location.reload();
   }
 }

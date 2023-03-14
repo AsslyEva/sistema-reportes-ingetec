@@ -12,7 +12,7 @@ import { integrantes } from '../../usuario/formulario/formulario.component';
 import { AgregarEmpleadoComponent } from './agregar-empleado/agregar-empleado.component';
 import { EditarEmpleadoComponent } from './editar-empleado/editar-empleado.component';
 import { EditarService } from './editar.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-agregar-empleados',
   templateUrl: './agregar-empleados.component.html',
@@ -27,15 +27,16 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
   actosFilter : any[] = [];
 
 
-    // activar
-    estadoDesactivado= true;
+  // activar
+  estadoDesactivado= true;
 
 
   constructor(
     public editarService: EditarService,
     private dialog: MatDialog,
     private integrantesService: IntegrantesService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private location: Location
   ){}
 
 
@@ -118,14 +119,27 @@ export class AgregarEmpleadosComponent implements OnDestroy , OnInit{
               'Usuario '+ (estado == 0 ? 'Eliminado' : 'Restaurado') ,
               'success'
             )
+            this.integrantesService.getIntegrantesUsuarios()
+            .subscribe(
+              (resp: any) => {
+                this.integrantes = resp;
+              }
+            );
           }
         );
 
       }
+
     })
+
+
 
     // this.estadoDesactivado = !this.estadoDesactivado;
     // console.log("estado ", this.estadoDesactivado);
   }
 
+
+  onReload() {
+    window.location.reload();
+  }
 }

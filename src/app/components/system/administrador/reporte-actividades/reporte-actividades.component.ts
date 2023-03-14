@@ -14,6 +14,7 @@ import { downloadReportExcel } from 'src/app/components/shared/generate-excel/ge
 import { environment } from 'src/environments/environment.prod';
 import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -88,6 +89,8 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     private dialogsService: DialogsService,
     private reporteService: ReportesService,
     private segmentosService: SegmentosService,
+    private spinner: NgxSpinnerService,
+
     ) {
 
       this.form = this.fb.group({
@@ -99,9 +102,11 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
 
 
   ngOnInit(): void {
+    this.spinner.show();
     this.reporteService.getReportesByEje()
     .subscribe((resp: any) =>{
       this.actos = resp;
+      this.spinner.hide();
       this.filtrar();
       console.log(this.actos)
     })
@@ -109,7 +114,9 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     this.segmentosService.getSegmentos()
     .subscribe((resp: any) => {
       this.segmentos = resp;
+
     })
+    
 
     this.dtOptions = {
       dom: '<"top"if>rt<"bottom"lp><"clear">',
@@ -202,16 +209,25 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
       if (result.isConfirmed) {
         this.reporteService.postEliminarEje(data)
         .subscribe(
+
           (resp: any) => {
+            this.spinner.show();
             console.log('desde cambiar estado', resp);
             Swal.fire(
               (estado == 0 ? 'Eliminado' : 'Restaurado'),
               'Registro '+ (estado == 0 ? 'Eliminado' : 'Restaurado') ,
               'success'
             )
+            // recargar
+            this.reporteService.getReportesByEje()
+            .subscribe((resp: any) =>{
+              this.actos = resp;
+              this.spinner.hide();
+              this.filtrar();
+              console.log(this.actos)
+            })
           }
         );
-
       }
     })
   }

@@ -23,6 +23,8 @@ export class EditarEmpleadoComponent implements OnInit{
 
   form: FormGroup;
 
+  integrantes: any[] = [];
+
   integrante = {
     nombres_integrante: "",
     apellidos_integrante: "",
@@ -66,10 +68,14 @@ export class EditarEmpleadoComponent implements OnInit{
         showConfirmButton: false,
         timer: 1500
       })
+
+      this.onReload();
+
       console.log(resp);
       this.closeState;
       this.dialogRef.close();
     })
+
   }
 
   closeState(){
@@ -78,5 +84,9 @@ export class EditarEmpleadoComponent implements OnInit{
 
   cerrar(){
     this.dialogRef.close();
+  }
+
+  onReload() {
+    window.location.reload();
   }
 }
