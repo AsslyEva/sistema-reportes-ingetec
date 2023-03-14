@@ -118,7 +118,7 @@ export class DashboardComponent implements OnInit{
         // renderTo: 'container',
         type: 'bar',
         backgroundColor: '#0000',
-        width:'900',
+        width:'800',
         height:'500',
         marginleft: 50,
         // marginristh: 100,
@@ -172,7 +172,7 @@ export class DashboardComponent implements OnInit{
           style: {
             colorByPoint: false,
             color: '#ffff',
-            fontSize: '16px'
+            fontSize: '12px'
           }
         },
 
@@ -182,7 +182,7 @@ export class DashboardComponent implements OnInit{
           style: {
             colorByPoint: false,
             color: '#ffff',
-            fontSize: '16px'
+            fontSize: '10px'
           }
         },
       },
@@ -200,7 +200,7 @@ export class DashboardComponent implements OnInit{
           style: {
             colorByPoint: false,
             color: '#ffff',
-            fontSize: '16px'
+            fontSize: '14px'
           }
         },
         labels: {
@@ -448,17 +448,14 @@ export class DashboardComponent implements OnInit{
           depth: 35,
           dataLabels: {
             enabled: true,
-            distance: -50,
+            // distance: -50,
             format: '{point.name}',
             style: {
               fontWeight: 'bold',
               color: 'white'
             }
           },
-          startAngle: -90,
-          endAngle: 90,
-          center: ['50%', '75%'],
-          size: '110%'
+         
         }
       },
     };
