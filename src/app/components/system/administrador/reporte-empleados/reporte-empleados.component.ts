@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject } from 'rxjs';
 import { DialogsService } from 'src/app/components/shared/dialogs.service';
 import { downloadReportExcel } from 'src/app/components/shared/generate-excel/generate-excel';
@@ -12,19 +13,6 @@ import { SegmentosService } from 'src/app/service/global/segmentos.service';
 import { LenguajeDataTable } from 'src/app/utils/utils';
 import { environment } from 'src/environments/environment.prod';
 
-export interface Actividad {
-  id_actividad: number;
-  fecha?: Date;
-  lider?: string;
-  integrantes?: string;
-  segmento?: string;
-  actividad_especifica?: string;
-  cantidad?: number;
-  cantidad_rural: string | undefined;
-  cantidad_urbano: string | undefined;
-  fecha_acti?: Date;
-}
-
 @Component({
   selector: 'app-reporte-empleados',
   templateUrl: './reporte-empleados.component.html',
@@ -32,12 +20,6 @@ export interface Actividad {
 })
 export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
 
-  // cuadrilla: any = [
-  //   {
-  //     nameParticipante: IntegrantesService.codigo_integrante == 'nombres_integrante',
-  //     numero: 1,
-  //   },
-  // ];
   value: any;
   name!: string;
 
@@ -56,7 +38,6 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
   dtTrigger: Subject<any> = new Subject<any>();
 
   // inicializacion de variables
-  // actos: Actividad[] = [];
   form: FormGroup;
 
   sede = "";
@@ -79,8 +60,8 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
 
 
   range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
+    start: new FormControl<Date | null>(new Date()),
+    end: new FormControl<Date | null>(new Date()),
   });
 
   constructor(
@@ -90,6 +71,7 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
     private dialogsService: DialogsService,
     private reporteService: ReportesService,
     private participanteService: IntegrantesService,
+    private spinner: NgxSpinnerService,
     ) {
 
       this.form = this.fb.group({
@@ -129,8 +111,7 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
   }
 
 
-  changed(value: any) {
-    this.value = value;
+  changed() {
     this.nombreParticipante = this.participantes.find((e:any) => e.codigo_integrante == this.selectedParticipante).nombres_integrante;
     this.apellidoParticipante = this.participantes.find((e:any) => e.codigo_integrante == this.selectedParticipante).apellidos_integrante;
   }
@@ -140,59 +121,64 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
     this.dtTrigger.unsubscribe();
   }
 
-  cargarReporte(id: Number){
-    this.reporteService.getReportesParticipante(id)
-    .subscribe((resp: any) =>{
-      this.actos = resp;
-      this.actosFilter = this.actos;
-    })
-    this.nombreParticipante = this.participantes.find((e:any) => e.codigo_integrante == this.selectedParticipante).nombres_integrante;
-    this.apellidoParticipante = this.participantes.find((e:any) => e.codigo_integrante == this.selectedParticipante).apellidos_integrante;
+  cargarReporte(){
+    this.filtrar;
+  }
 
-    console.log("desde change :", this.nombreParticipante);
+  formatDate(date: string) {
+    let d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+    if (month.length < 2)
+    month = '0' + month;
+    if (day.length < 2)
+    day = '0' + day;
+
+    return [year, month, day].join('-');
   }
 
   filtrar(){
+    this.spinner.show();
     const rango = this.range.value;
-    if(rango.start != null || rango.end != null || rango.start || rango.end ){
-      this.actosFilter = [];
-      setTimeout(() => {
-        this.actosFilter = this.filterDate(rango.start, rango.end, this.actos);
-        console.log("actosFilter",this.actosFilter);
-        this.filtrarParticipante(this.actosFilter);
-      }, 100);
+    if(rango.start != null && rango.end != null && rango.start && rango.end && this.selectedParticipante){
+        this.filterDate(rango.start, rango.end, this.selectedParticipante);
+        this.changed();
+        this.spinner.hide();
+    } else {
+      // this.actosFilter = this.filtrarParticipante(this.actosFilter);
+      this.spinner.hide();
     }
-    // else {
-    //   this.filtrarParticipante(this.actos);
-    //   console.log('desde filtrar sin fecha',this.actosFilter);
-    // }
-  }
-
-  filterDate(fromDate: any, ToDate: any, data: any){
-    return data.filter( (resp:any) => new Date(resp.fecha_cant_eje).getTime() >= new Date( fromDate ).getTime()
-      // console.log('dede el filter data', new Date(resp.fecha_cant_eje), new Date( fromDate ))
-      ).filter( (resp:any) =>
-        new Date(resp.fecha_cant_eje).getTime() <= new Date( ToDate ).getTime()
-      )
   }
 
   filtrarParticipante(data: any){
     if(this.selectedParticipante != null){
       const datosFiltrados = data;
-      this.actosFilter = [];
-      setTimeout(() => {
-        this.actosFilter = datosFiltrados.filter((e:any) => e.codigo_integrante == this.selectedParticipante);
-        console.log('desdefilteParticipante',this.actosFilter);
-      }, 100);
+      return datosFiltrados.filter((e:any) => e.codigo_integrante == this.selectedParticipante);
     }
+  }
+
+  filterDate(fromDate: any, ToDate: any, id: Number): any{
+    this.reporteService.getReportesParticipante(id, this.formatDate(fromDate), this.formatDate(ToDate))
+      .subscribe((resp: any) => {
+        this.spinner.hide();
+        this.actosFilter = resp;
+        return resp;
+      }, (err) => {
+        return [];
+      })
   }
 
   reset(){
     this.actosFilter = [];
-    setTimeout(() => {
-      this.actosFilter = this.actos;
-    }, 100);
+    this.range = new FormGroup({
+      start: new FormControl<Date | null>(new Date()),
+      end: new FormControl<Date | null>(new Date()),
+    });
     this.selectedParticipante = null;
+    this.nombreParticipante = "";
+    this.apellidoParticipante = "";
   }
 
   public abrirDetalle(codigo: string, lider: string) {

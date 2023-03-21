@@ -12,16 +12,16 @@ export class ReportesService {
     private http: HttpClient
   ) { }
 
-  getReportesByEje(){
-    return this.http.get(`${this.url}reportes/listar`)
+  getReportesByEje(fecha_ini: any, fecha_fin:any){
+    return this.http.get(`${this.url}reportes/listar/${fecha_ini}/${fecha_fin}`)
   }
 
   getReportesAgrupados(){
     return this.http.get(`${this.url}reportes/listar/agrupado`)
   }
 
-  getReportesParticipante(id: Number){
-    return this.http.get(`${this.url}reportes/listar/participantes/${id}`)
+  getReportesParticipante(id: Number, fecha_ini: any, fecha_fin:any){
+    return this.http.get(`${this.url}reportes/listar/participantes/${id}/${fecha_ini}/${fecha_fin}`)
   }
 
   postEliminarEje(data: any){

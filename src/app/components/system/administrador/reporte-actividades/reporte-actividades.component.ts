@@ -51,13 +51,12 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
 
   // inicializa fecha
   todayDate : Date = new Date();
-  fecha_act =  new FormControl('');
+  fecha_act =  new FormControl();
 
   //Configuracion para datatable
   dtOptions: ADTSettings = {};
 
   // inicializacion de variables
-  // actos: Actividad[] = [];
   form: FormGroup;
 
   sede = "";
@@ -74,12 +73,13 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
   actos: any[] = [];
   actosFilter : any[] = [];
   sumaTotal: number = 0;
+  serializedDate = new FormControl(new Date().toISOString());
 
   dtTrigger: Subject<any> = new Subject<any>();
 
   range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
+    start: new FormControl<Date | null>(new Date()),
+    end: new FormControl<Date | null>(new Date()),
   });
 
   constructor(
@@ -103,12 +103,10 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.reporteService.getReportesByEje()
+    this.reporteService.getReportesByEje(this.formatDate(this.todayDate.toString()), this.formatDate(this.todayDate.toString()))
     .subscribe((resp: any) =>{
-      this.actos = resp;
+      this.actosFilter = resp;
       this.spinner.hide();
-      this.filtrar();
-      console.log(this.actos)
     })
 
     this.segmentosService.getSegmentos()
@@ -116,7 +114,6 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
       this.segmentos = resp;
 
     })
-    
 
     this.dtOptions = {
       dom: '<"top"if>rt<"bottom"lp><"clear">',
@@ -144,36 +141,56 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     this.dtTrigger.unsubscribe();
   }
 
+  formatDate(date: string) {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+
   filtrar(){
-    this.actosFilter = this.actos;
+    this.spinner.show();
     this.sumaTotal = 0;
     const rango = this.range.value;
-    if(rango.start != null || rango.end != null || rango.start || rango.end ){
-      this.actosFilter = [];
-      setTimeout(() => {
-        this.actosFilter = this.filtrarEstado(this.filtrarSegmento(this.filterDate(rango.start, rango.end, this.actos)));
-        this.actosFilter.map((resp: any) => {
-          this.sumaTotal += (Number(resp.total_rural)) + (Number(resp.total_urbano)) + (Number(resp.total_urbRural));
-        });
-      }, 100);
+    if(rango.start != null && rango.end != null && rango.start && rango.end ){
+        this.filterDate(rango.start, rango.end);
+        setTimeout(() => {
+          this.actosFilter = this.filtrarEstado(this.filtrarSegmento(this.actosFilter));
+          this.actosFilter.map((resp: any) => {
+            this.sumaTotal += (Number(resp.total_rural)) + (Number(resp.total_urbano)) + (Number(resp.total_urbRural));
+          });
+        }, 100);
     } else {
-      this.actosFilter = this.filtrarEstado(this.filtrarSegmento(this.actos));
+      this.actosFilter = this.filtrarEstado(this.filtrarSegmento(this.actosFilter));
       this.actosFilter.map((resp: any) => {
         this.sumaTotal += (Number(resp.total_rural)) + (Number(resp.total_urbano)) + (Number(resp.total_urbRural));
       });
+      this.spinner.hide();
     }
   }
 
-  filterDate(fromDate: any, ToDate: any, data: any){
-    return data.filter( (resp:any) => new Date(resp.fecha_cant_eje).getTime() >= new Date( fromDate ).getTime()
-      ).filter( (resp:any) =>
-        new Date(resp.fecha_cant_eje).getTime() <= new Date( ToDate ).getTime()
-      )
+  filterDate(fromDate: any, ToDate: any): any{
+    this.reporteService.getReportesByEje(this.formatDate(fromDate), this.formatDate(ToDate))
+      .subscribe((resp: any) => {
+        this.spinner.hide();
+        this.actosFilter = resp;
+        return resp;
+        // this.filtrar();
+      }, (err) => {
+        this.spinner.hide();
+        return [];
+      })
   }
 
   filtrarSegmento(data: any){
     if(this.selectedSegmento != null){
-      console.log('desdefilteSegmento',data.filter((e:any) => e.codigo_seg == this.selectedSegmento));
       return data.filter((e:any) => e.codigo_seg == this.selectedSegmento);
     }
     return data;
@@ -183,15 +200,19 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     if(this.estadoData == 3){
       return data;
     }
-    console.log("desde filter data",data.filter((resp :any) => resp.estado_eje == this.estadoData));
     return data.filter((resp :any) => resp.estado_eje == this.estadoData);
   }
 
   reset(){
-    this.actosFilter = [];
-    setTimeout(() => {
-      this.actosFilter = this.actos;
-    }, 100);
+    this.reporteService.getReportesByEje(this.formatDate(this.todayDate.toString()), this.formatDate(this.todayDate.toString()))
+    .subscribe((resp: any) =>{
+      this.actosFilter = resp;
+      this.spinner.hide();
+    })
+    this.range = new FormGroup({
+      start: new FormControl<Date | null>(new Date()),
+      end: new FormControl<Date | null>(new Date()),
+    });
     this.selectedSegmento = null;
   }
 
@@ -212,19 +233,17 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
 
           (resp: any) => {
             this.spinner.show();
-            console.log('desde cambiar estado', resp);
             Swal.fire(
               (estado == 0 ? 'Eliminado' : 'Restaurado'),
               'Registro '+ (estado == 0 ? 'Eliminado' : 'Restaurado') ,
               'success'
             )
             // recargar
-            this.reporteService.getReportesByEje()
+            this.reporteService.getReportesByEje('2023-02-01', '2023-02-07')
             .subscribe((resp: any) =>{
               this.actos = resp;
               this.spinner.hide();
               this.filtrar();
-              console.log(this.actos)
             })
           }
         );
@@ -236,6 +255,15 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     this.dialogsService
       .confirm(codigo, lider)
       .subscribe((res: any) => this.result = res);
+  }
+
+  redondearDecimales(numero: number, decimales: number) {
+    const numeroRegexp = new RegExp('\\d\\.(\\d){' + decimales + ',}');   // Expresion regular para numeros con un cierto numero de decimales o mas
+    if (numeroRegexp.test(numero.toString())) {         // Ya que el numero tiene el numero de decimales requeridos o mas, se realiza el redondeo
+        return Number(numero.toFixed(decimales));
+    } else {
+        return Number(numero.toFixed(decimales)) === 0 ? 0 : numero;  // En valores muy bajos, se comprueba si el numero es 0 (con el redondeo deseado), si no lo es se devuelve el numero otra vez.
+    }
   }
 
     // for reports
@@ -328,7 +356,7 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         x1.cuadrilla
       ]);
     });
-    this.__downloadReportExcel( this.title, this.headerAndSize, dataExcel, this.range.value, this.sumaTotal );
+    this.__downloadReportExcel( this.title, this.headerAndSize, dataExcel, this.range.value, this.redondearDecimales(this.sumaTotal, 3) );
   }
 }
 

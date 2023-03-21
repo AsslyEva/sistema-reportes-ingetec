@@ -16,15 +16,15 @@
 
 
 
-            <mat-form-field class="form-item" appearance="outline">
+            <mat-form-field class="form-item" appearance="outline" *ngIf="participantes.length != 0">
               <mat-label>Participante</mat-label>
               <mat-select
-                          #sel (change)="changed(sel.value)"
+                          #sel
                           placeholder="Ingresa Participante"
                           formControlName="actividad"
                           [(ngModel)]="selectedParticipante"
-                          (ngModelChange)="cargarReporte(selectedParticipante)">
-                <mat-option *ngFor="let participante of participantes" [value]="participante.codigo_integrante" >
+                          (ngModelChange)="cargarReporte()">
+                <mat-option *ngFor="let participante of participantes" [value]="participante.codigo_integrante">
                   {{participante.nombres_integrante + ' ' +participante.apellidos_integrante}}
                 </mat-option>
               </mat-select>
@@ -59,17 +59,18 @@
 
     </form>
 
-    <div class="content-tabla col-12 " *ngIf="actosFilter.length != 0">
-    
+    <div class="content-tabla col-12 ">
+
       <div class="title-container">
         <div class="nombre-title">
           <h4>
             Trabajador: {{nombreParticipante}} {{apellidoParticipante}}
-          </h4>        
+          </h4>
         </div>
       </div>
 
       <table
+        *ngIf="actosFilter.length != 0"
         datatable
         [dtOptions]="dtOptions"
         class="table table-dark-ingetec">
@@ -97,7 +98,7 @@
           </tr>
         </tbody>
       </table>
-      <div class="button-option download text-center align-middle border-top pt-5">
+      <div class="button-option download text-center align-middle border-top pt-5" *ngIf="actosFilter.length != 0">
         <button
           class="descargar-all col-12"
           matTooltip="Descargar todo"
@@ -108,14 +109,6 @@
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
 
   <ngx-spinner
       bdColor = "rgba(14,14,14,0.8)"
