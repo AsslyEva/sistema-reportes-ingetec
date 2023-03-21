@@ -163,9 +163,6 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         this.filterDate(rango.start, rango.end);
         setTimeout(() => {
           this.actosFilter = this.filtrarEstado(this.filtrarSegmento(this.actosFilter));
-          this.actosFilter.map((resp: any) => {
-            this.sumaTotal += (Number(resp.total_rural)) + (Number(resp.total_urbano)) + (Number(resp.total_urbRural));
-          });
         }, 100);
     } else {
       this.actosFilter = this.filtrarEstado(this.filtrarSegmento(this.actosFilter));
@@ -176,16 +173,17 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
     }
   }
 
-  filterDate(fromDate: any, ToDate: any): any{
+  filterDate(fromDate: any, ToDate: any){
+    this.actosFilter = [];
     this.reporteService.getReportesByEje(this.formatDate(fromDate), this.formatDate(ToDate))
       .subscribe((resp: any) => {
         this.spinner.hide();
-        this.actosFilter = resp;
-        return resp;
-        // this.filtrar();
+        this.actosFilter = this.filtrarEstado(this.filtrarSegmento(resp));
+        this.actosFilter.map((resp: any) => {
+          this.sumaTotal += (Number(resp.total_rural)) + (Number(resp.total_urbano)) + (Number(resp.total_urbRural));
+        });
       }, (err) => {
         this.spinner.hide();
-        return [];
       })
   }
 

@@ -160,6 +160,7 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
   }
 
   filterDate(fromDate: any, ToDate: any, id: Number): any{
+    this.actosFilter = [];
     this.reporteService.getReportesParticipante(id, this.formatDate(fromDate), this.formatDate(ToDate))
       .subscribe((resp: any) => {
         this.spinner.hide();
