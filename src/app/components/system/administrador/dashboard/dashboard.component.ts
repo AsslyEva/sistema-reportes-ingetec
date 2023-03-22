@@ -1,10 +1,15 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import * as Highcharts from 'highcharts';
-import highcharts3D from 'highcharts/highcharts-3d';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { filter } from 'rxjs';
 import { DashboardService } from 'src/app/service/dashboard/dashboard.service';
 import { ReportesService } from 'src/app/service/global/reportes.service';
-highcharts3D(Highcharts);
+import * as Highcharts from 'highcharts';
+import * as HighchartsMore from 'highcharts/highcharts-more';
+import * as HighchartsExporting from 'highcharts/modules/exporting';
+import * as HighchartsExportData from 'highcharts/modules/export-data';
+import * as HighchartsAccessibility from 'highcharts/modules/accessibility';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -22,10 +27,10 @@ export class DashboardComponent implements OnInit{
 
   HighchartsActividades = Highcharts;
   HighchartsTrabajador = Highcharts;
-  HighchartsPie = Highcharts;
+  HighchartsSedes = Highcharts;
   chartOptionsActividades: any;
   chartOptionsTrabajador: any;
-  chartOptionsPie: any;
+  chartOptionsSedes: any;
 
   rankingEmpleados: any[] = [];
   rankingSedes: any[] = [];
@@ -33,82 +38,75 @@ export class DashboardComponent implements OnInit{
 
   constructor(
     private __dashboarService: DashboardService,
-    private __reportesService: ReportesService
+    private __reportesService: ReportesService,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit() {
-    // this.obtenerTotalTrabajador();
+    this.filtrar();
+  }
 
-    this.__reportesService.getRankingParticipante()
+  // For filter
+  range = new FormGroup({
+    start: new FormControl<Date | null>(new Date()),
+    end: new FormControl<Date | null>(new Date()),
+  });
+
+  filtrar(){
+    const rango = this.range.value;
+    this.spinner.show();
+    if(rango.start != null && rango.end != null && rango.start && rango.end ){
+      this.filterDate(rango.start, rango.end);
+      this.spinner.hide();
+    } else {
+      this.spinner.hide();
+    }
+  }
+
+  filterDate(fromDate: any, ToDate: any){
+    this.__reportesService.getRankingParticipante(this.formatDate(fromDate), this.formatDate(ToDate))
     .subscribe((resp: any)=>{
       this.rankingEmpleados = resp;
-      console.log(this.rankingEmpleados)
-      console.log(this.rankingEmpleados.map((e:any)=>{return e.nombre_completo}))
+      console.log("participantes",resp)
       this.obtenerTotalTrabajador(
         this.rankingEmpleados.map((e:any)=>{return e.nombre_completo}),
         this.rankingEmpleados.map((e:any)=>{return {name:e.nombre_completo, y: Number(e.total)}})
       );
     })
 
-    this.__reportesService.getRankingActividades()
+    this.__reportesService.getRankingActividades(this.formatDate(fromDate), this.formatDate(ToDate))
     .subscribe((resp: any)=>{
       this.rankingActi = resp;
-      this.obtenerTotalPie(
+      console.log("actividades",resp)
+      this.obtenerTotalActividades(
+        this.rankingActi.map((e:any)=>{return e.descripcion_act}),
         this.rankingActi.map((e:any)=>{return {name:e.descripcion_act, y: Number(e.total)}})
       );
     })
 
-    this.__reportesService.getRankingSedes()
+    this.__reportesService.getRankingSedes(this.formatDate(fromDate), this.formatDate(ToDate))
     .subscribe((resp: any)=>{
       this.rankingSedes = resp;
-      this.obtenerTotalActividades(
+      console.log("sedes",resp)
+      this.obtenerTotalSedes(
         this.rankingSedes.map((e:any)=>{return e.descripcion_sede}),
         this.rankingSedes.map((e:any)=>{return {name:e.descripcion_sede, y: Number(e.total)}})
       );
     })
   }
 
-  // For filter
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
-  dataRanking1: any[] = [];
-  dataRanking2: any[] = [];
-  dataRanking3: any[] = [];
-  dataRankingFiltrada1: any[] = [];
-  dataRankingFiltrada2: any[] = [];
-  dataRankingFiltrada3: any[] = [];
+  formatDate(date: string) {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
 
-  filtrar(){
-    const rango = this.range.value;
-    if(rango.start != null || rango.end != null || rango.start || rango.end ){
-      setTimeout(() => {
-        this.dataRankingFiltrada1 = this.filterDate(rango.start, rango.end, this.rankingEmpleados);
-        // this.dataRankingFiltrada2 = this.filterDate(rango.start, rango.end, this.rankingActi);
-        // this.dataRankingFiltrada3 = this.filterDate(rango.start, rango.end, this.rankingSedes);
-        this.obtenerTotalTrabajador(
-          this.dataRankingFiltrada1.map((e:any)=>{return e.nombre_completo}),
-          this.dataRankingFiltrada1.map((e:any)=>{return {name:e.nombre_completo, y: Number(e.total)}})
-        );
-        // this.obtenerTotalPie(
-        //   this.dataRankingFiltrada2.map((e:any)=>{return {name:e.descripcion_act, y: Number(e.total)}})
-        // );
-        // this.obtenerTotalActividades(
-        //   this.dataRankingFiltrada3.map((e:any)=>{return e.descripcion_sede}),
-        //   this.dataRankingFiltrada3.map((e:any)=>{return {name:e.descripcion_sede, y: Number(e.total)}})
-        // );
-      }, 100);
-    } else {
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
 
-    }
-  }
-
-  filterDate(fromDate: any, ToDate: any, data: any){
-    return data.filter( (resp:any) => new Date(resp.fecha_cant_eje).getTime() >= new Date( fromDate ).getTime()
-      ).filter( (resp:any) =>
-        new Date(resp.fecha_cant_eje).getTime() <= new Date( ToDate ).getTime()
-      )
+    return [year, month, day].join('-');
   }
 
   obtenerTotalTrabajador(titulos:any, datos:any){
@@ -121,19 +119,15 @@ export class DashboardComponent implements OnInit{
         width:'800',
         height:'500',
         marginleft: 50,
-        // marginristh: 100,
-
-        // options3d: {
-        //   enabled: true,
-        //   alpha: 20,
-        //   beta: 5,
-        //   viewDistance: 15,
-        //   depth: 90,
-        // }
       },
-
+      plotOptions: {
+        series: {
+            grouping: false,
+            borderWidth: 0
+        }
+      },
       title: {
-        text: 'TOTAL DE ACTIVIDADES POR EMPLEADO',
+        text: 'TOTAL DE VALORIZACIÓN POR EMPLEADO',
 
         style: {
           colorByPoint: true,
@@ -195,7 +189,7 @@ export class DashboardComponent implements OnInit{
         // max: 1000,
 
         title: {
-          text: 'Cantidad de Actividades realizadas',
+          text: 'Cantidad de Valor realizado',
           skew3d: true,
           style: {
             colorByPoint: false,
@@ -221,11 +215,8 @@ export class DashboardComponent implements OnInit{
 
       series: [{
         type: 'bar',
-        name: 'Total de actividades realizadas',
+        name: 'Total de valor realizado',
         data:  datos,
-        // this.actos.map(element => {
-        //   return {name:element.titulo_acto, y: element.cantidad}
-        // }),
         colorByPoint: true,
         showLastLabel: true,
 
@@ -254,164 +245,156 @@ export class DashboardComponent implements OnInit{
     this.chartOptionsActividades = {
       chart: {
         // renderTo: 'container',
-        type: 'column',
+        type: 'bar',
         backgroundColor: '#0000',
-        width:'500',
+        width:'800',
         height:'500',
-        margin: 70,
-        options3d: {
-          enabled: true,
-          alpha: 15,
-          beta: 15,
-          viewDistance: 25,
-          depth: 100,
-        },
+        marginleft: 50,
+      },
+      plotOptions: {
+        series: {
+            grouping: false,
+            borderWidth: 0
+        }
       },
       title: {
-        text: 'ACTIVIDAD POR SEDES',
+        text: 'TOTAL DE ACTIVIDADES REALIZADAS POR ACTIVIDADES',
+
         style: {
           colorByPoint: true,
           color: '#ffff',
         },
       },
+
       credits: {
         enabled: false
       },
+
       legend: {
         itemStyle: {
           color: '#ffff',
           fontWeight: 'bold'
         },
 
-          verticalAlign: 'top',
-          labelFormat: '<b>{name}</b>',
-          enabled: true
+        align: "left",
+        text: 'Leyenda',
+
+        verticalAlign: "top",
+        layout: "horozontal",
+        x: 0,
+        y: 0,
       },
+
       xAxis: {
         categories: titulos,
+        // this.arrayTituloActo,
+
         labels: {
+          allowOverlap: true,
+
           skew3d: true,
           credits: false,
+          style: {
+            colorByPoint: false,
+            color: '#ffff',
+            fontSize: '12px'
+          }
+        },
+
+        title: {
+          // text: 'Actos registrales',
+          skew3d: true,
           style: {
             colorByPoint: false,
             color: '#ffff',
             fontSize: '10px'
           }
         },
-        title: {
-          // text: 'Nombre de busqueda',
-          skew3d: true,
-          style: {
-            colorByPoint: false,
-            color: '#ffff',
-            fontSize: '16px'
-          }
-        },
       },
+
       yAxis: {
+        // categories: this.arrayTituloActo,
+
         allowDecimals: false,
         min: 0,
+        // max: 1000,
+
         title: {
           text: 'Cantidad de actividades realizadas',
           skew3d: true,
           style: {
             colorByPoint: false,
             color: '#ffff',
-            fontSize: '16px'
+            fontSize: '14px'
           }
         },
         labels: {
+          allowOverlap: true,
           skew3d: true,
           style: {
             colorByPoint: false,
             color: '#ffff',
           }
-        }
+        },
+
       },
+
       tooltip: {
         headerFormat: '<b>{point.key}</b><br>',
-        pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y}',
+        pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y} ',
       },
+
       series: [{
-        type: 'column',
-        name: 'Total de búsquedas',
-        data: datos,
-        // this.registros.map(element => {
-        //   return {name:element.nombre_categoria, y: element.cantidad}
-        // }),
+        type: 'bar',
+        name: 'Total de actividades realizadas',
+        data:  datos,
         colorByPoint: true,
-        animation: {
-          duration: 1000,
-          // Uses Math.easeOutBounce
-          easing: 'easeOutBounce'
-        },
+        showLastLabel: true,
+
+        // color: '#7AE6A7',
         dataLabels: {
           enabled: true,
           format: '{point.y:.0f}',
           style: {
             colorByPoint: false,
             color: '#ffff',
-            fontSize: '23px',
+            fontSize: '15px',
+
           }
         },
+        animation: {
+          duration: 1500,
+          // Uses Math.easeOutBounce
+          easing: 'easeOutBounce'
+        }
       }]
     };
   }
 
 
-  obtenerTotalPie(datos:any){
-    this.chartOptionsPie = {
+  obtenerTotalSedes(titulos:any, datos:any){
+    this.chartOptionsSedes = {
       chart: {
         // renderTo: 'container',
-        type: 'pie',
+        type: 'bar',
         backgroundColor: '#0000',
-        width:'600',
-        height:'600',
-
-        margin: 20
+        width:'800',
+        height:'500',
+        marginleft: 50,
       },
-
+      plotOptions: {
+        series: {
+            grouping: false,
+            borderWidth: 0
+        }
+      },
       title: {
-        text: 'PROCESO DE ACTIVIDADES',
-        align: 'center',
+        text: 'TOTAL DE VALORIZACIÓN REALIZADAS POR SEDES',
+
         style: {
+          colorByPoint: true,
           color: '#ffff',
         },
-      },
-      series:
-      [
-        {
-          type: 'pie',
-          name: 'Total de búsquedas',
-          //  color: '#00A5A5',
-          innerSize: '50%',
-          data: datos,
-          // this.horas.map(element => {
-          //   return {name: element.hora, y: element.total}
-          // }),
-          animation: {
-            duration: 2000,
-            // Uses Math.easeOutBounce
-            easing: 'easeOutBounce'
-          },
-          dataLabels: {
-            enabled: true,
-            // format: '{point.y:.0f}%',
-            style: {
-              // colorByPoint: false,
-              // color: '#0',
-              stroke: 0,
-              fontSize: '12px',
-
-            }
-          },
-        }
-      ],
-
-      accessibility: {
-        point: {
-          valueSuffix: '%'
-        }
       },
 
       credits: {
@@ -419,45 +402,103 @@ export class DashboardComponent implements OnInit{
       },
 
       legend: {
-        allowOverlap: true,
-
-      color: '#ffff',
-      fontWeight: 'bold',
-      backgroundColor: '#00000',
         itemStyle: {
           color: '#ffff',
           fontWeight: 'bold'
         },
 
-        layout: 'horizontal',
-        floating: true,
-        align: 'left',
-        x: 100,
-        verticalAlign: 'top',
-        y: 70
+        align: "left",
+        text: 'Leyenda',
+
+        verticalAlign: "top",
+        layout: "horozontal",
+        x: 0,
+        y: 0,
+      },
+
+      xAxis: {
+        categories: titulos,
+        // this.arrayTituloActo,
+
+        labels: {
+          allowOverlap: true,
+
+          skew3d: true,
+          credits: false,
+          style: {
+            colorByPoint: false,
+            color: '#ffff',
+            fontSize: '12px'
+          }
+        },
+
+        title: {
+          // text: 'Actos registrales',
+          skew3d: true,
+          style: {
+            colorByPoint: false,
+            color: '#ffff',
+            fontSize: '10px'
+          }
+        },
+      },
+
+      yAxis: {
+        // categories: this.arrayTituloActo,
+
+        allowDecimals: false,
+        min: 0,
+        // max: 1000,
+
+        title: {
+          text: 'Cantidad de valorización realizada',
+          skew3d: true,
+          style: {
+            colorByPoint: false,
+            color: '#ffff',
+            fontSize: '14px'
+          }
+        },
+        labels: {
+          allowOverlap: true,
+          skew3d: true,
+          style: {
+            colorByPoint: false,
+            color: '#ffff',
+          }
+        },
+
       },
 
       tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        headerFormat: '<b>{point.key}</b><br>',
+        pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y} ',
       },
 
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          depth: 35,
-          dataLabels: {
-            enabled: true,
-            // distance: -50,
-            format: '{point.name}',
-            style: {
-              fontWeight: 'bold',
-              color: 'white'
-            }
-          },
-         
+      series: [{
+        type: 'bar',
+        name: 'Total de valorización realizada',
+        data:  datos,
+        colorByPoint: true,
+        showLastLabel: true,
+
+        // color: '#7AE6A7',
+        dataLabels: {
+          enabled: true,
+          format: '{point.y:.0f}',
+          style: {
+            colorByPoint: false,
+            color: '#ffff',
+            fontSize: '15px',
+
+          }
+        },
+        animation: {
+          duration: 1500,
+          // Uses Math.easeOutBounce
+          easing: 'easeOutBounce'
         }
-      },
+      }]
     };
   }
 

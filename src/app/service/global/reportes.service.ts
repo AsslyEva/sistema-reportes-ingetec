@@ -28,15 +28,15 @@ export class ReportesService {
     return this.http.post(`${this.url}reportes/eliminarEje`, data)
   }
 
-  getRankingParticipante(){
-    return this.http.get(`${this.url}reportes/ranking/participantes`)
+  getRankingParticipante(fecha_ini: any, fecha_fin:any){
+    return this.http.get(`${this.url}reportes/ranking/participantes/${fecha_ini}/${fecha_fin}`)
   }
 
-  getRankingSedes(){
-    return this.http.get(`${this.url}reportes/ranking/sedes`)
+  getRankingSedes(fecha_ini: any, fecha_fin:any){
+    return this.http.get(`${this.url}reportes/ranking/sedes/${fecha_ini}/${fecha_fin}`)
   }
 
-  getRankingActividades(){
-    return this.http.get(`${this.url}reportes/ranking/actividades`)
+  getRankingActividades(fecha_ini: any, fecha_fin:any){
+    return this.http.get(`${this.url}reportes/ranking/actividades/${fecha_ini}/${fecha_fin}`)
   }
 }
