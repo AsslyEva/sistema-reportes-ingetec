@@ -335,7 +335,7 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
   dwnExcel(){
     let dataExcel: any[];
     dataExcel = this.actosFilter.map((x1, index) => {
-      let fecha = new Date(x1.fecha_cant_eje).toLocaleDateString();
+      let fecha = this.formatDate(x1.fecha_cant_eje);
       return ([
         index + 1,
         x1.descripcion_sede,
