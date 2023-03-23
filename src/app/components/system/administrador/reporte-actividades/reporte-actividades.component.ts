@@ -335,7 +335,6 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
   dwnExcel(){
     let dataExcel: any[];
     dataExcel = this.actosFilter.map((x1, index) => {
-      let fecha = this.formatDate(x1.fecha_cant_eje);
       return ([
         index + 1,
         x1.descripcion_sede,
@@ -350,7 +349,7 @@ export class ReporteActividadesComponent implements OnDestroy , OnInit {
         x1.total_urbano,
         x1.total_urbRural,
         x1.total_rural,
-        fecha,
+        x1.fecha_cant_eje,
         x1.cuadrilla
       ]);
     });

@@ -231,7 +231,6 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
   dwnExcel(){
     let dataExcel: any[];
     dataExcel = this.actosFilter.map((x1, index) => {
-      let fecha = new Date(x1.fecha_cant_eje).toLocaleDateString();
       return ([
         index + 1,
         x1.descripcion_sede,
@@ -240,7 +239,7 @@ export class ReporteEmpleadosComponent implements OnDestroy , OnInit{
         x1.cantidad_urbano_eje,
         x1.cantidad_urbrural_eje,
         x1.cantidad_rural_eje,
-        fecha
+        x1.fecha_cant_eje
       ]);
     });
 
